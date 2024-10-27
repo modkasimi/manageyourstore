@@ -107,7 +107,21 @@
 <body>
 
     <div class="first-section">
-       
+        <!-- Language Selector Dropdown with Flag Icons -->
+    <div class="language-selector">
+        <label for="language" data-en="Language" data-fr="Langue" data-ar="اللغة">Language</label>
+        <select id="language" onchange="changeLanguage(this.value)">
+            <option value="en">
+                EN
+            </option>
+            <option value="fr">
+                 FR
+            </option>
+            <option value="ar">
+                 AR
+            </option>
+        </select>
+    </div>
 
 	<h1 data-en="POS For Shops" data-fr="POS Pour Des Boutiques" data-ar="برنامج إدارة للمحلات">POS For Shops</h1>
         
@@ -217,25 +231,25 @@
 </div>
 
 
-	<script>
+	//<script>
         // Function to change language based on selection
-        function changeLanguage(lang) {
+        //function changeLanguage(lang) {
             // Set the `lang` attribute for the whole page
-            document.documentElement.lang = lang;
+            //document.documentElement.lang = lang;
 
             // Get all elements with a translation for the selected language
-            const translatableElements = document.querySelectorAll('[data-en]');
+            //const translatableElements = document.querySelectorAll('[data-en]');
 
             // Update each element's text based on the selected language
-            translatableElements.forEach(el => {
+            //translatableElements.forEach(el => {
                 // Set the element's text content to the correct data attribute (e.g., `data-ar` for Arabic)
-                el.textContent = el.getAttribute(`data-${lang}`);
-            });
-        }
+                //el.textContent = el.getAttribute(`data-${lang}`);
+           // });
+        //}
 
         // Initialize the page with default language (English)
-        changeLanguage('en');
-    </script>
+        //changeLanguage('en');
+    //</script>
 	<script src="language.js"></script>
 
 

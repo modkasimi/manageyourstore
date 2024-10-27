@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS For Shops</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+	.language-selector {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+
+        }
+        select {
+            padding: 5px;
+            font-size: 1em;
+        }
+
+        .section {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .left, .right {
+            width: 48%;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+            color: #fdfefe; /*#e1ee25 #333;*/
+        }
+        p {
+            color: #fdfefe /*#e1ee25 #555;*/
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #131311; /*#4CAF50;*/
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .first-section {
+            /*background-color: #266276;*/
+            background: linear-gradient(to right, #ffffff 0%, black 100%);
+            /*border-bottom-left-radius: 300px;*/
+            /*border-bottom-right-radius: 150px;*/
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .second-section {
+            background: linear-gradient(to left, #ffffff 0%, black 100%); /*#131311;  Light cream */
+            border-top-left-radius: 300px;
+            /*border-top-right-radius: 300px;*/
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .third-section {
+            /*background-color: #f5f5dc;  Light cream */
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            padding: 50px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .container {
+            background-color: black ; /* Light blue */
+            border: 2px solid white;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            margin: 0 10px; /* Space between containers */
+            flex: 1; /* Make containers take equal space */
+        }
+	.fourth-section {
+            background-color: black; 
+            /*border-top-left-radius: 30px;
+            border-top-right-radius: 30px;*/
+            padding: 50px 20px;
+            /*display: flex;
+            justify-content: space-between;
+            align-items: flex-start;*/
+            
+            
+        }.vertical-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Optional: centers items horizontally */
+    text-align: center; /* Optional: centers text */
+}
+</div>
+
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="first-section">
+        <!-- Language Selector Dropdown with Flag Icons -->
+    <div class="language-selector">
+        <label for="language" data-en="Language" data-fr="Langue" data-ar="اللغة">Language</label>
+        <select id="language" onchange="changeLanguage(this.value)">
+            <option value="en">
+                EN
+            </option>
+            <option value="fr">
+                 FR
+            </option>
+            <option value="ar">
+                 AR
+            </option>
+        </select>
+    </div>
+
+	<h1 data-en="POS For Shops" data-fr="POS Pour Des Boutiques" data-ar="برنامج إدارة للمحلات">POS For Shops</h1>
+        
+        <img src="C:\Users\HP\Pictures\Saved Pictures\pos system.jpg" alt="Your Image" style="width: 100%; max-width: 400px;">
+        
+        <h2 data-en="Embrace Digital Solutions" data-fr="Adoptez les solutions numériques" data-ar="حان الوقت لاعتماد الحلول الرقمية">Embrace Digital Solutions</h2>
+        <p data-en="Simple & Secure Store Management Software For Windows Systems" 
+   data-fr="Logiciel de gestion de magasin simple et sécurisé pour systèmes Windows" 
+   data-ar="برنامج بسيط وآمن  لإدارة المتاجر لأنظمة الويندوز ">
+   Simple & Secure Store Management Software For Windows Systems
+</p>
+
+        <button onclick="window.location.href='https://your-github-page-url'" 
+        data-en="DOWNLOAD" 
+        data-fr="TÉLÉCHARGER" 
+        data-ar="تـحميــــــل">
+    DOWNLOAD
+</button>
+
+    </div>
+
+    <div class="second-section">
+    <h3 data-en="About Us" data-fr="À Propos de Nous" data-ar="مــن نحـــــــن">About Us</h3>
+    <div class="section">
+        <div class="left">
+            <h3 data-en="Welcome to POS for Shops" data-fr="Bienvenue dans POS pour Boutiques" data-ar="مرحبًا بكم في برنامج إدارة المحلات">Welcome to POS for Shops</h3>
+            <p data-en="We are dedicated to transforming the way small businesses manage their stores. Our journey began with a simple goal: to simplify store management through innovative technology." 
+               data-fr="Nous sommes dédiés à transformer la manière dont les petites entreprises gèrent leurs magasins. Notre parcours a commencé avec un objectif simple : simplifier la gestion des magasins grâce à la technologie innovante." 
+               data-ar="نحن ملتزمون بتحويل طريقة إدارة الشركات الصغيرة لمتاجرها. هدفنا  تبسيط إدارة المتاجر من خلال التكنولوجيا المبتكرة.">
+                We are dedicated to transforming the way small businesses manage their stores. Our journey began with a simple goal: to simplify store management through innovative technology.
+            </p>
+            <p data-en="We understand the challenges faced by small business owners, from tedious manual processes to the complexities of inventory management. That's why we've developed a user-friendly point of sale (POS) application designed specifically for small shops. Our app combines cutting-edge features like barcode scanning and real-time sales tracking to streamline operations, save time, and boost productivity." 
+               data-fr="Nous comprenons les défis auxquels sont confrontés les propriétaires de petites entreprises, des processus manuels fastidieux aux complexités de la gestion des stocks. C'est pourquoi nous avons développé une application de point de vente (POS) conviviale, conçue spécifiquement pour les petits magasins. Notre application combine des fonctionnalités de pointe telles que la numérisation de codes-barres et le suivi des ventes en temps réel pour rationaliser les opérations, gagner du temps et augmenter la productivité." 
+               data-ar="نحن نفهم التحديات التي يواجهها أصحاب الأعمال الصغيرة، عمليات يدوية مرهقة و تعقيدات في إدارة المخازن. لهذا السبب قمنا بتطوير تطبيق متجري وهو تطبيق سهل الاستخدام مصمم خصيصًا للمحلات الصغيرة. يجمع تطبيق متجري بين ميزات متقدمة مثل مسح الباركود وتتبع المبيعات بشكل تلقائي، وتوفير الوقت، وزيادة الإنتاجية">
+                We understand the challenges faced by small business owners, from tedious manual processes to the complexities of inventory management. That's why we've developed a user-friendly point of sale (POS) application designed specifically for small shops. Our app combines cutting-edge features like barcode scanning and real-time sales tracking to streamline operations, save time, and boost productivity.
+            </p>
+            <p data-en="At POS for Shops, we believe that every business deserves access to powerful tools that enhance efficiency and drive growth. Our team is passionate about helping you transition from manual methods to a digital management system that not only simplifies your tasks but also allows you to focus on what you love—serving your customers." 
+               data-fr="Chez POS pour Boutiques, nous croyons que chaque entreprise mérite d'avoir accès à des outils puissants qui améliorent l'efficacité et favorisent la croissance. Notre équipe est passionnée par l'aide à la transition des méthodes manuelles vers un système de gestion numérique qui simplifie non seulement vos tâches, mais vous permet également de vous concentrer sur ce que vous aimez : servir vos clients." 
+               data-ar="في برنامج إدارة المحلات، نعتقد أن كل عمل يستحق الوصول إلى أدوات فعالة تعزز الكفاءة وتعزز نمو الشركة. فريقنا متحمس لمساعدتك على الانتقال من الطرق اليدوية إلى نظام إدارة رقمي لا يبسط مهامك فحسب، بل يتيح لك أيضًا التركيز على ما تحبه وهو خدمة عملائك">
+                At POS for Shops, we believe that every business deserves access to powerful tools that enhance efficiency and drive growth. Our team is passionate about helping you transition from manual methods to a digital management system that not only simplifies your tasks but also allows you to focus on what you love—serving your customers.
+            </p>
+            <p data-en="Join us on this journey toward smarter store management, and experience the ease and convenience of modern technology!" 
+               data-fr="Rejoignez-nous dans ce voyage vers une gestion de magasin plus intelligente et découvrez la facilité et la commodité de la technologie moderne !" 
+               data-ar="انضم إلينا في هذه الرحلة نحو إدارة المتاجر الذكية، واكتشف سهولة وروعة التكنولوجيا الحديثة">
+                Join us on this journey toward smarter store management, and experience the ease and convenience of modern technology!
+            </p>
+        </div>
+        <div class="right">
+            <img src="C:\Users\HP\Pictures\Saved Pictures\pos system right.jpg" alt="About Us Image" style="width: 100%; max-width: 400px;">
+        </div>
+    </div>
+</div>
+
+
+    <div class="third-section">
+    <div class="container left">
+        <h3 data-en="Switch to Digital Management" data-fr="Passez à la Gestion Numérique" data-ar="انتقل إلى الإدارة الرقمية">Switch to Digital Management</h3>
+        <h2 data-en="Simplify Your Store Management" data-fr="Simplifiez la Gestion de Votre Magasin" data-ar="بسط إدارة متجرك">Simplify Your Store Management</h2>
+        <p data-en="Boost efficiency, track sales, and manage inventory with ease. Explore our app's features below:" 
+           data-fr="Améliorez l'efficacité, suivez les ventes et gérez les stocks en toute simplicité. Découvrez les fonctionnalités de notre application ci-dessous :"
+           data-ar="ارفع كفاءتك، تتبع مبيعاتك وإدارة المخزون بسهولة. استكشف ميزات تطبيق متجري أدناه">
+            Boost efficiency, track sales, and manage inventory with ease. Explore our app's features below:
+        </p>
+        <button onclick="window.location.href='https://your-features-page-url'">
+            <span data-en="Show Features" data-fr="Afficher les Fonctionnalités" data-ar="عرض الميزات">Show Features</span>
+        </button>
+    </div>
+    <div class="container right">
+        <h3 data-en="Explore My Store Windows App" data-fr="Découvrez Mon Application Windows de Magasin" data-ar="استكشف تطبيق المتجر الخاص بي على ويندوز">Explore My Store Windows App</h3>
+        <h2 data-en="Your Guide to Launch and Use Our App" data-fr="Votre Guide pour Lancer et Utiliser Notre Application" data-ar="دليلك لإطلاق واستخدام تطبيقنا">Your Guide to Launch and Use Our App</h2>
+        <p data-en="Whatever your trade is, My Store App is for you. To simplify your journey to get familiar with My Store app, follow the steps below:" 
+           data-fr="Quel que soit votre métier, l'application My Store est faite pour vous. Pour simplifier votre parcours pour vous familiariser avec l'application My Store, suivez les étapes ci-dessous :"
+           data-ar="مهما كانت مهنتك، تطبيق المتجر الخاص بي هو لك. لتبسيط رحلتك للتعرف على تطبيق متجري، اتبع الخطوات أدناه:">
+            Whatever your trade is, My Store App is for you. To simplify your journey to get familiar with My Store app, follow the steps below:
+        </p>
+        <button onclick="window.location.href='https://your-guide-page-url'">
+            <span data-en="Show Guide" data-fr="Afficher le Guide" data-ar="عرض الدليل">Show Guide</span>
+        </button>
+    </div>
+</div>
+
+<div class="fourth-section">
+    <div class="vertical-section">            
+        <h2 data-en="Boost Your Business Digitally Now" data-fr="Boostez Votre Entreprise Numériquement Maintenant" data-ar="عزز عملك رقمياً الآن">Boost Your Business Digitally Now</h2>
+        <p data-en="Transform your business with our innovative digital solutions, unlock growth and elevate your success today. Explore My Store app now!" 
+           data-fr="Transformez votre entreprise avec nos solutions numériques innovantes, débloquez la croissance et élevez votre succès aujourd'hui. Découvrez nos offres dès maintenant !"
+           data-ar=" طور عملك باستخدام حلولنا الرقمية المبتكرة، افتح آفاق النمو وزيّن نجاحك اليوم. استكشف تطبيق متجري">
+            Transform your business with our innovative digital solutions—unlock growth and elevate your success today. Explore our offerings now!
+        </p>
+        <button onclick="window.location.href='https://your-features-page-url'">
+            <span data-en="DOWNLOAD NOW" data-fr="TÉLÉCHARGEZ MAINTENANT" data-ar="قم بالتنزيل الآن">DOWNLOAD NOW</span>
+        </button>
+    </div>
+</div>
+
+
+	<script>
+        // Function to change language based on selection
+        function changeLanguage(lang) {
+            // Set the `lang` attribute for the whole page
+            document.documentElement.lang = lang;
+
+            // Get all elements with a translation for the selected language
+            const translatableElements = document.querySelectorAll('[data-en]');
+
+            // Update each element's text based on the selected language
+            translatableElements.forEach(el => {
+                // Set the element's text content to the correct data attribute (e.g., `data-ar` for Arabic)
+                el.textContent = el.getAttribute(`data-${lang}`);
+            });
+        }
+
+        // Initialize the page with default language (English)
+        changeLanguage('en');
+    </script>
+
+
+
+</body>
+</html>

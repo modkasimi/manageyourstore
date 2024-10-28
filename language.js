@@ -20,12 +20,25 @@ function changeLanguage(lang) {
         // Add the new language-specific class
         if (lang === 'en') el.classList.add("english-text");
         else if (lang === 'fr') el.classList.add("french-text");
-        else if (lang === 'ar') el.classList.add("arabic-text");
+        else if (lang === 'ar') {
+            el.classList.add("arabic-text");
+            
+            // Apply text alignment only if not centered
+            if (!el.hasAttribute("data-centered")) {
+                el.style.textAlign = "right";
+            }
+        }
+        
+        // Reset text alignment for non-Arabic languages
+        if (lang !== 'ar') {
+            el.style.textAlign = "";
+        }
     });
 
     // Store the selected language in local storage
     localStorage.setItem('selectedLanguage', lang);
 }
+
 
 
 // Add event listener to load the saved language on page load

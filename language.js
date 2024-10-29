@@ -9,10 +9,10 @@ function changeLanguage(lang) {
     // Select all elements with a `data-en` attribute (assumes they also have `data-fr` and `data-ar`)
     const translatableElements = document.querySelectorAll('[data-en]');
 
-    // Update each element's text and apply the appropriate language class
+    // Update each element's content and apply the appropriate language class
     translatableElements.forEach(el => {
-        // Set the text content based on the selected language
-        el.textContent = el.getAttribute(`data-${lang}`);
+        // Set the content with innerHTML to render HTML tags
+        el.innerHTML = el.getAttribute(`data-${lang}`) || el.getAttribute('data-en');
 
         // Remove any existing language-specific classes
         el.classList.remove("english-text", "french-text", "arabic-text");
@@ -22,13 +22,13 @@ function changeLanguage(lang) {
         else if (lang === 'fr') el.classList.add("french-text");
         else if (lang === 'ar') {
             el.classList.add("arabic-text");
-            
-            // Apply text alignment only if not centered
+
+            // Apply text alignment to the right for Arabic unless centered
             if (!el.hasAttribute("data-centered")) {
                 el.style.textAlign = "right";
             }
         }
-        
+
         // Reset text alignment for non-Arabic languages
         if (lang !== 'ar') {
             el.style.textAlign = "";
@@ -38,6 +38,7 @@ function changeLanguage(lang) {
     // Store the selected language in local storage
     localStorage.setItem('selectedLanguage', lang);
 }
+
 
 
 

@@ -3,6 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="text/javascript">
+  (function() {
+    emailjs.init("6qpHx9YK4aIa0BMjv"); // Replace with your EmailJS public key
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Send email using EmailJS service
+      emailjs.sendForm('service_8vonmex', 'template_ysqt2st', form)
+        .then(function(response) {
+          console.log('Success:', response);
+          alert("Your message has been sent successfully!");
+        }, function(error) {
+          console.log('Failed:', error);
+          alert("There was an issue sending your message.");
+        });
+    });
+  })();
+</script>
+
+
+
     <title>Contact Us</title>
     <style>
         body {

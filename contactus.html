@@ -86,9 +86,9 @@
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-        // Capture the email and message values from the form
-    const userEmail = document.querySelector('#from-email').value;  // Get the value of the email input field
-    const message = document.querySelector('#message').value;  // Get the value of the message input field
+        // Capture the email and message values
+        const userEmail = document.getElementById('from-email').value;
+    const message = document.getElementById('message').value;
 
 
       // Send email using EmailJS service      

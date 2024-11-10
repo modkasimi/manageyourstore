@@ -77,9 +77,11 @@
                 // these IDs from the previous steps
                 emailjs.sendForm('service_8vonmex', 'template_ysqt2st', this)
                     .then(() => {
-                        console.log('SUCCESS!');
+                        alert("Your message has been sent successfully!");
+                        form.reset();
                     }, (error) => {
-                        console.log('FAILED...', error);
+                        alert("Failed to send message. Please try again later.");
+                        console.error('FAILED...', error);
                     });
             });
         }

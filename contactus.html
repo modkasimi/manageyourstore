@@ -86,9 +86,15 @@
     form.addEventListener('submit', function(event) {
       event.preventDefault();
 
-      // Send email using EmailJS service
-      emailjs.sendForm('service_8vonmex', 'template_ysqt2st', form)
-        .then(function(response) {
+    const userEmail = document.getElementById('user-email').value;
+    const message = document.getElementById('message').value;
+
+
+      // Send email using EmailJS service      
+    emailjs.send('service_8vonmex', 'template_ysqt2st', {
+      from_email: userEmail,  // Sender's email
+      message: message        // The message text
+    }).then(function(response) {
           console.log('Success:', response);
           alert("Your message has been sent successfully!");
         }, function(error) {

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fr: "https://www.facebook.com/plugins/video.php?href=FRENCH_VIDEO_URL_FOR_PAGE2",
             ar: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F575969954945459%2F&show_text=false&width=560&t=0" 
         }
-        recordWastage: {
+        recordWastages: {
             en: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566514610571%2Fvideos%2F1045786380468626%2F&show_text=false&width=560&t=0",
             fr: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566514610571%2Fvideos%2F1045786380468626%2F&show_text=false&width=560&t=0",
             ar: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F546211488041609%2F&show_text=false&width=560&t=0"

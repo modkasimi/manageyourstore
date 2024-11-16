@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const videos = {
         cancelOperation: {
             <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F876555391335228%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-            en: "https://www.facebook.com/plugins/video.php?href=ENGLISH_VIDEO_URL_FOR_PAGE1",
+            en: "https://www.facebook.com/plugins/video.php?href=ARABIC_VIDEO_URL_FOR_PAGE1"
             fr: "https://www.facebook.com/plugins/video.php?href=FRENCH_VIDEO_URL_FOR_PAGE1",
-            ar: "https://www.facebook.com/plugins/video.php?href=ARABIC_VIDEO_URL_FOR_PAGE1"
+            en: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F876555391335228%2F&show_text=false&width=560&t=0",
+            
         },
         page2: {
             en: "https://www.facebook.com/plugins/video.php?href=ENGLISH_VIDEO_URL_FOR_PAGE2",

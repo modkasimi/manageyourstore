@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fr: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566514610571%2Fvideos%2F1650551585726620%2F&show_text=false&width=560&t=0",
             ar: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F1086917339683917%2F&show_text=false&width=560&t=0"
         },
-    addProduct: {
+    addProducts: {
             en: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566514610571%2Fvideos%2F811563987716300%2F&show_text=false&width=560&t=0",
             fr: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F61566514610571%2Fvideos%2F811563987716300%2F&show_text=false&width=560&t=0",
             ar: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2F100085252551188%2Fvideos%2F480459731094192%2F&show_text=false&width=560&t=0"

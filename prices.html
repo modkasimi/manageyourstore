@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Pricing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+        }
+        select, button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .prices {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .price {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+    <script>
+        const prices = {
+            "Group1": {
+                oneTime: 50,
+                monthly: 5,
+                yearly: 50
+            },
+            "Group2": {
+                oneTime: 60,
+                monthly: 6,
+                yearly: 60
+            },
+            "Other": {
+                oneTime: 70,
+                monthly: 7,
+                yearly: 70
+            }
+        };
+
+        const countries = {
+            "Group1": ["United States", "Canada", "France"],
+            "Group2": ["India", "Egypt", "Brazil"],
+            "Other": ["Other"]
+        };
+
+        const translations = {
+            en: {
+                title: "Pricing for My Store App",
+                selectCountry: "Select your country:",
+                oneTime: "One-time payment: ",
+                monthly: "Monthly subscription (includes 1 free month trial): ",
+                yearly: "Yearly subscription (includes 1 free month trial): ",
+                download: "Download the Application"
+            },
+            ar: {
+                title: "أسعار تطبيق متجري",
+                selectCountry: "اختر دولتك:",
+                oneTime: "دفع لمرة واحدة: ",
+                monthly: "اشتراك شهري (يشمل شهرًا تجريبيًا مجانيًا): ",
+                yearly: "اشتراك سنوي (يشمل شهرًا تجريبيًا مجانيًا): ",
+                download: "تحميل التطبيق"
+            },
+            fr: {
+                title: "Tarifs de My Store App",
+                selectCountry: "Sélectionnez votre pays :",
+                oneTime: "Paiement unique : ",
+                monthly: "Abonnement mensuel (inclut 1 mois d'essai gratuit) : ",
+                yearly: "Abonnement annuel (inclut 1 mois d'essai gratuit) : ",
+                download: "Télécharger l'application"
+            }
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLang = document.documentElement.lang || "en"; // Detect language
+            const t = translations[userLang] || translations.en;
+
+            // Translate text
+            document.getElementById("title").textContent = t.title;
+            document.getElementById("selectCountryLabel").textContent = t.selectCountry;
+            document.getElementById("downloadBtn").textContent = t.download;
+
+            // Populate country dropdown
+            const countrySelect = document.getElementById("country");
+            Object.keys(countries).forEach(group => {
+                countries[group].forEach(country => {
+                    const option = document.createElement("option");
+                    option.value = group;
+                    option.textContent = country;
+                    countrySelect.appendChild(option);
+                });
+            });
+
+            // Display prices based on selection
+            countrySelect.addEventListener("change", () => {
+                const group = countrySelect.value;
+                const groupPrices = prices[group];
+                if (groupPrices) {
+                    document.getElementById("oneTime").textContent = `${t.oneTime} $${groupPrices.oneTime}`;
+                    document.getElementById("monthly").textContent = `${t.monthly} $${groupPrices.monthly}`;
+                    document.getElementById("yearly").textContent = `${t.yearly} $${groupPrices.yearly}`;
+                } else {
+                    document.getElementById("oneTime").textContent = "";
+                    document.getElementById("monthly").textContent = "";
+                    document.getElementById("yearly").textContent = "";
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <label for="country" id="selectCountryLabel"></label>
+    <select id="country">
+        <option value="" disabled selected>Select your country</option>
+    </select>
+    <div class="prices">
+        <div id="oneTime" class="price"></div>
+        <div id="monthly" class="price"></div>
+        <div id="yearly" class="price"></div>
+    </div>
+    <button id="downloadBtn" onclick="window.location.href='/download'"></button>
+</body>
+</html>

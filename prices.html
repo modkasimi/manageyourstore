@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1TN4CN5EG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Q1TN4CN5EG');
-</script>
-    <script src="language.js"></script>
-    <script src="detectLang.js"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Pricing</title>
@@ -40,7 +28,7 @@
             margin: 10px 0;
         }
     </style>
-    
+    <script src="detectLang.js"></script> <!-- Language detection script -->
     <script>
         const prices = {
             "Group1": {
@@ -66,33 +54,46 @@
             "Other": ["Other"]
         };
 
-        
-            // Populate country dropdown
+        function populateCountries() {
             const countrySelect = document.getElementById("country");
+            if (countrySelect.options.length > 1) return; // Prevent repopulating if already populated
+
             Object.keys(countries).forEach(group => {
                 countries[group].forEach(country => {
                     const option = document.createElement("option");
-                    option.value = group;
-                    option.textContent = country;
-                    countrySelect.appendChild(option);
+                    option.value = group; // Set the value as the group key
+                    option.textContent = country; // Set the display text as the country
+                    countrySelect.appendChild(option); // Add option to the select dropdown
                 });
             });
+        }
 
-            // Display prices based on selection
+        function updatePrices(group, lang) {
+            const groupPrices = prices[group];
+            if (groupPrices) {
+                document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${lang}`)} $${groupPrices.oneTime}`;
+                document.getElementById("monthly").textContent = `${document.getElementById("monthly").getAttribute(`data-${lang}`)} $${groupPrices.monthly}`;
+                document.getElementById("yearly").textContent = `${document.getElementById("yearly").getAttribute(`data-${lang}`)} $${groupPrices.yearly}`;
+            } else {
+                document.getElementById("oneTime").textContent = "";
+                document.getElementById("monthly").textContent = "";
+                document.getElementById("yearly").textContent = "";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const countrySelect = document.getElementById("country");
+
+            // Populate dropdown when clicked
+            countrySelect.addEventListener("click", populateCountries);
+
+            // Update prices on dropdown selection
             countrySelect.addEventListener("change", () => {
                 const group = countrySelect.value;
-                const groupPrices = prices[group];
-                if (groupPrices) {
-                    document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${lang}`)} $${groupPrices.oneTime}`;
-                    document.getElementById("monthly").textContent = `${document.getElementById("monthly").getAttribute(`data-${lang}`)} $${groupPrices.monthly}`;
-                    document.getElementById("yearly").textContent = `${document.getElementById("yearly").getAttribute(`data-${lang}`)} $${groupPrices.yearly}`;
-                } else {
-                    document.getElementById("oneTime").textContent = "";
-                    document.getElementById("monthly").textContent = "";
-                    document.getElementById("yearly").textContent = "";
-                }
+                updatePrices(group, lang);
             });
-        
+        });
     </script>
 </head>
 <body>

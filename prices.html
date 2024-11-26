@@ -72,7 +72,7 @@
             });
         }
 
-        function updatePrices(group, lang) {
+        function updatePrices(group) {
             const groupPrices = prices[group];
             if (groupPrices) {
                 document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${lang}`)} $${groupPrices.oneTime}`;
@@ -93,7 +93,7 @@
 
             countrySelect.addEventListener("change", () => {
                 const selectedGroup = countrySelect.value;
-                updatePrices(selectedGroup, lang);
+                updatePrices(selectedGroup);
             });
         });
     </script>

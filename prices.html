@@ -75,9 +75,9 @@
         function updatePrices(group, lang) {
             const groupPrices = prices[group];
             if (groupPrices) {
-                document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${lang}`)} $${groupPrices.oneTime}`;
-                document.getElementById("monthly").textContent = `${document.getElementById("monthly").getAttribute(`data-${lang}`)} $${groupPrices.monthly}`;
-                document.getElementById("yearly").textContent = `${document.getElementById("yearly").getAttribute(`data-${lang}`)} $${groupPrices.yearly}`;
+                document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-en`)} $${groupPrices.oneTime}`;
+                document.getElementById("monthly").textContent = `${document.getElementById("monthly").getAttribute(`data-en`)} $${groupPrices.monthly}`;
+                document.getElementById("yearly").textContent = `${document.getElementById("yearly").getAttribute(`data-en`)} $${groupPrices.yearly}`;
             } else {
                 document.getElementById("oneTime").textContent = "";
                 document.getElementById("monthly").textContent = "";

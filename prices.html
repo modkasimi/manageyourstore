@@ -94,6 +94,7 @@
 
 
         function populateCountries() {
+            const currentLanguage=localStorage.getItem('selectedLanguage'); 
             const countrySelect = document.getElementById("country");
             if (countrySelect.options.length > 1) return;
 
@@ -101,7 +102,14 @@
                 countries[group].forEach(country => {
                     const option = document.createElement("option");
                     option.value = group;
-                    option.textContent = country["data-en"];
+                    if (currentLanguage === "data-en") {
+                        option.textContent = country["data-en"];
+                  } else if (currentLanguage === "data-ar") {
+                        option.textContent = country["data-en"];
+                  } else if (currentLanguage === "data-fr") {
+                         option.textContent = country["data-en"];
+                  } 
+                    
                     countrySelect.appendChild(option);
                 });
             });

@@ -47,16 +47,49 @@
     
     <script>
         const prices = {
-            "Group1": { oneTime: 50, monthly: 5, yearly: 50 },
-            "Group2": { oneTime: 60, monthly: 6, yearly: 60 },
-            "Other": { oneTime: 70, monthly: 7, yearly: 70 }
+            "Group1": { oneTime: , monthly: , yearly:  },
+            "Group2": { oneTime: , monthly: , yearly:  },
+            "Other": { oneTime: , monthly: , yearly:  }
         };
 
         const countries = {
-            "Group1": ["United States", "Canada", "France"],
-            "Group2": ["India", "Egypt", "Brazil"],
-            "Other": ["Other"]
-        };
+  "Group1": [
+    { "data-en": "United States", "data-ar": "الولايات المتحدة", "data-fr": "États-Unis" },
+    { "data-en": "Canada", "data-ar": "كندا", "data-fr": "Canada" },
+    { "data-en": "France", "data-ar": "فرنسا", "data-fr": "France" },
+    { "data-en": "Germany", "data-ar": "ألمانيــا", "data-fr": "France" },
+    { "data-en": "Finland", "data-ar": "فنلنــدا", "data-fr": "France" },
+    { "data-en": "Spain", "data-ar": "اسبانيــا", "data-fr": "France" },
+    { "data-en": "Switzerland", "data-ar": "سويســـرا", "data-fr": "France" },
+    { "data-en": "Sweden", "data-ar": "السويــد", "data-fr": "France" },
+    { "data-en": "Italy", "data-ar": "إيطاليــا", "data-fr": "France" },
+    { "data-en": "Norway", "data-ar": "النرويــج", "data-fr": "France" },
+    { "data-en": "Belgium", "data-ar": "بلجيــكا", "data-fr": "France" },
+    { "data-en": "United Kingdome", "data-ar": "المملكة المتحدة", "data-fr": "France" },
+    { "data-en": "Austria", "data-ar": "النمســا", "data-fr": "France" },
+    { "data-en": "Denmark", "data-ar": "الدانمــارك", "data-fr": "France" },  
+    { "data-en": "Netherland", "data-ar": "هولنــدا", "data-fr": "France" }   
+  ],
+  "Group2": [
+    { "data-en": "Australia", "data-ar": "استــراليـا", "data-fr": "États-Unis" },
+    { "data-en": "Ireland", "data-ar": "ايرلــندا", "data-fr": "Canada" },
+    { "data-en": "France", "data-ar": "لوكسبــورج", "data-fr": "France" },
+    { "data-en": "Germany", "data-ar": "موناكــو", "data-fr": "France" },
+    { "data-en": "Liechtenstein", "data-ar": "ليختنشتاين", "data-fr": "Liechtenstein" },
+    { "data-en": "Spain", "data-ar": "سنغافورة", "data-fr": "France" },
+    { "data-en": "Switzerland", "data-ar": "اليابــان", "data-fr": "France" },
+    { "data-en": "Sweden", "data-ar": "الكويــت", "data-fr": "France" },
+    { "data-en": "Italy", "data-ar": "الإمارات", "data-fr": "France" },
+    { "data-en": "Norway", "data-ar": "هونـج كونـج", "data-fr": "France" },
+    { "data-en": "Belgium", "data-ar": "قطــر", "data-fr": "France" },
+    { "data-en": "United Kingdome", "data-ar": "أيسلنــدا", "data-fr": "France" },
+    { "data-en": "Austria", "data-ar": "نيوزيلنــدا", "data-fr": "France" }
+  ],
+  "Other": [
+    { "data-en": "Other", "data-ar": "أخرى", "data-fr": "Autre" }
+  ]
+};
+
 
         function populateCountries() {
             const countrySelect = document.getElementById("country");

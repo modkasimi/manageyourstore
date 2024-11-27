@@ -73,7 +73,7 @@
         }
 
         function updatePrices(group) {
-             currentLanguage=localStorage.getItem('selectedLanguage');
+             const currentLanguage=localStorage.getItem('selectedLanguage');
             const groupPrices = prices[group];
             if (groupPrices) {
                 document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${currentLanguage}`)} $${groupPrices.oneTime}`;

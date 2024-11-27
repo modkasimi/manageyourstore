@@ -11,7 +11,7 @@
   gtag('config', 'G-Q1TN4CN5EG');
 </script>
     <script src="language.js"></script>    
-     <script src="detectLang.js"></script>
+     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Pricing</title>
@@ -101,7 +101,7 @@
                 countries[group].forEach(country => {
                     const option = document.createElement("option");
                     option.value = group;
-                    option.textContent = country;
+                    option.textContent = country["data-en"];
                     countrySelect.appendChild(option);
                 });
             });

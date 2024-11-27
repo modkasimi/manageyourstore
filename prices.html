@@ -31,6 +31,7 @@
             margin: 20px 0;
         }
         select, button {
+            text-align: center; 
             display: block;
             padding: 10px;
             font-size: 16px;
@@ -47,44 +48,45 @@
     
     <script>
         const prices = {
-            "Group1": { oneTime: , monthly: , yearly:  },
-            "Group2": { oneTime: , monthly: , yearly:  },
-            "Other": { oneTime: , monthly: , yearly:  }
+            "Group1": { oneTime: 224,99, monthly: 9.99, yearly: 89.99 },
+            "Group2": { oneTime: 84.99, monthly: 4.99, yearly:  44.99},
+            "Other": { oneTime: 34.99, monthly: 1.49, yearly: 14.49 }
         };
 
         const countries = {
   "Group1": [
-    { "data-en": "United States", "data-ar": "الولايات المتحدة", "data-fr": "États-Unis" },
-    { "data-en": "Canada", "data-ar": "كندا", "data-fr": "Canada" },
-    { "data-en": "France", "data-ar": "فرنسا", "data-fr": "France" },
-    { "data-en": "Germany", "data-ar": "ألمانيــا", "data-fr": "France" },
-    { "data-en": "Finland", "data-ar": "فنلنــدا", "data-fr": "France" },
-    { "data-en": "Spain", "data-ar": "اسبانيــا", "data-fr": "France" },
-    { "data-en": "Switzerland", "data-ar": "سويســـرا", "data-fr": "France" },
-    { "data-en": "Sweden", "data-ar": "السويــد", "data-fr": "France" },
-    { "data-en": "Italy", "data-ar": "إيطاليــا", "data-fr": "France" },
-    { "data-en": "Norway", "data-ar": "النرويــج", "data-fr": "France" },
-    { "data-en": "Belgium", "data-ar": "بلجيــكا", "data-fr": "France" },
-    { "data-en": "United Kingdome", "data-ar": "المملكة المتحدة", "data-fr": "France" },
-    { "data-en": "Austria", "data-ar": "النمســا", "data-fr": "France" },
-    { "data-en": "Denmark", "data-ar": "الدانمــارك", "data-fr": "France" },  
-    { "data-en": "Netherland", "data-ar": "هولنــدا", "data-fr": "France" }   
-  ],
+  { "data-en": "United States", "data-ar": "الولايات المتحدة", "data-fr": "États-Unis" },
+  { "data-en": "Canada", "data-ar": "كندا", "data-fr": "Canada" },
+  { "data-en": "France", "data-ar": "فرنسا", "data-fr": "France" },
+  { "data-en": "Germany", "data-ar": "ألمانيــا", "data-fr": "Allemagne" },
+  { "data-en": "Finland", "data-ar": "فنلنــدا", "data-fr": "Finlande" },
+  { "data-en": "Spain", "data-ar": "اسبانيــا", "data-fr": "Espagne" },
+  { "data-en": "Switzerland", "data-ar": "سويســـرا", "data-fr": "Suisse" },
+  { "data-en": "Sweden", "data-ar": "السويــد", "data-fr": "Suède" },
+  { "data-en": "Italy", "data-ar": "إيطاليــا", "data-fr": "Italie" },
+  { "data-en": "Norway", "data-ar": "النرويــج", "data-fr": "Norvège" },
+  { "data-en": "Belgium", "data-ar": "بلجيــكا", "data-fr": "Belgique" },
+  { "data-en": "United Kingdom", "data-ar": "المملكة المتحدة", "data-fr": "Royaume-Uni" },
+  { "data-en": "Austria", "data-ar": "النمســا", "data-fr": "Autriche" },
+  { "data-en": "Denmark", "data-ar": "الدانمــارك", "data-fr": "Danemark" },  
+  { "data-en": "Netherland", "data-ar": "هولنــدا", "data-fr": "Pays-Bas" }   
+],
   "Group2": [
-    { "data-en": "Australia", "data-ar": "استــراليـا", "data-fr": "États-Unis" },
-    { "data-en": "Ireland", "data-ar": "ايرلــندا", "data-fr": "Canada" },
-    { "data-en": "France", "data-ar": "لوكسبــورج", "data-fr": "France" },
-    { "data-en": "Germany", "data-ar": "موناكــو", "data-fr": "France" },
-    { "data-en": "Liechtenstein", "data-ar": "ليختنشتاين", "data-fr": "Liechtenstein" },
-    { "data-en": "Spain", "data-ar": "سنغافورة", "data-fr": "France" },
-    { "data-en": "Switzerland", "data-ar": "اليابــان", "data-fr": "France" },
-    { "data-en": "Sweden", "data-ar": "الكويــت", "data-fr": "France" },
-    { "data-en": "Italy", "data-ar": "الإمارات", "data-fr": "France" },
-    { "data-en": "Norway", "data-ar": "هونـج كونـج", "data-fr": "France" },
-    { "data-en": "Belgium", "data-ar": "قطــر", "data-fr": "France" },
-    { "data-en": "United Kingdome", "data-ar": "أيسلنــدا", "data-fr": "France" },
-    { "data-en": "Austria", "data-ar": "نيوزيلنــدا", "data-fr": "France" }
-  ],
+  { "data-en": "Australia", "data-ar": "استــراليـا", "data-fr": "Australie" },
+  { "data-en": "Ireland", "data-ar": "ايرلــندا", "data-fr": "Irlande" },
+  { "data-en": "Luxembourg", "data-ar": "لوكسبــورج", "data-fr": "Luxembourg" },
+  { "data-en": "Monaco", "data-ar": "موناكــو", "data-fr": "Monaco" },
+  { "data-en": "Liechtenstein", "data-ar": "ليختنشتاين", "data-fr": "Liechtenstein" },
+  { "data-en": "Singapore", "data-ar": "سنغافورة", "data-fr": "Singapour" },
+  { "data-en": "Japan", "data-ar": "اليابــان", "data-fr": "Japon" },
+  { "data-en": "Kuwait", "data-ar": "الكويــت", "data-fr": "Koweït" },
+  { "data-en": "United Arab Emirates", "data-ar": "الإمارات", "data-fr": "Émirats arabes unis" },
+  { "data-en": "Hong Kong", "data-ar": "هونـج كونـج", "data-fr": "Hong Kong" },
+  { "data-en": "Qatar", "data-ar": "قطــر", "data-fr": "Qatar" },
+  { "data-en": "Iceland", "data-ar": "أيسلنــدا", "data-fr": "Islande" },
+  { "data-en": "New Zealand", "data-ar": "نيوزيلنــدا", "data-fr": "Nouvelle-Zélande" }
+]
+,
   "Other": [
     { "data-en": "Other", "data-ar": "أخرى", "data-fr": "Autre" }
   ]

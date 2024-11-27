@@ -105,9 +105,9 @@
                     if (currentLanguage === "data-en") {
                         option.textContent = country["data-en"];
                   } else if (currentLanguage === "data-ar") {
-                        option.textContent = country["data-en"];
+                        option.textContent = country["data-ar"];
                   } else if (currentLanguage === "data-fr") {
-                         option.textContent = country["data-en"];
+                         option.textContent = country["data-fr"];
                   } 
                     
                     countrySelect.appendChild(option);
@@ -159,7 +159,7 @@
         <div id="yearly" class="price" data-en="Yearly subscription (includes 1 free month trial):" data-ar="اشتراك سنوي (يشمل شهرًا تجريبيًا مجانيًا):" data-fr="Abonnement annuel (inclut 1 mois d'essai gratuit) :"></div>
     </div>
 
-    <button id="downloadBtn" data-en="Download the Application" data-ar="تحميل التطبيق" data-fr="Télécharger l'application" onclick="window.location.href='/download'"></button>
+    <button id="downloadBtn" classs="center" data-en="Download the Application" data-ar="تحميل التطبيق" data-fr="Télécharger l'application" onclick="window.location.href='/download'"></button>
 </body>
 </html>
 

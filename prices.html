@@ -1,178 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1TN4CN5EG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Q1TN4CN5EG');
-</script>
-    <script src="language.js"></script>   
-     <script>
-        const currentLanguage=localStorage.getItem('selectedLanguage');
-    </script>
-     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Pricing</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            text-align: center;
-        }
-        .center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0;
-        }
-        select, button {
-            text-align: center; 
-            display: block;
-            padding: 10px;
-            font-size: 16px;
-        }
-        .prices {
-              
-            text-align: center;
-            margin-top: 20px;
-        }
-        .price {
-            justify-content: center; 
-            font-size: 18px;
-            margin: 10px 0;
-        }
-         .container {
-            display: flex;
-            justify-content: center;  /* This centers the button horizontally */
-            align-items: center;      /* This centers the button vertically (optional) */            
-        }
-    </style>
-    
-    <script>
-        const prices = {
-            "Group1": { oneTime: 224.99, monthly: 9.99, yearly: 89.99 },
-            "Group2": { oneTime: 84.99, monthly: 4.99, yearly:  44.99},
-            "Other": { oneTime: 34.99, monthly: 1.49, yearly: 14.49 }
-        };
-
-        const countries = {
-  "Group1": [
-  { "data-en": "United States", "data-ar": "الولايات المتحدة", "data-fr": "États-Unis" },
-  { "data-en": "Canada", "data-ar": "كندا", "data-fr": "Canada" },
-  { "data-en": "France", "data-ar": "فرنسا", "data-fr": "France" },
-  { "data-en": "Germany", "data-ar": "ألمانيــا", "data-fr": "Allemagne" },
-  { "data-en": "Finland", "data-ar": "فنلنــدا", "data-fr": "Finlande" },
-  { "data-en": "Spain", "data-ar": "اسبانيــا", "data-fr": "Espagne" },
-  { "data-en": "Switzerland", "data-ar": "سويســـرا", "data-fr": "Suisse" },
-  { "data-en": "Sweden", "data-ar": "السويــد", "data-fr": "Suède" },
-  { "data-en": "Italy", "data-ar": "إيطاليــا", "data-fr": "Italie" },
-  { "data-en": "Norway", "data-ar": "النرويــج", "data-fr": "Norvège" },
-  { "data-en": "Belgium", "data-ar": "بلجيــكا", "data-fr": "Belgique" },
-  { "data-en": "United Kingdom", "data-ar": "المملكة المتحدة", "data-fr": "Royaume-Uni" },
-  { "data-en": "Austria", "data-ar": "النمســا", "data-fr": "Autriche" },
-  { "data-en": "Denmark", "data-ar": "الدانمــارك", "data-fr": "Danemark" },  
-  { "data-en": "Netherland", "data-ar": "هولنــدا", "data-fr": "Pays-Bas" }   
-],
-  "Group2": [
-  { "data-en": "Australia", "data-ar": "استــراليـا", "data-fr": "Australie" },
-  { "data-en": "Ireland", "data-ar": "ايرلــندا", "data-fr": "Irlande" },
-  { "data-en": "Luxembourg", "data-ar": "لوكسبــورج", "data-fr": "Luxembourg" },
-  { "data-en": "Monaco", "data-ar": "موناكــو", "data-fr": "Monaco" },
-  { "data-en": "Liechtenstein", "data-ar": "ليختنشتاين", "data-fr": "Liechtenstein" },
-  { "data-en": "Singapore", "data-ar": "سنغافورة", "data-fr": "Singapour" },
-  { "data-en": "Japan", "data-ar": "اليابــان", "data-fr": "Japon" },
-  { "data-en": "Kuwait", "data-ar": "الكويــت", "data-fr": "Koweït" },
-  { "data-en": "United Arab Emirates", "data-ar": "الإمارات", "data-fr": "Émirats arabes unis" },
-  { "data-en": "Hong Kong", "data-ar": "هونـج كونـج", "data-fr": "Hong Kong" },
-  { "data-en": "Qatar", "data-ar": "قطــر", "data-fr": "Qatar" },
-  { "data-en": "Iceland", "data-ar": "أيسلنــدا", "data-fr": "Islande" },
-  { "data-en": "New Zealand", "data-ar": "نيوزيلنــدا", "data-fr": "Nouvelle-Zélande" }
+[
+  {
+    "data-en": "Store App Pricing",
+    "data-ar": "أسعار تطبيق المتجر",
+    "data-fr": "Tarification de l'application Store"
+  },
+  {
+    "data-en": "Monthly Subscription",
+    "data-ar": "الاشتراك الشهري",
+    "data-fr": "Abonnement mensuel"
+  },
+  {
+    "data-en": "$1.5 - $10",
+    "data-ar": "$1.5 - $10",
+    "data-fr": "$1,5 - $10"
+  },
+  {
+    "data-en": "per month",
+    "data-ar": "شهرياً",
+    "data-fr": "par mois"
+  },
+  {
+    "data-en": "Yearly Subscription",
+    "data-ar": "الاشتراك السنوي",
+    "data-fr": "Abonnement annuel"
+  },
+  {
+    "data-en": "$15 - $90",
+    "data-ar": "$15 - $90",
+    "data-fr": "$15 - $90"
+  },
+  {
+    "data-en": "per year",
+    "data-ar": "سنوياً",
+    "data-fr": "par an"
+  },
+  {
+    "data-en": "One-time Payment",
+    "data-ar": "دفع لمرة واحدة",
+    "data-fr": "Paiement unique"
+  },
+  {
+    "data-en": "$35 - $225",
+    "data-ar": "$35 - $225",
+    "data-fr": "$35 - $225"
+  },
+  {
+    "data-en": "one-time payment",
+    "data-ar": "دفع لمرة واحدة",
+    "data-fr": "paiement unique"
+  },
+  {
+    "data-en": "Why Do Prices Vary?",
+    "data-ar": "لماذا تختلف الأسعار؟",
+    "data-fr": "Pourquoi les prix varient-ils ?"
+  },
+  {
+    "data-en": "We’ve designed our pricing to be fair and accessible, considering the different living costs across various regions. The prices you see here are only an estimate—your actual price will be displayed once you download the app. Upon opening the app, you’ll be prompted to subscribe, and at that point, the app will automatically adjust the price based on your location.",
+    "data-ar": "لقد صممنا أسعارنا لتكون عادلة ومتاحة، مع مراعاة تكاليف المعيشة المختلفة عبر المناطق المختلفة. الأسعار التي تراها هنا هي مجرد تقدير—سوف يتم عرض السعر الفعلي بمجرد تنزيل التطبيق. عند فتح التطبيق، سيتم مطالبتك بالاشتراك، وعند هذه النقطة سيقوم التطبيق بتعديل السعر تلقائيًا بناءً على موقعك.",
+    "data-fr": "Nous avons conçu notre tarification pour qu'elle soit équitable et accessible, en tenant compte des différents coûts de la vie dans diverses régions. Les prix que vous voyez ici sont uniquement une estimation. Votre prix réel sera affiché une fois que vous téléchargerez l'application. Lors de l'ouverture de l'application, vous serez invité à vous abonner, et à ce moment-là, l'application ajustera automatiquement le prix en fonction de votre localisation."
+  },
+  {
+    "data-en": "This ensures that everyone, regardless of location, can enjoy our app at a price that reflects their local economy. We believe in providing affordable pricing while maintaining the high-quality features of our app.",
+    "data-ar": "يضمن هذا أن يتمكن الجميع، بغض النظر عن الموقع، من الاستمتاع بتطبيقنا بسعر يعكس الاقتصاد المحلي لديهم. نؤمن بتقديم أسعار ميسورة التكلفة مع الحفاظ على الميزات عالية الجودة لتطبيقنا.",
+    "data-fr": "Cela garantit que tout le monde, quelle que soit sa localisation, puisse profiter de notre application à un prix qui reflète son économie locale. Nous croyons en des prix abordables tout en maintenant les fonctionnalités de haute qualité de notre application."
+  },
+  {
+    "data-en": "Download the App",
+    "data-ar": "قم بتنزيل التطبيق",
+    "data-fr": "Téléchargez l'application"
+  },
+  {
+    "data-en": "© 2024 Your Store App. All Rights Reserved.",
+    "data-ar": "© 2024 تطبيق المتجر الخاص بك. جميع الحقوق محفوظة.",
+    "data-fr": "© 2024 Votre application Store. Tous droits réservés."
+  }
 ]
-,
-  "Other": [
-    { "data-en": "Other", "data-ar": "أخرى", "data-fr": "Autre" }
-  ]
-};
-
-
-        function populateCountries() {
-             
-            const countrySelect = document.getElementById("country");
-            if (countrySelect.options.length > 1) return;
-
-            Object.keys(countries).forEach(group => {
-                countries[group].forEach(country => {
-                    const option = document.createElement("option");
-                    option.value = group;
-                 if (currentLanguage === "en") {
-                        option.textContent = country["data-en"];
-                  } else if (currentLanguage === "ar") {
-                        option.textContent = country["data-ar"];
-                  } else if (currentLanguage === "fr") {
-                         option.textContent = country["data-fr"];
-                  } else {
-                         option.textContent = country["data-en"];
-                  } 
-                    
-                    countrySelect.appendChild(option);
-                });
-            });
-        }
-
-        function updatePrices(group) {
-             
-            const groupPrices = prices[group];
-            if (groupPrices) {
-                document.getElementById("oneTime").textContent = `${document.getElementById("oneTime").getAttribute(`data-${currentLanguage}`)} $${groupPrices.oneTime}`;
-                document.getElementById("monthly").textContent = `${document.getElementById("monthly").getAttribute(`data-${currentLanguage}`)} $${groupPrices.monthly}`;
-                document.getElementById("yearly").textContent = `${document.getElementById("yearly").getAttribute(`data-${currentLanguage}`)} $${groupPrices.yearly}`;
-            } else {
-                document.getElementById("oneTime").textContent = "";
-                document.getElementById("monthly").textContent = "";
-                document.getElementById("yearly").textContent = "";
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            const countrySelect = document.getElementById("country");
-
-            countrySelect.addEventListener("click", populateCountries);
-
-            countrySelect.addEventListener("change", () => {
-                const selectedGroup = countrySelect.value;
-                updatePrices(selectedGroup);
-            });
-        });
-    </script>
-</head>
-<body>
-    <h1 id="title" data-en="Pricing for My Store App" data-ar="أسعار تطبيق متجري" data-fr="Tarifs de My Store App"></h1>
-
-    <!-- Centered Country Selection -->
-    <div class="center">
-        <label id="selectCountryLabel" data-en="Select your country:" data-ar="اختر بلـدك:" data-fr="Sélectionnez votre pays :"></label>
-        <select id="country">
-            <option value="" disabled selected> </option>
-        </select>
-    </div>
-
-    <div class="prices">
-        <div id="oneTime" class="price" data-en="One-time payment:" data-ar="دفع لمرة واحدة:" data-fr="Paiement unique :"></div>
-        <div id="monthly" class="price" data-en="Monthly subscription (includes 1 free month trial):" data-ar="اشتراك شهري (يشمل شهرًا تجريبيًا مجانيًا):" data-fr="Abonnement mensuel (inclut 1 mois d'essai gratuit) :"></div>
-        <div id="yearly" class="price" data-en="Yearly subscription (includes 1 free month trial):" data-ar="اشتراك سنوي (يشمل شهرًا تجريبيًا مجانيًا):" data-fr="Abonnement annuel (inclut 1 mois d'essai gratuit) :"></div>
-    </div>
-<div class="container">
-    <button id="downloadBtn" data-en="Download the Application" data-ar="تحميل التطبيق" data-fr="Télécharger l'application" onclick="window.location.href='/download'"></button>
-</div>     
-</body>
-</html>
-

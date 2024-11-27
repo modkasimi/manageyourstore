@@ -47,6 +47,12 @@
             font-size: 18px;
             margin: 10px 0;
         }
+         container {
+            display: flex;
+            justify-content: center;  /* This centers the button horizontally */
+            align-items: center;      /* This centers the button vertically (optional) */
+            height: 100vh;            /* This makes the container take full viewport height */
+        }
     </style>
     
     <script>
@@ -105,14 +111,14 @@
                 countries[group].forEach(country => {
                     const option = document.createElement("option");
                     option.value = group;
-                 if (currentLanguage === "data-en") {
+                 if (currentLanguage === "en") {
                         option.textContent = country["data-en"];
-                  } else if (currentLanguage === "data-ar") {
+                  } else if (currentLanguage === "ar") {
                         option.textContent = country["data-ar"];
-                  } else if (currentLanguage === "data-fr") {
-                         option.textContent = country["data-fr"];
                   } else if (currentLanguage === "fr") {
                          option.textContent = country["data-fr"];
+                  } else {
+                         option.textContent = country["data-en"];
                   } 
                     
                     countrySelect.appendChild(option);
@@ -163,8 +169,9 @@
         <div id="monthly" class="price" data-en="Monthly subscription (includes 1 free month trial):" data-ar="اشتراك شهري (يشمل شهرًا تجريبيًا مجانيًا):" data-fr="Abonnement mensuel (inclut 1 mois d'essai gratuit) :"></div>
         <div id="yearly" class="price" data-en="Yearly subscription (includes 1 free month trial):" data-ar="اشتراك سنوي (يشمل شهرًا تجريبيًا مجانيًا):" data-fr="Abonnement annuel (inclut 1 mois d'essai gratuit) :"></div>
     </div>
-
+<div class="container"
     <button id="downloadBtn" data-en="Download the Application" data-ar="تحميل التطبيق" data-fr="Télécharger l'application" onclick="window.location.href='/download'"></button>
+</div>     
 </body>
 </html>
 

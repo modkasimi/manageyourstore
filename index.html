@@ -156,6 +156,37 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+        @media (max-width: 700px) {
+            .section, .third-section {
+                flex-direction: column;
+            }
+            .left, .right {
+                width: 100%;
+                margin-bottom: 20px;
+                box-sizing: border-box;
+            }
+            .container {
+                margin: 0 0 20px 0;
+                box-sizing: border-box;
+            }
+            nav ul {
+                flex-wrap: wrap;
+            }
+            nav ul li {
+                margin: 5px 10px;
+            }
+        }
+        @media (max-width: 600px) {
+            .language-selector {
+                position: static;
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            nav ul li a {
+                font-size: 0.9em;
+            }
+        }
 
     </style>
 </head>

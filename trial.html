@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-46L0L6JK7R"></script>
 <script>
@@ -34,7 +35,6 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
 
     <script src="language.js"></script>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Try My Store free for 15 days - no card needed. Scan sales, print receipts, and see your reports in real time.">
     <title>Try My Store Free</title>
@@ -114,6 +114,65 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
             font-size: 14px;
         }
 
+        .pay-box {
+            text-align: left;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 30px 0 10px;
+        }
+
+        .pay-box h3 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .pay-box p {
+            margin: 0 0 8px;
+            font-size: 14px;
+        }
+
+        .wa-btn {
+            background-color: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        .wa-btn:hover {
+            background-color: #1ebe57;
+        }
+
+        .wa-float {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: #25D366;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wa-float[hidden] {
+            display: none;
+        }
+
+        .wa-float svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 25px 15px;
@@ -178,31 +237,82 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
             </div>
         </div>
 
-        <a href="https://apps.microsoft.com/detail/9P07X9GQ43WZ" class="download-btn"
+        <a href="download.html" class="download-btn"
            onclick="if(typeof fbq==='function'){fbq('track','Lead',{content_name:'trial_landing'});}"
            data-en="Start My Free 15-Day Trial" data-fr="Démarrer mon essai gratuit de 15 jours" data-ar="ابدأ تجربتي المجانية لمدة 15 يومًا">
           Start My Free 15-Day Trial
         </a>
 
-        <p style="font-size:12px; color:#666; margin-top: 14px;" data-en="✅ Free install from the Microsoft Store"
-           data-fr="✅ Installation gratuite depuis le Microsoft Store"
-           data-ar="✅ تثبيت مجاني من متجر مايكروسوفت">
-            ✅ Free install from the Microsoft Store
+        <p style="font-size:12px; color:#666; margin-top: 14px;" data-en="✅ Free 15-day trial - no card needed"
+           data-fr="✅ Essai gratuit de 15 jours - sans carte requise"
+           data-ar="✅ تجربة مجانية لمدة 15 يومًا - بدون بطاقة">
+            ✅ Free 15-day trial - no card needed
         </p>
+        <div class="pay-box">
+            <h3 data-en="After the trial: how to pay"
+                data-fr="Après l'essai : comment payer"
+                data-ar="بعد التجربة: طرق الدفع">
+                After the trial: how to pay
+            </h3>
+            <p data-en="💳 Bank card (Visa, Mastercard, American Express...), PayPal, Apple Pay (Safari) or Google Pay (Chrome) - through the secure checkout opened from the app."
+               data-fr="💳 Carte bancaire (Visa, Mastercard, American Express...), PayPal, Apple Pay (Safari) ou Google Pay (Chrome) - via le paiement sécurisé ouvert depuis l'application."
+               data-ar="💳 بطاقة بنكية (Visa، Mastercard، American Express...)، أو PayPal، أو Apple Pay (متصفح Safari)، أو Google Pay (متصفح Chrome) - عبر صفحة الدفع الآمنة التي تُفتح من التطبيق.">
+                💳 Bank card (Visa, Mastercard, American Express...), PayPal, Apple Pay (Safari) or Google Pay (Chrome) - through the secure checkout opened from the app.
+            </p>
+            <p data-en="🏦 No card? Pay by bank transfer or cash: tick &quot;pay without a card&quot; in the app, or message us on WhatsApp and we'll arrange it."
+               data-fr="🏦 Pas de carte ? Payez par virement bancaire ou en espèces : cochez « payer sans carte » dans l'application, ou écrivez-nous sur WhatsApp et nous organiserons le paiement."
+               data-ar="🏦 ليست لديك بطاقة؟ ادفع بتحويل بنكي أو نقدًا: اختر «الدفع بدون بطاقة» في التطبيق، أو راسلنا على واتساب وسننظم عملية الدفع.">
+                🏦 No card? Pay by bank transfer or cash: tick "pay without a card" in the app, or message us on WhatsApp and we'll arrange it.
+            </p>
+        </div>
 
-        <p style="font-size: 0.9em; color: #6c757d; margin-top: 10px;" data-en="My Store is designed for Windows. Looking for the Android app or productsCount?"
-           data-fr="My Store est conçu pour Windows. Vous cherchez l'application Android ou productsCount ?"
-           data-ar="تطبيق متجري مصمم لنظام ويندوز. هل تبحث عن تطبيق أندرويد أو productsCount؟">
-            My Store is designed for Windows. Looking for the Android app or productsCount?
-        </p>
-        <p>
-            <a href="download.html" data-en="See all download options" data-fr="Voir toutes les options de téléchargement" data-ar="عرض جميع خيارات التنزيل">See all download options</a>
-        </p>
+        <div class="wa-section" hidden>
+            <p style="font-size: 15px; margin-bottom: 4px;" data-en="Questions before you start? Message us on WhatsApp."
+               data-fr="Des questions avant de commencer ? Écrivez-nous sur WhatsApp."
+               data-ar="عندك سؤال قبل البدء؟ راسلنا على واتساب.">
+                Questions before you start? Message us on WhatsApp.
+            </p>
+            <a class="wa-btn wa-link" target="_blank" rel="noopener"
+               onclick="if(typeof fbq==='function'){fbq('track','Contact',{content_name:'trial_whatsapp'});}"
+               data-en="💬 Chat on WhatsApp" data-fr="💬 Discuter sur WhatsApp" data-ar="💬 تواصل عبر واتساب">💬 Chat on WhatsApp</a>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2024 KasimiApps. All rights reserved.</p>
     </footer>
+
+    <a class="wa-float wa-link" target="_blank" rel="noopener" aria-label="WhatsApp" hidden
+       onclick="if(typeof fbq==='function'){fbq('track','Contact',{content_name:'trial_whatsapp_float'});}">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.7 12.7-12.6S23 3 16 3zm0 23.2c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.6-3.5-1.6-5.5C5.3 9.8 10.1 5.1 16 5.1s10.7 4.7 10.7 10.5S21.9 26.2 16 26.2zm5.9-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>
+    </a>
+
+    <script>
+        // WhatsApp number in international format, digits only.
+        var WHATSAPP_NUMBER = '212649864854';
+
+        (function () {
+            // Ads link here with ?lang=fr or ?lang=ar so the page opens in the ad's language.
+            var lang = new URLSearchParams(location.search).get('lang');
+            if (lang === 'en' || lang === 'fr' || lang === 'ar') {
+                localStorage.setItem('selectedLanguage', lang);
+            }
+
+            if (!WHATSAPP_NUMBER) return;
+            var msg = {
+                en: 'Hello, I saw your ad for My Store and I have a question.',
+                fr: "Bonjour, j'ai vu votre publicité pour My Store et j'ai une question.",
+                ar: 'مرحبا، رأيت إعلانكم عن تطبيق متجري ولدي سؤال.'
+            };
+            var current = localStorage.getItem('selectedLanguage') || 'en';
+            var href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg[current] || msg.en);
+            document.querySelectorAll('.wa-link').forEach(function (a) {
+                a.href = href;
+                a.hidden = false;
+            });
+            document.querySelectorAll('.wa-section').forEach(function (s) { s.hidden = false; });
+        })();
+    </script>
 
 </body>
 </html>

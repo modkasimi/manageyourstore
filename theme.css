@@ -63,3 +63,17 @@ a.download-btn { display: inline-block !important; margin: 6px 4px !important; l
 .note-small, [style*="color:#666"], [style*="6c757d"] { color: var(--muted) !important; }
 
 input[type="text"], input[type="email"], textarea, select { border: 1px solid var(--line) !important; border-radius: 8px; }
+
+/* shared top bar (site-nav.js): Home + language on every page */
+.site-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  background: var(--primary); padding: 8px 16px; position: sticky; top: 0; z-index: 50; direction: ltr;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .15); font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+.site-bar a.site-bar-home { color: var(--on-primary) !important; text-decoration: none; font-weight: 700; font-size: 15px;
+  padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .35); }
+.site-bar a.site-bar-home:hover { background: rgba(255, 255, 255, .12); }
+.site-bar a.site-bar-home span { direction: inherit !important; text-align: inherit !important; color: inherit !important; }
+.site-bar-lang { display: flex; align-items: center; gap: 6px; color: var(--on-primary); font-size: 17px; }
+.site-bar-lang select { font: inherit; font-size: 14px; font-weight: 600; padding: 5px 8px; border-radius: 8px !important;
+  border: 0 !important; background: #fff; color: var(--ink); cursor: pointer; }
+/* the old per-page home icons and the home page's old selector are replaced by the bar */
+.home-icon, [class^="home-icon"], .language-selector { display: none !important; }

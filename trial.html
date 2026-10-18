@@ -250,6 +250,40 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
            data-ar="✅ تجربة مجانية لمدة 15 يومًا - بدون بطاقة">
             ✅ Free 15-day trial - no card needed
         </p>
+
+        <!-- Picture gallery: same pictures as the ads / message kit, in the visitor's language. -->
+        <section class="gallery" aria-label="My Store">
+            <h2 class="gal-title" data-centered="1"
+                data-en="See what My Store does" data-fr="Découvrez My Store en images" data-ar="اكتشف تطبيق متجري بالصور">
+                See what My Store does
+            </h2>
+            <div class="gal-track" id="gal-track">
+                <figure class="gal-slide"><img data-name="app_explainer_pos" loading="lazy" width="900" height="1125" alt=""></figure>
+                <figure class="gal-slide"><img data-name="devices" loading="lazy" width="900" height="1125" alt=""></figure>
+                <figure class="gal-slide"><img data-name="remote" loading="lazy" width="900" height="1125" alt=""></figure>
+            </div>
+            <div class="gal-nav">
+                <button type="button" class="gal-arrow" id="gal-prev" aria-label="Previous">&#8249;</button>
+                <span class="gal-dots" id="gal-dots"><i></i><i></i><i></i></span>
+                <button type="button" class="gal-arrow" id="gal-next" aria-label="Next">&#8250;</button>
+            </div>
+            <p class="gal-tip" data-centered="1"
+               data-en="Swipe to see more · tap a picture to zoom"
+               data-fr="Faites glisser pour voir la suite · touchez une image pour l'agrandir"
+               data-ar="اسحب لرؤية المزيد · المس الصورة لتكبيرها">
+               Swipe to see more · tap a picture to zoom
+            </p>
+            <a href="download.html" class="download-btn"
+               onclick="if(typeof fbq==='function'){fbq('trackCustom','TrialButtonClick',{content_name:'trial_gallery'});}"
+               data-en="Start My Free 15-Day Trial" data-fr="Démarrer mon essai gratuit de 15 jours" data-ar="ابدأ تجربتي المجانية لمدة 15 يومًا">
+              Start My Free 15-Day Trial
+            </a>
+        </section>
+        <div class="gal-zoom" id="gal-zoom" hidden>
+            <button type="button" class="gal-close" aria-label="Close">&times;</button>
+            <img id="gal-zoom-img" alt="">
+        </div>
+
         <div class="pay-box">
             <h3 data-en="After the trial: how to pay"
                 data-fr="Après l'essai : comment payer"
@@ -290,6 +324,51 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
     </a>
 
     <script>
+        // Gallery: pick the pictures for the visitor's language, swipe/arrows/dots, tap to zoom.
+        (function () {
+            var track = document.getElementById('gal-track');
+            if (!track) return;
+            var lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('selectedLanguage') || 'en';
+            if (['en', 'fr', 'ar'].indexOf(lang) < 0) lang = 'en';
+            var ALT = {
+                app_explainer_pos: { en: 'My Store: what the app does', fr: 'My Store : ce que fait l’application', ar: 'تطبيق متجري: ماذا يفعل' },
+                devices: { en: 'No need for an expensive POS', fr: 'Pas besoin d’une caisse coûteuse', ar: 'لا حاجة لجهاز كاشير باهظ الثمن' },
+                remote: { en: 'Your shop in your pocket', fr: 'Votre magasin dans votre poche', ar: 'متجرك في جيبك' }
+            };
+            var imgs = track.querySelectorAll('img');
+            imgs.forEach(function (im) {
+                var n = im.getAttribute('data-name');
+                im.src = 'assets/trial/' + n + '_' + lang + '.jpg';
+                im.alt = (ALT[n] || {})[lang] || '';
+            });
+            var dots = document.querySelectorAll('#gal-dots i');
+            var slides = track.querySelectorAll('.gal-slide');
+            function target(k) { return slides[k].offsetLeft - track.offsetLeft - (track.clientWidth - slides[k].offsetWidth) / 2; }
+            function index() {   // the slide whose snap position is closest to the current scroll
+                var best = 0;
+                slides.forEach(function (s, k) { if (Math.abs(target(k) - track.scrollLeft) < Math.abs(target(best) - track.scrollLeft)) best = k; });
+                return best;
+            }
+            function go(i) {
+                i = Math.max(0, Math.min(slides.length - 1, i));
+                track.scrollTo({ left: target(i), behavior: 'smooth' });
+            }
+            function update() { var i = index(); dots.forEach(function (d, k) { d.className = k === i ? 'on' : ''; }); }
+            document.getElementById('gal-prev').onclick = function () { go(index() - 1); };
+            document.getElementById('gal-next').onclick = function () { go(index() + 1); };
+            dots.forEach(function (d, k) { d.onclick = function () { go(k); }; });
+            track.addEventListener('scroll', update);
+            update();
+
+            var zoom = document.getElementById('gal-zoom'), zimg = document.getElementById('gal-zoom-img');
+            imgs.forEach(function (im) {
+                im.addEventListener('click', function () { zimg.src = im.src; zimg.alt = im.alt; zoom.hidden = false; document.body.style.overflow = 'hidden'; });
+            });
+            function close() { zoom.hidden = true; document.body.style.overflow = ''; }
+            zoom.addEventListener('click', close);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+        })();
+
         // WhatsApp number in international format, digits only.
         var WHATSAPP_NUMBER = '212649864854';
 

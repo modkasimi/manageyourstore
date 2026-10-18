@@ -89,3 +89,6 @@ input[type="text"], input[type="email"], textarea, select { border: 1px solid va
 .email-link-box .elb-hint { color: var(--muted) !important; font-size: 13px; margin: 8px 0 0; text-align: center; word-break: break-word; }
 /* each line picks its own direction from its text (Arabic right-to-left, others left-to-right) */
 .email-link-box .elb-title, .email-link-box .elb-error, .email-link-box .elb-hint, .elb-form .elb-btn { unicode-bidi: plaintext; }
+/* download page: small trust lines under the download buttons */
+.container p.trust-line { font-size: 13px; color: var(--muted) !important; margin: 4px 0; padding: 0 12px; text-align: center; unicode-bidi: plaintext; }
+.container p.trust-line + p.trust-line { margin-bottom: 12px; }

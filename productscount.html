@@ -44,6 +44,14 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         .pc-wrap *, .pc-hero * { box-sizing: border-box; }
 
         .pc-hero { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: var(--on-primary); text-align: center; padding: 44px 16px 52px; }
+        .pc-hero-in { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+        .pc-hero-txt { flex: 1 1 0; min-width: 0; }
+        .pc-hero-pic { flex: 0 0 360px; position: relative; }
+        .pc-hero-pic::before { content: ""; position: absolute; inset: 6% 2%; border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(255,255,255,.95), rgba(255,255,255,.55) 70%, rgba(255,255,255,0)); }
+        .pc-hero-pic img { position: relative; width: 100%; height: auto; display: block; }
+        .pc-steps li .pc-step-pic { display: block; width: 100%; max-width: 130px; height: auto; margin: 0 0 10px;
+            background: var(--bg); border-radius: 12px; padding: 6px; }
         .pc-hero .pc-badge { display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); color: var(--on-primary) !important;
             border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; margin: 0 0 14px; unicode-bidi: plaintext; }
         .pc-hero h1 { color: var(--on-primary) !important; font-size: 34px; line-height: 1.2; margin: 0 auto 14px; max-width: 760px; unicode-bidi: plaintext; }
@@ -124,6 +132,9 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
             .pc-node { max-width: 100%; width: 100%; }
             .pc-arrow { transform: rotate(90deg); }
             .pc-hero h1 { font-size: 27px; }
+            .pc-hero-in { flex-direction: column; gap: 6px; }
+            .pc-hero-pic { order: -1; flex: 0 0 auto; width: 250px; max-width: 75%; }
+            .pc-hero { padding-top: 22px; }
             .pc-hero p.pc-lead { font-size: 16px; }
         }
         @media (max-width: 440px) {
@@ -136,6 +147,8 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 <body>
 
 <section class="pc-hero">
+<div class="pc-hero-in">
+<div class="pc-hero-txt">
     <p class="pc-badge" data-centered="1"
        data-en="📱 Free Android app · companion to My Store"
        data-fr="📱 Application Android gratuite · compagnon de My Store"
@@ -162,6 +175,9 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
        data-en="✅ Choose the free version · you get the APK by email"
        data-fr="✅ Choisissez la version gratuite · vous recevez l'APK par email"
        data-ar="✅ اختر النسخة المجانية · يصلك ملف APK عبر البريد الإلكتروني">✅ Choose the free version · you get the APK by email</p>
+</div>
+<div class="pc-hero-pic"><img src="assets/productscount/scan.svg" width="420" height="340" alt="Phone scanning a product barcode"></div>
+</div>
 </section>
 
 <main class="pc-wrap">
@@ -238,6 +254,7 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         </p>
         <ol class="pc-steps">
             <li>
+                <img class="pc-step-pic" src="assets/productscount/scan.svg" width="420" height="340" loading="lazy" alt="">
                 <h3 data-en="Scan" data-fr="Scannez" data-ar="امسح">Scan</h3>
                 <p data-en="Open productsCount and point the phone camera at the barcode."
                    data-fr="Ouvrez productsCount et pointez la caméra du téléphone vers le code-barres."
@@ -424,7 +441,13 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         if (['en', 'fr', 'ar'].indexOf(lang) < 0) lang = 'en';
 
         var img = document.getElementById('pc-img');
-        img.src = 'assets/productscount/productscount_' + lang + '.jpg';
+        function setPic(l) { img.src = 'assets/productscount/productscount_' + (['en', 'fr', 'ar'].indexOf(l) < 0 ? 'en' : l) + '.jpg'; }
+        setPic(lang);
+        // The top-bar language menu translates the text in place without a reload, so swap the picture too.
+        if (typeof window.changeLanguage === 'function') {
+            var orig = window.changeLanguage;
+            window.changeLanguage = function (l) { orig(l); setPic(l); };
+        }
         var zoom = document.getElementById('pc-zoom'), zimg = document.getElementById('pc-zoom-img');
         img.addEventListener('click', function () { zimg.src = img.src; zoom.hidden = false; document.body.style.overflow = 'hidden'; });
         function close() { zoom.hidden = true; document.body.style.overflow = ''; }

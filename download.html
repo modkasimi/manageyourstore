@@ -139,6 +139,32 @@ function gtag_report_conversion(url) {
     ✅ Secure checkout powered by Lemon Squeezy
 </p>
 
+<!-- Phone visitors can't install the Windows app: let them mail the Store link to themselves.
+     Opens the visitor's own email app (mailto) - nothing is sent or stored by the site. -->
+<div class="email-link-box">
+  <p class="elb-title" data-centered="1"
+     data-en="On your phone? Send the Windows download link to your email, then open it on your shop PC."
+     data-fr="Sur votre téléphone ? Envoyez-vous le lien de téléchargement Windows par email, puis ouvrez-le sur le PC de votre magasin."
+     data-ar="تتصفح من هاتفك؟ أرسل رابط تنزيل نسخة ويندوز إلى بريدك الإلكتروني، ثم افتحه على حاسوب متجرك.">
+     On your phone? Send the Windows download link to your email, then open it on your shop PC.
+  </p>
+  <form id="elb-form" class="elb-form" novalidate>
+    <input type="email" id="elb-email" autocomplete="email" inputmode="email" placeholder="email@example.com" aria-label="Email">
+    <button type="submit" class="elb-btn" data-centered="1"
+            data-en="✉ Email me the link" data-fr="✉ M'envoyer le lien" data-ar="✉ أرسل لي الرابط">✉ Email me the link</button>
+  </form>
+  <p class="elb-error" id="elb-error" hidden data-centered="1"
+     data-en="Please enter a valid email address." data-fr="Veuillez saisir une adresse email valide." data-ar="يرجى إدخال بريد إلكتروني صحيح.">
+     Please enter a valid email address.
+  </p>
+  <p class="elb-hint" id="elb-hint" hidden data-centered="1"
+     data-en="Your email app is opening with the link ready - just press Send. Nothing opened? Here is the link: apps.microsoft.com/detail/9P07X9GQ43WZ"
+     data-fr="Votre application email s'ouvre avec le lien prêt - appuyez simplement sur Envoyer. Rien ne s'ouvre ? Voici le lien : apps.microsoft.com/detail/9P07X9GQ43WZ"
+     data-ar="يفتح الآن تطبيق البريد مع الرابط جاهزًا - اضغط فقط على إرسال. لم يفتح شيء؟ هذا هو الرابط: apps.microsoft.com/detail/9P07X9GQ43WZ">
+     Your email app is opening with the link ready - just press Send. Nothing opened? Here is the link: apps.microsoft.com/detail/9P07X9GQ43WZ
+  </p>
+</div>
+
  <p  data-en="My Store is a full store-management app for Windows PCs and Android tablets (7&quot; or larger) - same features on both: sales, purchases, stock, cash register and more."
    data-fr="My Store est une application complète de gestion de magasin pour PC Windows et tablettes Android (7 pouces ou plus) - les mêmes fonctionnalités sur les deux : ventes, achats, stock, caisse et plus encore."
    data-ar="تطبيق متجري هو تطبيق كامل لإدارة المتجر لأجهزة ويندوز والأجهزة اللوحية أندرويد (7 بوصات أو أكبر) - بنفس الميزات على الاثنين: المبيعات والمشتريات والمخزون والصندوق وأكثر.">
@@ -225,6 +251,41 @@ function gtag_report_conversion(url) {
     } catch (e) { /* storage unavailable: still send the event */ }
     fbq('track', 'Lead', {content_name: name});
   }
+
+  // "Email me the link": builds a mailto addressed to the visitor themselves, in the page's language.
+  (function () {
+    var STORE_LINK = 'https://apps.microsoft.com/detail/9P07X9GQ43WZ';
+    var TEXT = {
+      en: { subject: 'My Store for Windows - download link',
+            body: 'Open this link on your shop PC to download My Store (15-day free trial, no bank card needed):\n\n' + STORE_LINK +
+                  '\n\nQuestions? kasimiapps@manageyourstore.site' },
+      fr: { subject: 'My Store pour Windows - lien de téléchargement',
+            body: 'Ouvrez ce lien sur le PC de votre magasin pour télécharger My Store (essai gratuit de 15 jours, sans carte bancaire) :\n\n' + STORE_LINK +
+                  '\n\nDes questions ? kasimiapps@manageyourstore.site' },
+      ar: { subject: 'تطبيق متجري لويندوز - رابط التنزيل',
+            body: 'افتح هذا الرابط على حاسوب متجرك لتنزيل تطبيق متجري (تجربة مجانية لمدة 15 يومًا بدون بطاقة بنكية):\n\n' + STORE_LINK +
+                  '\n\nلأي سؤال: kasimiapps@manageyourstore.site' }
+    };
+    var form = document.getElementById('elb-form');
+    if (!form) return;
+    var input = document.getElementById('elb-email');
+    var err = document.getElementById('elb-error');
+    var hint = document.getElementById('elb-hint');
+    var EMAIL_RE = /^[^\s@<>"'(),;:]+@[^\s@<>"'(),;:]+\.[a-zA-Z]{2,}$/;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = input.value.trim();
+      if (!EMAIL_RE.test(email)) { err.hidden = false; hint.hidden = true; input.focus(); return; }
+      err.hidden = true;
+      var lang = localStorage.getItem('selectedLanguage') || 'en';
+      var t = TEXT[lang] || TEXT.en;
+      msLead('email_windows_link');
+      window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
+      hint.hidden = false;
+    });
+    input.addEventListener('input', function () { err.hidden = true; });
+  })();
 </script>
 </body>
 </html>

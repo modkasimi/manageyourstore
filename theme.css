@@ -77,3 +77,15 @@ input[type="text"], input[type="email"], textarea, select { border: 1px solid va
   border: 0 !important; background: #fff; color: var(--ink); cursor: pointer; }
 /* the old per-page home icons and the home page's old selector are replaced by the bar */
 .home-icon, [class^="home-icon"], .language-selector { display: none !important; }
+
+/* download page: "Email me the Windows link" box */
+.email-link-box { margin: 6px auto 18px; max-width: 520px; background: var(--bg); border: 1px dashed var(--line);
+  border-radius: 14px; padding: 14px 16px; }
+.email-link-box .elb-title { font-size: 15px; font-weight: 600; color: var(--ink) !important; margin: 0 0 10px; text-align: center; }
+.elb-form { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.elb-form input[type="email"] { flex: 1 1 220px; min-width: 0; font: inherit; font-size: 15px; padding: 10px 12px; background: #fff; }
+.elb-form .elb-btn { flex: 0 0 auto; padding: 10px 16px; font-size: 15px; cursor: pointer; }
+.email-link-box .elb-error { color: #b42318 !important; font-size: 14px; margin: 8px 0 0; text-align: center; }
+.email-link-box .elb-hint { color: var(--muted) !important; font-size: 13px; margin: 8px 0 0; text-align: center; word-break: break-word; }
+/* each line picks its own direction from its text (Arabic right-to-left, others left-to-right) */
+.email-link-box .elb-title, .email-link-box .elb-error, .email-link-box .elb-hint, .elb-form .elb-btn { unicode-bidi: plaintext; }

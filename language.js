@@ -1,3 +1,11 @@
+// Links like download.html?lang=fr (ads, WhatsApp messages) open the page in that language.
+(function () {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q === 'en' || q === 'fr' || q === 'ar') {
+        try { localStorage.setItem('selectedLanguage', q); } catch (e) {}
+    }
+})();
+
 
     // Function to change language based on selection
 function changeLanguage(lang) {

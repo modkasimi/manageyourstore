@@ -112,6 +112,24 @@ function gtag_report_conversion(url) {
     </style>
 <script src="site-nav.js" defer></script>
 <link rel="stylesheet" href="theme.css">
+<style>
+  /* Phone visitors (set by the device check below): lead with "send me the link" + WhatsApp + tutorial */
+  .phone-box { display:none; }
+  .is-phone .phone-box { display:block; margin:10px auto 22px; max-width:560px; background:#fff; border:2px solid var(--primary);
+                         border-radius:16px; padding:18px 16px 20px; text-align:center; box-shadow:0 6px 18px rgba(10,59,54,.12); }
+  .container .phone-box p.pb-title { font-size:22px; font-weight:800; color:var(--ink) !important; margin:0 0 6px; unicode-bidi:plaintext; }
+  .container .phone-box p.pb-text { font-size:16px; line-height:1.55; color:var(--text) !important; margin:0 0 12px; unicode-bidi:plaintext; }
+  .is-phone .phone-box .email-link-box { margin:0 auto 14px; border:0; padding:0; background:transparent; }
+  .is-phone .phone-box .elb-title { display:none; }
+  .phone-box a.pb-wa { display:inline-block; background:#25D366; color:#fff !important; font-weight:700; text-decoration:none;
+                       padding:11px 20px; border-radius:10px; font-size:16px; }
+  .phone-box .pb-video { margin-top:16px; }
+  .container .phone-box p.pb-vtitle { font-size:16px; font-weight:700; color:var(--ink) !important; margin:0 0 8px; unicode-bidi:plaintext; }
+  .phone-box video { width:100%; max-width:320px; border-radius:14px; background:#000; display:block; margin:0 auto; }
+  .phone-only { display:none; }
+  .is-phone .phone-only { display:block; }
+  .container p.phone-only { font-size:13px; color:var(--muted) !important; margin:4px 12px 10px; text-align:center; unicode-bidi:plaintext; }
+</style>
 </head>
 <body>
 
@@ -128,6 +146,23 @@ function gtag_report_conversion(url) {
    data-ar="قم بتنزيل تطبيق متجري وتمتع بتجربة مجانية لمدة 15 يومًا كاملة">
    Download My Store & Enjoy A Free 15-Day Trial
 </p>
+<!-- Shown only on phones (see the device check at the end): My Store installs on a PC or a 7"+ tablet,
+     so phone visitors first get "send me the link", WhatsApp help and the 1-minute tutorial. -->
+<div class="phone-box" id="phone-box">
+  <p class="pb-title" data-centered="1" data-en="📱 You're on a phone" data-fr="📱 Vous êtes sur un téléphone" data-ar="📱 أنت تتصفح من هاتف">📱 You're on a phone</p>
+  <p class="pb-text" data-centered="1"
+     data-en="My Store works on your shop's &lt;b&gt;Windows PC&lt;/b&gt; or an &lt;b&gt;Android tablet (7&quot; or larger)&lt;/b&gt;. Send yourself the link and open it there:"
+     data-fr="My Store fonctionne sur le &lt;b&gt;PC Windows&lt;/b&gt; de votre magasin ou sur une &lt;b&gt;tablette Android (7 pouces ou plus)&lt;/b&gt;. Envoyez-vous le lien et ouvrez-le là-bas :"
+     data-ar="يعمل تطبيق متجري على &lt;b&gt;حاسوب Windows&lt;/b&gt; في محلك أو على &lt;b&gt;جهاز لوحي أندرويد (7 بوصات أو أكثر)&lt;/b&gt;. أرسل الرابط إلى نفسك وافتحه هناك:">
+     My Store works on your shop's <b>Windows PC</b> or an <b>Android tablet (7" or larger)</b>. Send yourself the link and open it there:</p>
+  <div id="pb-email-slot"></div>
+  <a class="pb-wa wa-link" id="pb-wa" target="_blank" rel="noopener" href="https://wa.me/212649864854"
+     data-en="💬 Need help? Chat on WhatsApp" data-fr="💬 Besoin d'aide ? Écrivez-nous sur WhatsApp" data-ar="💬 تحتاج مساعدة؟ راسلنا على واتساب">💬 Need help? Chat on WhatsApp</a>
+  <div class="pb-video" id="pb-video" hidden>
+    <p class="pb-vtitle" data-centered="1" data-en="▶ See how in 1 minute" data-fr="▶ Voyez comment en 1 minute" data-ar="▶ شاهد الطريقة في دقيقة واحدة">▶ See how in 1 minute</p>
+    <video controls preload="none" playsinline poster="assets/video/download_tutorial_ar.jpg" src="assets/video/download_tutorial_ar.mp4"></video>
+  </div>
+</div>
         
         
 <a href="https://apps.microsoft.com/detail/9P07X9GQ43WZ" class="download-btn" onclick="msLead('download_windows')" data-en="Download for Windows" data-fr="Télécharger pour Windows" data-ar="تنزيل لويندوز">Download for Windows</a>
@@ -144,6 +179,12 @@ function gtag_report_conversion(url) {
    data-fr="✅ Android : téléchargement gratuit, envoyé par email, sécurisé par Lemon Squeezy"
    data-ar="✅ أندرويد: تنزيل مجاني، يصلك عبر البريد الإلكتروني، ومؤمّن عبر Lemon Squeezy">
     ✅ Android: free download, delivered by email, secured by Lemon Squeezy
+</p>
+<p class="phone-only" data-centered="1"
+   data-en="These buttons are for the PC or tablet itself - on this phone, use the box above to send yourself the link."
+   data-fr="Ces boutons sont à utiliser sur le PC ou la tablette - sur ce téléphone, utilisez la case ci-dessus pour vous envoyer le lien."
+   data-ar="هذه الأزرار للاستعمال على الحاسوب أو الجهاز اللوحي نفسه - على هذا الهاتف، استعمل الخانة أعلاه لإرسال الرابط إلى نفسك.">
+   These buttons are for the PC or tablet itself - on this phone, use the box above to send yourself the link.
 </p>
 
 <!-- Phone visitors can't install the Windows app: let them mail the Store link to themselves.
@@ -291,11 +332,37 @@ function gtag_report_conversion(url) {
       err.hidden = true;
       var lang = localStorage.getItem('selectedLanguage') || 'en';
       var t = TEXT[lang] || TEXT.en;
-      msLead('email_windows_link');
+      msLead(document.documentElement.classList.contains('is-phone') ? 'phone_email_link' : 'email_windows_link');
       window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
       hint.hidden = false;
     });
     input.addEventListener('input', function () { err.hidden = true; });
+  })();
+</script>
+<script>
+  // Device check: phone = touch screen whose short side is under 600 css px (same 600dp rule the app
+  // uses for tablets). Phones get the phone box; Android tablets see the tablet download first.
+  (function () {
+    var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+    var shortSide = Math.min(screen.width, screen.height);
+    var html = document.documentElement;
+    if (touch && shortSide < 600) {
+      html.classList.add('is-phone');
+      var slot = document.getElementById('pb-email-slot'), box = document.querySelector('.email-link-box');
+      if (slot && box) slot.appendChild(box);
+      var lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('selectedLanguage') || 'en';
+      if (lang === 'ar') document.getElementById('pb-video').hidden = false;   // only the Arabic tutorial exists so far
+      var msg = { en: 'Hello, I am on the download page and need help installing My Store.',
+                  fr: "Bonjour, je suis sur la page de téléchargement et j'ai besoin d'aide pour installer My Store.",
+                  ar: 'مرحبا، أنا في صفحة التنزيل وأحتاج مساعدة لتثبيت تطبيق متجري.' };
+      var wa = document.getElementById('pb-wa');
+      wa.href = 'https://wa.me/212649864854?text=' + encodeURIComponent(msg[lang] || msg.en);
+      wa.addEventListener('click', function () { if (typeof fbq === 'function') fbq('track', 'Contact', {content_name: 'download_phone_whatsapp'}); });
+    } else if (touch && /Android/i.test(navigator.userAgent)) {
+      html.classList.add('is-tablet');
+      var win = document.querySelector('a[onclick*="download_windows"]'), tab = document.querySelector('a[onclick*="download_android_tablet"]');
+      if (win && tab) win.parentNode.insertBefore(tab, win);
+    }
   })();
 </script>
 </body>

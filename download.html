@@ -49,7 +49,7 @@ function gtag_report_conversion(url) {
   window.lemonSqueezyAffiliateConfig = { store: 'mysales' }
 </script>
 <script src="https://lmsqueezy.com/affiliate.js" defer></script>
-    
+
 
 
     <script src="language.js"></script>
@@ -66,9 +66,9 @@ function gtag_report_conversion(url) {
         }
 
         .container {
-            max-width: 600px;
+            max-width: 640px;
             margin: 0 auto;
-            padding: 50px;
+            padding: 40px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -105,30 +105,71 @@ function gtag_report_conversion(url) {
 
         @media (max-width: 480px) {
             .container {
-                padding: 25px 15px;
-                margin: 0 10px;
+                padding: 22px 14px;
+                margin: 0;
             }
         }
     </style>
 <script src="site-nav.js" defer></script>
 <link rel="stylesheet" href="theme.css">
 <style>
-  /* Phone visitors (set by the device check below): lead with "send me the link" + WhatsApp + tutorial */
-  .phone-box { display:none; }
-  .is-phone .phone-box { display:block; margin:10px auto 22px; max-width:560px; background:#fff; border:2px solid var(--primary);
-                         border-radius:16px; padding:18px 16px 20px; text-align:center; box-shadow:0 6px 18px rgba(10,59,54,.12); }
-  .container .phone-box p.pb-title { font-size:22px; font-weight:800; color:var(--ink) !important; margin:0 0 6px; unicode-bidi:plaintext; }
-  .container .phone-box p.pb-text { font-size:16px; line-height:1.55; color:var(--text) !important; margin:0 0 12px; unicode-bidi:plaintext; }
-  .is-phone .phone-box .email-link-box { margin:0 auto 14px; border:0; padding:0; background:transparent; }
-  .is-phone .phone-box .elb-title { display:none; }
-  .phone-box a.pb-wa { display:inline-block; background:#25D366; color:#fff !important; font-weight:700; text-decoration:none;
-                       padding:11px 20px; border-radius:10px; font-size:16px; }
-  .phone-box .pb-video { margin-top:16px; }
-  .container .phone-box p.pb-vtitle { font-size:16px; font-weight:700; color:var(--ink) !important; margin:0 0 8px; unicode-bidi:plaintext; }
-  .phone-box video { width:100%; max-width:320px; border-radius:14px; background:#000; display:block; margin:0 auto; }
-  .phone-only { display:none; }
-  .is-phone .phone-only { display:block; }
-  .container p.phone-only { font-size:13px; color:var(--muted) !important; margin:4px 12px 10px; text-align:center; unicode-bidi:plaintext; }
+  /* Step 1: "which device will you use in your shop?" - three picture cards. */
+  .container h2.step-title { font-size: 22px; margin: 26px 0 4px; unicode-bidi: plaintext; }
+  .container p.step-sub { font-size: 15px; color: var(--muted) !important; margin: 0 0 14px; unicode-bidi: plaintext; }
+  .device-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 auto 8px; max-width: 560px; }
+  .device-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px;
+                 background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 14px 8px 12px;
+                 cursor: pointer; font: inherit; color: var(--ink); transition: border-color .15s, box-shadow .15s, transform .15s; }
+  /* (the site theme paints every <button> gold: these are picture cards instead) */
+  button.device-card { background: var(--surface) !important; color: var(--ink) !important;
+                       border: 2px solid var(--line) !important; border-radius: 16px !important; font-weight: 400; }
+  button.device-card:hover { filter: none; border-color: var(--primary-2) !important; }
+  button.device-card[aria-pressed="true"] { border-color: var(--primary) !important; background: #eef7f3 !important; }
+  .device-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .device-card[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 6px 18px rgba(10,59,54,.18); background: #f2faf7; }
+  .device-card svg { width: 100%; max-width: 132px; height: 84px; }
+  .device-card .dc-name { font-weight: 800; font-size: 15px; line-height: 1.25; unicode-bidi: plaintext; }
+  .device-card .dc-note { font-size: 12.5px; color: var(--muted); line-height: 1.3; unicode-bidi: plaintext; }
+  .device-card .dc-here { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+                          background: var(--accent); color: var(--on-accent); font-size: 11.5px; font-weight: 700;
+                          border-radius: 20px; padding: 2px 10px; display: none; }
+  .device-card.is-here .dc-here { display: block; }
+  .device-card .dc-check { position: absolute; top: 8px; inset-inline-end: 8px; width: 22px; height: 22px; border-radius: 50%;
+                           background: var(--primary); color: #fff; font-size: 14px; line-height: 22px; display: none; }
+  .device-card[aria-pressed="true"] .dc-check { display: block; }
+  @media (max-width: 420px) {
+    .device-cards { gap: 8px; }
+    .device-card { padding: 12px 4px 10px; border-radius: 12px; }
+    .device-card svg { height: 64px; }
+    .device-card .dc-name { font-size: 13.5px; }
+    .device-card .dc-note { font-size: 11.5px; }
+  }
+
+  /* Step 2: the chosen device's panel. */
+  .device-panel { display: none; margin: 18px auto 6px; max-width: 560px; background: var(--surface); border: 2px solid var(--primary);
+                  border-radius: 16px; padding: 18px 14px 16px; box-shadow: 0 6px 18px rgba(10,59,54,.10); }
+  .device-panel.open { display: block; animation: dp-in .25s ease-out; }
+  @keyframes dp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .container .device-panel p.dp-title { font-size: 19px; font-weight: 800; color: var(--ink) !important; margin: 0 0 6px; unicode-bidi: plaintext; }
+  .container .device-panel p.dp-text { font-size: 15.5px; line-height: 1.55; margin: 0 0 12px; unicode-bidi: plaintext; }
+  .container .device-panel p.dp-note { font-size: 13px; color: var(--muted) !important; margin: 8px 6px 0; unicode-bidi: plaintext; }
+  .device-panel ul.dp-points { list-style: none; padding: 0; margin: 0 auto 12px; max-width: 440px; text-align: start; }
+  .device-panel ul.dp-points li { font-size: 15px; line-height: 1.45; padding: 4px 0; color: var(--text); unicode-bidi: plaintext; }
+  .container .device-panel p.dp-other { font-size: 14px; font-weight: 600; color: var(--ink) !important; margin: 14px 0 6px; unicode-bidi: plaintext; }
+
+  /* Phone visitors who picked the PC: WhatsApp help and the 1-minute tutorial. */
+  .dp-phone-help { display: none; margin-top: 12px; }
+  .is-phone .dp-phone-help { display: block; }
+  a.pb-wa { display: inline-block; background: #25D366; color: #fff !important; font-weight: 700; text-decoration: none;
+            padding: 11px 20px; border-radius: 10px; font-size: 16px; }
+  .pb-video { margin-top: 16px; }
+  .container p.pb-vtitle { font-size: 16px; font-weight: 700; color: var(--ink) !important; margin: 0 0 8px; unicode-bidi: plaintext; }
+  .pb-video video { width: 100%; max-width: 320px; border-radius: 14px; background: #000; display: block; margin: 0 auto; }
+
+  /* "Follow your shop from your phone" - replaces the old companion-app section. */
+  .remote-tip { margin: 18px auto 4px; max-width: 560px; background: var(--bg); border: 1px dashed var(--line); border-radius: 14px;
+                padding: 12px 14px; }
+  .container .remote-tip p { font-size: 14.5px; line-height: 1.5; margin: 0; unicode-bidi: plaintext; }
 </style>
 </head>
 <body>
@@ -146,56 +187,182 @@ function gtag_report_conversion(url) {
    data-ar="قم بتنزيل تطبيق متجري وتمتع بتجربة مجانية لمدة 15 يومًا كاملة">
    Download My Store & Enjoy A Free 15-Day Trial
 </p>
-<!-- Shown only on phones (see the device check at the end): My Store installs on a PC or a 7"+ tablet,
-     so phone visitors first get "send me the link", WhatsApp help and the 1-minute tutorial. -->
-<div class="phone-box" id="phone-box">
-  <p class="pb-title" data-centered="1" data-en="📱 You're on a phone" data-fr="📱 Vous êtes sur un téléphone" data-ar="📱 أنت تتصفح من هاتف">📱 You're on a phone</p>
-  <p class="pb-text" data-centered="1"
-     data-en="My Store works on your shop's &lt;b&gt;Windows PC&lt;/b&gt; or an &lt;b&gt;Android tablet (7&quot; or larger)&lt;/b&gt;. Send yourself the link and open it there:"
-     data-fr="My Store fonctionne sur le &lt;b&gt;PC Windows&lt;/b&gt; de votre magasin ou sur une &lt;b&gt;tablette Android (7 pouces ou plus)&lt;/b&gt;. Envoyez-vous le lien et ouvrez-le là-bas :"
-     data-ar="يعمل تطبيق متجري على &lt;b&gt;حاسوب Windows&lt;/b&gt; في محلك أو على &lt;b&gt;جهاز لوحي أندرويد (7 بوصات أو أكثر)&lt;/b&gt;. أرسل الرابط إلى نفسك وافتحه هناك:">
-     My Store works on your shop's <b>Windows PC</b> or an <b>Android tablet (7" or larger)</b>. Send yourself the link and open it there:</p>
-  <div id="pb-email-slot"></div>
-  <a class="pb-wa wa-link" id="pb-wa" target="_blank" rel="noopener" href="https://wa.me/212649864854"
-     data-en="💬 Need help? Chat on WhatsApp" data-fr="💬 Besoin d'aide ? Écrivez-nous sur WhatsApp" data-ar="💬 تحتاج مساعدة؟ راسلنا على واتساب">💬 Need help? Chat on WhatsApp</a>
-  <div class="pb-video" id="pb-video" hidden>
-    <p class="pb-vtitle" data-centered="1" data-en="▶ See how in 1 minute" data-fr="▶ Voyez comment en 1 minute" data-ar="▶ شاهد الطريقة في دقيقة واحدة">▶ See how in 1 minute</p>
-    <video controls preload="none" playsinline poster="assets/video/download_tutorial_ar.jpg" src="assets/video/download_tutorial_ar.mp4"></video>
+
+<!-- Step 1: the visitor picks the device that will run the shop. The card for the device they are
+     browsing on gets a "This device" tag (see the device check at the end), but nothing is pre-chosen. -->
+<h2 class="step-title" data-centered="1"
+    data-en="Which device will you use in your shop?" data-fr="Quel appareil utiliserez-vous dans votre magasin ?" data-ar="ما الجهاز الذي ستستعمله في متجرك؟">
+    Which device will you use in your shop?</h2>
+<p class="step-sub" data-centered="1"
+   data-en="Choose one - same features on all three." data-fr="Choisissez-en un - les mêmes fonctionnalités sur les trois." data-ar="اختر واحدًا - نفس الميزات على الثلاثة.">
+   Choose one - same features on all three.</p>
+
+<div class="device-cards" role="group">
+  <button type="button" class="device-card" data-device="pc" aria-pressed="false" aria-controls="panel-pc">
+    <span class="dc-here" data-centered="1" data-en="This device" data-fr="Cet appareil" data-ar="هذا الجهاز">This device</span>
+    <span class="dc-check" aria-hidden="true">✓</span>
+    <svg viewBox="0 0 132 84" aria-hidden="true">
+      <!-- monitor -->
+      <rect x="10" y="4" width="76" height="50" rx="5" fill="#1f2b29"/>
+      <rect x="14" y="8" width="68" height="40" rx="2" fill="#f5f7f6"/>
+      <rect x="14" y="8" width="68" height="7" fill="#0a4640"/>
+      <rect x="18" y="19" width="10" height="10" rx="2" fill="#e3b04b"/>
+      <rect x="31" y="19" width="10" height="10" rx="2" fill="#cfe3dd"/>
+      <rect x="44" y="19" width="10" height="10" rx="2" fill="#cfe3dd"/>
+      <rect x="18" y="32" width="10" height="10" rx="2" fill="#cfe3dd"/>
+      <rect x="31" y="32" width="10" height="10" rx="2" fill="#cfe3dd"/>
+      <rect x="60" y="19" width="18" height="25" rx="2" fill="#ffffff" stroke="#13675d" stroke-width="1"/>
+      <rect x="43" y="54" width="10" height="10" fill="#1f2b29"/>
+      <rect x="32" y="63" width="32" height="5" rx="2" fill="#1f2b29"/>
+      <!-- laptop -->
+      <rect x="78" y="40" width="46" height="30" rx="3" fill="#2b3a37"/>
+      <rect x="81" y="43" width="40" height="24" rx="1" fill="#f5f7f6"/>
+      <rect x="81" y="43" width="40" height="5" fill="#0a4640"/>
+      <rect x="84" y="51" width="7" height="7" rx="1" fill="#e3b04b"/>
+      <rect x="93" y="51" width="7" height="7" rx="1" fill="#cfe3dd"/>
+      <rect x="108" y="51" width="10" height="13" rx="1" fill="#ffffff" stroke="#13675d" stroke-width=".8"/>
+      <path d="M72 71 h58 l-4 6 h-50 z" fill="#9aa8a4"/>
+    </svg>
+    <span class="dc-name" data-centered="1" data-en="Windows PC or laptop" data-fr="PC ou portable Windows" data-ar="حاسوب أو لابتوب ويندوز">Windows PC or laptop</span>
+    <span class="dc-note" data-centered="1" data-en="Works with barcode scanners and receipt printers" data-fr="Compatible lecteurs de codes-barres et imprimantes de tickets" data-ar="يعمل مع قارئ الباركود وطابعة التذاكر">Works with barcode scanners and receipt printers</span>
+  </button>
+
+  <button type="button" class="device-card" data-device="tablet" aria-pressed="false" aria-controls="panel-tablet">
+    <span class="dc-here" data-centered="1" data-en="This device" data-fr="Cet appareil" data-ar="هذا الجهاز">This device</span>
+    <span class="dc-check" aria-hidden="true">✓</span>
+    <svg viewBox="0 0 132 84" aria-hidden="true">
+      <rect x="18" y="8" width="96" height="68" rx="8" fill="#1f2b29"/>
+      <rect x="24" y="14" width="84" height="56" rx="3" fill="#f5f7f6"/>
+      <rect x="24" y="14" width="84" height="8" fill="#0a4640"/>
+      <rect x="28" y="26" width="13" height="13" rx="2" fill="#e3b04b"/>
+      <rect x="44" y="26" width="13" height="13" rx="2" fill="#cfe3dd"/>
+      <rect x="60" y="26" width="13" height="13" rx="2" fill="#cfe3dd"/>
+      <rect x="28" y="42" width="13" height="13" rx="2" fill="#cfe3dd"/>
+      <rect x="44" y="42" width="13" height="13" rx="2" fill="#cfe3dd"/>
+      <rect x="80" y="26" width="24" height="38" rx="2" fill="#ffffff" stroke="#13675d" stroke-width="1"/>
+      <rect x="83" y="56" width="18" height="5" rx="2" fill="#13675d"/>
+      <circle cx="113" cy="42" r="1.6" fill="#55625f"/>
+    </svg>
+    <span class="dc-name" data-centered="1" data-en="Android tablet" data-fr="Tablette Android" data-ar="جهاز لوحي أندرويد">Android tablet</span>
+    <span class="dc-note" data-centered="1" data-en="7 inches or larger - the big screen of a till" data-fr="7 pouces ou plus - le grand écran d'une caisse" data-ar="7 بوصات أو أكبر - شاشة كبيرة مثل الكاشير">7 inches or larger - the big screen of a till</span>
+  </button>
+
+  <button type="button" class="device-card" data-device="phone" aria-pressed="false" aria-controls="panel-phone">
+    <span class="dc-here" data-centered="1" data-en="This device" data-fr="Cet appareil" data-ar="هذا الجهاز">This device</span>
+    <span class="dc-check" aria-hidden="true">✓</span>
+    <svg viewBox="0 0 132 84" aria-hidden="true">
+      <rect x="46" y="2" width="40" height="80" rx="7" fill="#1f2b29"/>
+      <rect x="50" y="9" width="32" height="64" rx="2" fill="#f5f7f6"/>
+      <rect x="50" y="9" width="32" height="7" fill="#0a4640"/>
+      <rect x="53" y="19" width="12" height="7" rx="1.5" fill="#e3b04b"/>
+      <rect x="67" y="19" width="12" height="7" rx="1.5" fill="#13675d"/>
+      <rect x="53" y="29" width="8" height="8" rx="1.5" fill="#cfe3dd"/>
+      <rect x="62" y="29" width="8" height="8" rx="1.5" fill="#cfe3dd"/>
+      <rect x="71" y="29" width="8" height="8" rx="1.5" fill="#cfe3dd"/>
+      <rect x="53" y="39" width="8" height="8" rx="1.5" fill="#cfe3dd"/>
+      <rect x="62" y="39" width="8" height="8" rx="1.5" fill="#cfe3dd"/>
+      <rect x="53" y="63" width="26" height="7" rx="3" fill="#13675d"/>
+      <rect x="62" y="4.5" width="8" height="1.6" rx=".8" fill="#55625f"/>
+      <!-- barcode being scanned -->
+      <g transform="translate(92 50)">
+        <rect x="0" y="0" width="26" height="18" rx="2" fill="#ffffff" stroke="#9aa8a4" stroke-width=".8"/>
+        <path d="M4 3v12M6 3v12M9 3v12M11 3v12M14 3v12M17 3v12M19 3v12M22 3v12" stroke="#1f2b29" stroke-width="1.2"/>
+        <path d="M-4 9 h34" stroke="#e5484d" stroke-width="1.4"/>
+      </g>
+    </svg>
+    <span class="dc-name" data-centered="1" data-en="Android phone" data-fr="Téléphone Android" data-ar="هاتف أندرويد">Android phone</span>
+    <span class="dc-note" data-centered="1" data-en="Its camera scans the barcodes" data-fr="Son appareil photo scanne les codes-barres" data-ar="الكاميرا تقرأ الباركود">Its camera scans the barcodes</span>
+  </button>
+</div>
+
+<!-- Step 2: one panel per device, shown when its card is chosen. -->
+<div class="device-panel" id="panel-pc" role="region">
+  <p class="dp-title" data-centered="1" data-en="My Store for Windows" data-fr="My Store pour Windows" data-ar="تطبيق متجري لويندوز">My Store for Windows</p>
+  <p class="dp-text" data-centered="1"
+     data-en="Install it on your shop's PC or laptop (Windows 10 or 11) from the official Microsoft Store."
+     data-fr="Installez-le sur le PC ou le portable de votre magasin (Windows 10 ou 11) depuis le Microsoft Store officiel."
+     data-ar="ثبّته على حاسوب أو لابتوب متجرك (ويندوز 10 أو 11) من متجر مايكروسوفت الرسمي.">
+     Install it on your shop's PC or laptop (Windows 10 or 11) from the official Microsoft Store.</p>
+  <a href="https://apps.microsoft.com/detail/9P07X9GQ43WZ" class="download-btn dp-download" onclick="msLead('download_windows')"
+     data-en="Download for Windows" data-fr="Télécharger pour Windows" data-ar="تنزيل لويندوز">Download for Windows</a>
+  <p class="trust-line" data-centered="1"
+     data-en="✅ Free, secure download from the official Microsoft Store"
+     data-fr="✅ Téléchargement gratuit et sécurisé sur le Microsoft Store officiel"
+     data-ar="✅ تنزيل مجاني وآمن من متجر مايكروسوفت الرسمي">
+     ✅ Free, secure download from the official Microsoft Store</p>
+  <div class="dp-email-slot"></div>
+  <!-- Phone visitors can't install on Windows from here: WhatsApp help and the tutorial. -->
+  <div class="dp-phone-help">
+    <a class="pb-wa wa-link" id="pb-wa" target="_blank" rel="noopener" href="https://wa.me/212649864854"
+       data-en="💬 Need help? Chat on WhatsApp" data-fr="💬 Besoin d'aide ? Écrivez-nous sur WhatsApp" data-ar="💬 تحتاج مساعدة؟ راسلنا على واتساب">💬 Need help? Chat on WhatsApp</a>
+    <div class="pb-video" id="pb-video" hidden>
+      <p class="pb-vtitle" data-centered="1" data-en="▶ See how in 1 minute" data-fr="▶ Voyez comment en 1 minute" data-ar="▶ شاهد الطريقة في دقيقة واحدة">▶ See how in 1 minute</p>
+      <video controls preload="none" playsinline poster="assets/video/download_tutorial_ar.jpg" src="assets/video/download_tutorial_ar.mp4"></video>
+    </div>
   </div>
 </div>
-        
-        
-<a href="https://apps.microsoft.com/detail/9P07X9GQ43WZ" class="download-btn" onclick="msLead('download_windows')" data-en="Download for Windows" data-fr="Télécharger pour Windows" data-ar="تنزيل لويندوز">Download for Windows</a>
-<a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639" class="download-btn" onclick="msLead('download_android_tablet')" data-en="Download for Android Tablets" data-fr="Télécharger pour tablettes Android" data-ar="تنزيل للأجهزة اللوحية أندرويد">Download for Android Tablets</a>
 
-<p class="trust-line" data-centered="1"
-   data-en="✅ Windows: free, secure download from the official Microsoft Store"
-   data-fr="✅ Windows : téléchargement gratuit et sécurisé sur le Microsoft Store officiel"
-   data-ar="✅ ويندوز: تنزيل مجاني وآمن من متجر مايكروسوفت الرسمي">
-    ✅ Windows: free, secure download from the official Microsoft Store
-</p>
-<p class="trust-line" data-centered="1"
-   data-en="✅ Android: free download, delivered by email, secured by Lemon Squeezy"
-   data-fr="✅ Android : téléchargement gratuit, envoyé par email, sécurisé par Lemon Squeezy"
-   data-ar="✅ أندرويد: تنزيل مجاني، يصلك عبر البريد الإلكتروني، ومؤمّن عبر Lemon Squeezy">
-    ✅ Android: free download, delivered by email, secured by Lemon Squeezy
-</p>
-<p class="phone-only" data-centered="1"
-   data-en="These buttons are for the PC or tablet itself - on this phone, use the box above to send yourself the link."
-   data-fr="Ces boutons sont à utiliser sur le PC ou la tablette - sur ce téléphone, utilisez la case ci-dessus pour vous envoyer le lien."
-   data-ar="هذه الأزرار للاستعمال على الحاسوب أو الجهاز اللوحي نفسه - على هذا الهاتف، استعمل الخانة أعلاه لإرسال الرابط إلى نفسك.">
-   These buttons are for the PC or tablet itself - on this phone, use the box above to send yourself the link.
-</p>
+<div class="device-panel" id="panel-tablet" role="region">
+  <p class="dp-title" data-centered="1" data-en="My Store for Android tablets" data-fr="My Store pour tablettes Android" data-ar="تطبيق متجري للأجهزة اللوحية أندرويد">My Store for Android tablets</p>
+  <p class="dp-text" data-centered="1"
+     data-en="The full till on a 7&quot; or larger tablet - upright or sideways. Download the app on the tablet itself."
+     data-fr="La caisse complète sur une tablette de 7 pouces ou plus - à la verticale ou à l'horizontale. Téléchargez l'application sur la tablette elle-même."
+     data-ar="الكاشير الكامل على جهاز لوحي 7 بوصات أو أكبر - عموديًا أو أفقيًا. نزّل التطبيق على الجهاز اللوحي نفسه.">
+     The full till on a 7" or larger tablet - upright or sideways. Download the app on the tablet itself.</p>
+  <a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639"
+     class="download-btn dp-download" onclick="msLead('download_android_tablet')"
+     data-en="Download for Android tablets" data-fr="Télécharger pour tablettes Android" data-ar="تنزيل للأجهزة اللوحية أندرويد">Download for Android tablets</a>
+  <p class="trust-line" data-centered="1"
+     data-en="✅ Free download, delivered by email, secured by Lemon Squeezy"
+     data-fr="✅ Téléchargement gratuit, envoyé par email, sécurisé par Lemon Squeezy"
+     data-ar="✅ تنزيل مجاني، يصلك عبر البريد الإلكتروني، ومؤمّن عبر Lemon Squeezy">
+     ✅ Free download, delivered by email, secured by Lemon Squeezy</p>
+  <p class="dp-note" data-centered="1"
+     data-en="&lt;strong&gt;Note:&lt;/strong&gt; you may need to allow &quot;Install from unknown apps&quot; in the tablet's settings."
+     data-fr="&lt;strong&gt;Remarque :&lt;/strong&gt; vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres de la tablette."
+     data-ar="&lt;strong&gt;ملاحظة:&lt;/strong&gt; قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الجهاز اللوحي.">
+     <strong>Note:</strong> you may need to allow "Install from unknown apps" in the tablet's settings.</p>
+  <div class="dp-email-slot"></div>
+</div>
 
-<!-- Phone visitors can't install the Windows app: let them mail the Store link to themselves.
-     Opens the visitor's own email app (mailto) - nothing is sent or stored by the site. -->
-<div class="email-link-box">
-  <p class="elb-title" data-centered="1"
-     data-en="On your phone? Send the Windows download link to your email, then open it on your shop PC."
-     data-fr="Sur votre téléphone ? Envoyez-vous le lien de téléchargement Windows par email, puis ouvrez-le sur le PC de votre magasin."
-     data-ar="تتصفح من هاتفك؟ أرسل رابط تنزيل نسخة ويندوز إلى بريدك الإلكتروني، ثم افتحه على حاسوب متجرك.">
-     On your phone? Send the Windows download link to your email, then open it on your shop PC.
-  </p>
+<div class="device-panel" id="panel-phone" role="region">
+  <p class="dp-title" data-centered="1" data-en="My Store on your phone" data-fr="My Store sur votre téléphone" data-ar="تطبيق متجري على هاتفك">My Store on your phone</p>
+  <ul class="dp-points">
+    <li data-en="📷 Scan products with the phone's camera - no scanner to buy"
+        data-fr="📷 Scannez les produits avec l'appareil photo du téléphone - aucun lecteur à acheter"
+        data-ar="📷 امسح المنتجات بكاميرا الهاتف - لا حاجة لشراء قارئ باركود">📷 Scan products with the phone's camera - no scanner to buy</li>
+    <li data-en="🧾 Sales, purchases, stock, cash register and reports - the full till"
+        data-fr="🧾 Ventes, achats, stock, caisse et rapports - la caisse complète"
+        data-ar="🧾 المبيعات والمشتريات والمخزون والصندوق والتقارير - كاشير كامل">🧾 Sales, purchases, stock, cash register and reports - the full till</li>
+    <li data-en="✨ Product name and size filled in from the barcode"
+        data-fr="✨ Nom et contenance du produit remplis à partir du code-barres"
+        data-ar="✨ اسم المنتج وحجمه يُملآن تلقائيًا من الباركود">✨ Product name and size filled in from the barcode</li>
+  </ul>
+  <a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639"
+     class="download-btn dp-download" onclick="msLead('download_android_phone')"
+     data-en="Download for Android phones" data-fr="Télécharger pour téléphones Android" data-ar="تنزيل لهواتف أندرويد">Download for Android phones</a>
+  <p class="trust-line" data-centered="1"
+     data-en="✅ Free download, delivered by email, secured by Lemon Squeezy"
+     data-fr="✅ Téléchargement gratuit, envoyé par email, sécurisé par Lemon Squeezy"
+     data-ar="✅ تنزيل مجاني، يصلك عبر البريد الإلكتروني، ومؤمّن عبر Lemon Squeezy">
+     ✅ Free download, delivered by email, secured by Lemon Squeezy</p>
+  <p class="dp-note" data-centered="1"
+     data-en="When the app opens, choose &lt;b&gt;Use phone in shop&lt;/b&gt;. You may need to allow &quot;Install from unknown apps&quot; in the phone's settings."
+     data-fr="À l'ouverture de l'application, choisissez &lt;b&gt;Utiliser le téléphone en magasin&lt;/b&gt;. Vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres du téléphone."
+     data-ar="عند فتح التطبيق، اختر &lt;b&gt;استخدام الهاتف في المتجر&lt;/b&gt;. قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الهاتف.">
+     When the app opens, choose <b>Use phone in shop</b>. You may need to allow "Install from unknown apps" in the phone's settings.</p>
+  <div class="dp-email-slot"></div>
+</div>
+
+<!-- "Email me the link": moved into the chosen panel when the visitor is not on that kind of device
+     (e.g. on a phone but choosing the PC). Opens the visitor's own email app - nothing is sent or
+     stored by the site. -->
+<div class="email-link-box" id="email-link-box" hidden>
+  <p class="dp-other elb-title" data-centered="1"
+     data-en="Not on that device right now? Send yourself the link and open it there:"
+     data-fr="Vous n'êtes pas sur cet appareil ? Envoyez-vous le lien et ouvrez-le là-bas :"
+     data-ar="لست على ذلك الجهاز الآن؟ أرسل الرابط إلى نفسك وافتحه هناك:">
+     Not on that device right now? Send yourself the link and open it there:</p>
   <form id="elb-form" class="elb-form" novalidate>
     <input type="email" id="elb-email" autocomplete="email" inputmode="email" placeholder="email@example.com" aria-label="Email">
     <button type="submit" class="elb-btn" data-centered="1"
@@ -203,52 +370,23 @@ function gtag_report_conversion(url) {
   </form>
   <p class="elb-error" id="elb-error" hidden data-centered="1"
      data-en="Please enter a valid email address." data-fr="Veuillez saisir une adresse email valide." data-ar="يرجى إدخال بريد إلكتروني صحيح.">
-     Please enter a valid email address.
-  </p>
+     Please enter a valid email address.</p>
   <p class="elb-hint" id="elb-hint" hidden data-centered="1"
-     data-en="Your email app is opening with the link ready - just press Send. Nothing opened? Here is the link: apps.microsoft.com/detail/9P07X9GQ43WZ"
-     data-fr="Votre application email s'ouvre avec le lien prêt - appuyez simplement sur Envoyer. Rien ne s'ouvre ? Voici le lien : apps.microsoft.com/detail/9P07X9GQ43WZ"
-     data-ar="يفتح الآن تطبيق البريد مع الرابط جاهزًا - اضغط فقط على إرسال. لم يفتح شيء؟ هذا هو الرابط: apps.microsoft.com/detail/9P07X9GQ43WZ">
-     Your email app is opening with the link ready - just press Send. Nothing opened? Here is the link: apps.microsoft.com/detail/9P07X9GQ43WZ
-  </p>
+     data-en="Your email app is opening with the link ready - just press Send."
+     data-fr="Votre application email s'ouvre avec le lien prêt - appuyez simplement sur Envoyer."
+     data-ar="يفتح الآن تطبيق البريد مع الرابط جاهزًا - اضغط فقط على إرسال.">
+     Your email app is opening with the link ready - just press Send.</p>
 </div>
 
- <p  data-en="My Store is a full store-management app for Windows PCs and Android tablets (7&quot; or larger) - same features on both: sales, purchases, stock, cash register and more."
-   data-fr="My Store est une application complète de gestion de magasin pour PC Windows et tablettes Android (7 pouces ou plus) - les mêmes fonctionnalités sur les deux : ventes, achats, stock, caisse et plus encore."
-   data-ar="تطبيق متجري هو تطبيق كامل لإدارة المتجر لأجهزة ويندوز والأجهزة اللوحية أندرويد (7 بوصات أو أكبر) - بنفس الميزات على الاثنين: المبيعات والمشتريات والمخزون والصندوق وأكثر.">
-   My Store is a full store-management app for Windows PCs and Android tablets (7" or larger) - same features on both: sales, purchases, stock, cash register and more.
-</p>
-
-<hr> <!-- This adds a clean dividing line -->
-
-<h3 data-en="Want to track your store from anywhere?"
-    data-fr="Envie de suivre votre magasin de partout ?"
-    data-ar="هل تريد متابعة متجرك من أي مكان؟">
-  Want to track your store from anywhere?
-</h3>
-
-<p data-en="Free companion app for Android phones - it only shows your store's reports on the go, so it's useful once you're already running My Store on Windows or Tablet, not a replacement for it."
-   data-fr="Application compagnon gratuite pour téléphones Android - elle affiche uniquement les rapports de votre magasin en déplacement, donc utile si vous utilisez déjà My Store sur Windows ou tablette, elle ne le remplace pas."
-   data-ar="تطبيق مرافق مجاني لهواتف أندرويد - يعرض فقط تقارير متجرك أثناء التنقل، لذا فهو مفيد إذا كنت تستخدم بالفعل تطبيق متجري على ويندوز أو الجهاز اللوحي، وهو لا يغني عنه.">
-  Free companion app for Android phones - it only shows your store's reports on the go, so it's useful once you're already running My Store on Windows or Tablet, not a replacement for it.
-</p>
-
-<a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639" onclick="msLead('download_android')" class="download-btn"
-   data-en="Download Mobile Companion" data-fr="Télécharger l'application compagnon mobile" data-ar="تنزيل التطبيق المرافق للهاتف">
-  Download Mobile Companion
-</a>
-
-<p style="font-size:12px; color:#666;" data-en="✅ Free - just enter your email to get the APK"
-   data-fr="✅ Gratuit - il suffit d'indiquer votre email pour recevoir l'APK"
-   data-ar="✅ مجاني - فقط أدخل بريدك الإلكتروني للحصول على ملف APK">
-    ✅ Free - just enter your email to get the APK
-</p>
-
-<p style="font-size: 0.9em; color: #6c757d; margin-top: 10px;" data-en="&lt;strong&gt;Note:&lt;/strong&gt; You may need to enable &quot;Install from unknown apps&quot; in your phone's settings to complete the installation."
-   data-fr="&lt;strong&gt;Remarque :&lt;/strong&gt; vous devrez peut-être activer « Installer des applications inconnues » dans les paramètres de votre téléphone pour terminer l'installation."
-   data-ar="&lt;strong&gt;ملاحظة:&lt;/strong&gt; قد تحتاج إلى تفعيل خيار «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات هاتفك لإتمام التثبيت.">
-  <strong>Note:</strong> You may need to enable "Install from unknown apps" in your phone's settings to complete the installation.
-</p>
+<!-- Replaces the old "companion app" section: it's the same Android app, with "use remotely"
+     chosen when it first opens. -->
+<div class="remote-tip">
+  <p data-centered="1"
+     data-en="📊 &lt;b&gt;Already running My Store in your shop?&lt;/b&gt; Install the Android app on your own phone and choose &lt;b&gt;Use phone remotely&lt;/b&gt; to follow your sales and stock from anywhere."
+     data-fr="📊 &lt;b&gt;My Store tourne déjà dans votre magasin ?&lt;/b&gt; Installez l'application Android sur votre propre téléphone et choisissez &lt;b&gt;Utiliser le téléphone à distance&lt;/b&gt; pour suivre vos ventes et votre stock de partout."
+     data-ar="📊 &lt;b&gt;تطبيق متجري يعمل في متجرك بالفعل؟&lt;/b&gt; ثبّت تطبيق أندرويد على هاتفك واختر &lt;b&gt;استخدام الهاتف عن بُعد&lt;/b&gt; لمتابعة مبيعاتك ومخزونك من أي مكان.">
+     📊 <b>Already running My Store in your shop?</b> Install the Android app on your own phone and choose <b>Use phone remotely</b> to follow your sales and stock from anywhere.</p>
+</div>
 
 <hr> <!-- This adds a clean dividing line -->
 
@@ -303,53 +441,100 @@ function gtag_report_conversion(url) {
     } catch (e) { /* storage unavailable: still send the event */ }
     fbq('track', 'Lead', {content_name: name});
   }
+</script>
+<script>
+  // Which device the visitor is browsing on: phone = touch screen whose short side is under 600 css px
+  // (the app's own 600dp tablet rule); an Android touch screen at 600+ is a tablet; anything else, a PC.
+  var MS_HERE = (function () {
+    var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+    var shortSide = Math.min(screen.width, screen.height);
+    var html = document.documentElement;
+    if (touch && shortSide < 600) { html.classList.add('is-phone'); return /Android/i.test(navigator.userAgent) ? 'phone' : 'other-phone'; }
+    if (touch && /Android/i.test(navigator.userAgent)) { html.classList.add('is-tablet'); return 'tablet'; }
+    return 'pc';
+  })();
 
-  // "Email me the link": builds a mailto addressed to the visitor themselves, in the page's language.
+  // Step 1 -> step 2: choosing a device card opens its panel; the "email me the link" box goes into that
+  // panel when the visitor is on a different kind of device than the one chosen.
   (function () {
-    var STORE_LINK = 'https://apps.microsoft.com/detail/9P07X9GQ43WZ';
-    var TEXT = {
-      en: { subject: 'My Store for Windows - download link',
-            body: 'Open this link on your shop PC to download My Store (15-day free trial, no bank card needed):\n\n' + STORE_LINK +
-                  '\n\nQuestions? kasimiapps@manageyourstore.site' },
-      fr: { subject: 'My Store pour Windows - lien de téléchargement',
-            body: 'Ouvrez ce lien sur le PC de votre magasin pour télécharger My Store (essai gratuit de 15 jours, sans carte bancaire) :\n\n' + STORE_LINK +
-                  '\n\nDes questions ? kasimiapps@manageyourstore.site' },
-      ar: { subject: 'تطبيق متجري لويندوز - رابط التنزيل',
-            body: 'افتح هذا الرابط على حاسوب متجرك لتنزيل تطبيق متجري (تجربة مجانية لمدة 15 يومًا بدون بطاقة بنكية):\n\n' + STORE_LINK +
-                  '\n\nلأي سؤال: kasimiapps@manageyourstore.site' }
+    var LINKS = {
+      pc: 'https://apps.microsoft.com/detail/9P07X9GQ43WZ',
+      tablet: 'https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639',
+      phone: 'https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639'
     };
+    var cards = document.querySelectorAll('.device-card');
+    var box = document.getElementById('email-link-box');
+    var chosen = null;
+
+    cards.forEach(function (c) { if (c.getAttribute('data-device') === MS_HERE) c.classList.add('is-here'); });
+
+    function choose(device, scroll) {
+      chosen = device;
+      cards.forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-device') === device ? 'true' : 'false'); });
+      document.querySelectorAll('.device-panel').forEach(function (p) { p.classList.toggle('open', p.id === 'panel-' + device); });
+      var panel = document.getElementById('panel-' + device);
+      var slot = panel.querySelector('.dp-email-slot');
+      var elsewhere = device !== MS_HERE;
+      if (elsewhere) { slot.appendChild(box); box.hidden = false; } else { box.hidden = true; }
+      document.getElementById('elb-hint').hidden = true;
+      try { sessionStorage.setItem('ms_device_choice', device); } catch (e) {}
+      if (scroll) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }
+
+    cards.forEach(function (c) {
+      c.addEventListener('click', function () {
+        var device = c.getAttribute('data-device');
+        choose(device, true);
+        if (typeof fbq === 'function') fbq('trackCustom', 'DeviceChoice', {device: device, browsing_on: MS_HERE});
+        if (typeof gtag === 'function') gtag('event', 'device_choice', {device: device, browsing_on: MS_HERE});
+      });
+    });
+    // Coming back to the page (e.g. from the download) re-opens the device chosen before.
+    try { var prev = sessionStorage.getItem('ms_device_choice'); if (prev && LINKS[prev]) choose(prev, false); } catch (e) {}
+
+    // "Email me the link": a mailto addressed to the visitor themselves, in the page's language,
+    // with the chosen device's link.
+    var NAMES = { pc: {en: 'Windows', fr: 'Windows', ar: 'ويندوز'},
+                  tablet: {en: 'Android tablets', fr: 'tablettes Android', ar: 'الأجهزة اللوحية أندرويد'},
+                  phone: {en: 'Android phones', fr: 'téléphones Android', ar: 'هواتف أندرويد'} };
+    function mailText(lang, device) {
+      var link = LINKS[device], n = (NAMES[device] || NAMES.pc)[lang] || NAMES[device].en;
+      var where = { pc: {en: 'your shop PC', fr: 'le PC de votre magasin', ar: 'حاسوب متجرك'},
+                    tablet: {en: 'your shop tablet', fr: 'la tablette de votre magasin', ar: 'الجهاز اللوحي لمتجرك'},
+                    phone: {en: 'the phone you will use in your shop', fr: 'le téléphone que vous utiliserez dans votre magasin', ar: 'الهاتف الذي ستستعمله في متجرك'} }[device];
+      if (lang === 'fr') return { subject: 'My Store pour ' + n + ' - lien de téléchargement',
+        body: 'Ouvrez ce lien sur ' + where.fr + ' pour télécharger My Store (essai gratuit de 15 jours, sans carte bancaire) :\n\n' + link + '\n\nDes questions ? kasimiapps@manageyourstore.site' };
+      if (lang === 'ar') return { subject: 'تطبيق متجري ل' + n + ' - رابط التنزيل',
+        body: 'افتح هذا الرابط على ' + where.ar + ' لتنزيل تطبيق متجري (تجربة مجانية لمدة 15 يومًا بدون بطاقة بنكية):\n\n' + link + '\n\nلأي سؤال: kasimiapps@manageyourstore.site' };
+      return { subject: 'My Store for ' + n + ' - download link',
+        body: 'Open this link on ' + where.en + ' to download My Store (15-day free trial, no bank card needed):\n\n' + link + '\n\nQuestions? kasimiapps@manageyourstore.site' };
+    }
+
     var form = document.getElementById('elb-form');
-    if (!form) return;
     var input = document.getElementById('elb-email');
     var err = document.getElementById('elb-error');
     var hint = document.getElementById('elb-hint');
     var EMAIL_RE = /^[^\s@<>"'(),;:]+@[^\s@<>"'(),;:]+\.[a-zA-Z]{2,}$/;
-
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = input.value.trim();
       if (!EMAIL_RE.test(email)) { err.hidden = false; hint.hidden = true; input.focus(); return; }
       err.hidden = true;
       var lang = localStorage.getItem('selectedLanguage') || 'en';
-      var t = TEXT[lang] || TEXT.en;
-      msLead(document.documentElement.classList.contains('is-phone') ? 'phone_email_link' : 'email_windows_link');
+      var device = chosen || 'pc';
+      var t = mailText(lang, device);
+      var onPhone = document.documentElement.classList.contains('is-phone');
+      msLead(onPhone ? 'phone_email_link' : 'email_' + device + '_link');
+      // Separate signal for serious visitors (they plan to install on their shop device): fires on every
+      // send, unlike Lead (once per visit, shared with the download buttons).
+      if (typeof fbq === 'function') fbq('trackCustom', 'SendLink', {device: onPhone ? 'phone' : 'other', lang: lang, chosen: device});
       window.location.href = 'mailto:' + email + '?subject=' + encodeURIComponent(t.subject) + '&body=' + encodeURIComponent(t.body);
       hint.hidden = false;
     });
     input.addEventListener('input', function () { err.hidden = true; });
-  })();
-</script>
-<script>
-  // Device check: phone = touch screen whose short side is under 600 css px (same 600dp rule the app
-  // uses for tablets). Phones get the phone box; Android tablets see the tablet download first.
-  (function () {
-    var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
-    var shortSide = Math.min(screen.width, screen.height);
-    var html = document.documentElement;
-    if (touch && shortSide < 600) {
-      html.classList.add('is-phone');
-      var slot = document.getElementById('pb-email-slot'), box = document.querySelector('.email-link-box');
-      if (slot && box) slot.appendChild(box);
+
+    // Phone visitors: WhatsApp help (pre-filled message) and, in Arabic, the 1-minute tutorial.
+    if (document.documentElement.classList.contains('is-phone')) {
       var lang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('selectedLanguage') || 'en';
       if (lang === 'ar') document.getElementById('pb-video').hidden = false;   // only the Arabic tutorial exists so far
       var msg = { en: 'Hello, I am on the download page and need help installing My Store.',
@@ -358,13 +543,8 @@ function gtag_report_conversion(url) {
       var wa = document.getElementById('pb-wa');
       wa.href = 'https://wa.me/212649864854?text=' + encodeURIComponent(msg[lang] || msg.en);
       wa.addEventListener('click', function () { if (typeof fbq === 'function') fbq('track', 'Contact', {content_name: 'download_phone_whatsapp'}); });
-    } else if (touch && /Android/i.test(navigator.userAgent)) {
-      html.classList.add('is-tablet');
-      var win = document.querySelector('a[onclick*="download_windows"]'), tab = document.querySelector('a[onclick*="download_android_tablet"]');
-      if (win && tab) win.parentNode.insertBefore(tab, win);
     }
   })();
 </script>
 </body>
 </html>
-

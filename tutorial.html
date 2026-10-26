@@ -173,6 +173,14 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 
 
 
+
+        /* full app tour video */
+        .tour-video { margin: 34px auto 6px; max-width: 980px; text-align: center; }
+        .tour-video h2 { display: inline-block; background: rgba(0,0,0,.6); color: #fff !important; padding: 8px 22px;
+                         border-radius: 14px; font-size: 1.5em; }
+        .tour-video .tour-note { margin: 8px 0 12px; font-size: .95em; }
+        .tour-video video { width: 100%; border-radius: 16px; background: #000; display: block;
+                            box-shadow: 0 12px 34px rgba(0,0,0,.45); }
     </style>
 <script src="site-nav.js" defer></script>
 <link rel="stylesheet" href="theme.css">
@@ -184,6 +192,14 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
     <h2 data-en="Your guide to launch and use our app" data-fr="Votre guide pour lancer et utiliser notre application" data-ar="دليلك لإطلاق واستخدام تطبيق متجري" data-centered="true">Your guide to launch and use our app</h2>
     <p data-en="Whatever your trade is, My Store App is for you. To simplify your journey to get familiar with My Store app, follow the following steps:" data-fr="Quel que soit votre métier, My Store App est fait pour vous. Pour simplifier votre parcours, suivez les étapes suivantes :" data-ar="بغض النظر عن نوع نشاطك التجاري، تطبيق متجري مصمم لخدمتك، لتسهيل التعرف على التطبيق، اتبع الخطوات التالية" data-centered="true">Whatever your trade is, My Store App is for you. To simplify your journey to get familiar with My Store app, follow the following steps:</p>
     <button onclick="window.location.href='https://manageyourstore.site/download'" data-en="FREE 15-DAY TRIAL" data-fr="ESSAI GRATUIT DE 15 JOURS" data-ar="تجربة 15 يومًا مجانية" data-centered="true">FREE 15-DAY TRIAL</button>
+
+<!-- Full app tour (Arabic voice, 5 min) - plays are counted as TourVideoPlay -->
+<div class="tour-video" id="tour">
+  <h2 data-en="&#9654; See the whole app in 5 minutes" data-fr="&#9654; D&eacute;couvrez toute l'application en 5 minutes" data-ar="&#9654; شاهد جولة كاملة في التطبيق في 5 دقائق" data-centered="true">&#9654; See the whole app in 5 minutes</h2>
+  <p class="tour-note" data-en="Video in Arabic" data-fr="Vid&eacute;o en arabe" data-ar="البيع، المخزون، الصندوق، التقارير، الديون والمتجر الإلكتروني" data-centered="true">Video in Arabic</p>
+  <video controls preload="none" playsinline poster="assets/video/app_tour_ar.jpg" src="assets/video/app_tour_ar.mp4"
+         onplay="if(!this.dataset.counted){this.dataset.counted=1;try{gtag('event','tour_video_play')}catch(e){}try{fbq('trackCustom','TourVideoPlay')}catch(e){}}"></video>
+</div>
 </div>
 
 

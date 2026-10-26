@@ -125,7 +125,9 @@ let cart = store.get(cartKey, {});
 let shop = null, byCode = {};
 
 const fileUrl = path => `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encodeURIComponent('shops/' + shopId + '/' + path.split('?')[0])}?alt=media${path.includes('?') ? '&' + path.split('?')[1] : ''}`;
-const money = v => (Math.round(v * 100) / 100).toFixed(2) + (shop && shop.coin ? ' ' + shop.coin : '');
+const money = v => (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (shop && shop.coin ? ' ' + shop.coin : '');
+// The owner can publish without prices: then no price, line amount or total shows anywhere.
+const withPrices = () => !shop || shop.showPrices !== false;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
 
 $('search').placeholder = t.search;
@@ -191,12 +193,12 @@ function card(p) {
     : n ? `<div class="qty"><button class="minus" data-c="${esc(p.c)}" data-d="-1">−</button><b>${n}</b><button data-c="${esc(p.c)}" data-d="1">+</button></div>`
         : `<button class="add" data-c="${esc(p.c)}" data-d="1">${t.add}</button>`;
   return `<div class="card"><div class="pic">${pic}</div><div class="info"><div class="name" dir="auto">${esc(p.n)}</div>`
-    + (p.d ? `<div class="desc" dir="auto">${esc(p.d)}</div>` : '') + `<div class="price">${money(p.p)}</div>${ctl}</div></div>`;
+    + (p.d ? `<div class="desc" dir="auto">${esc(p.d)}</div>` : '') + (withPrices() ? `<div class="price">${money(p.p)}</div>` : '') + `${ctl}</div></div>`;
 }
 
 function totals() {
   let count = 0, sum = 0;
-  for (const code in cart) { count += cart[code]; sum += cart[code] * byCode[code].p; }
+  for (const code in cart) { count += cart[code]; sum += cart[code] * (byCode[code].p || 0); }
   return { count, sum };
 }
 
@@ -204,7 +206,7 @@ function bar() {
   const { count, sum } = totals();
   $('bar').style.display = count ? 'flex' : 'none';
   $('count').textContent = t.items(count);
-  $('sum').textContent = money(sum);
+  $('sum').textContent = withPrices() ? money(sum) : '';
 }
 
 $('list').addEventListener('click', e => {
@@ -221,9 +223,10 @@ $('search').addEventListener('input', render);
 $('orderBtn').onclick = () => {
   $('lines').innerHTML = Object.keys(cart).map(code => {
     const p = byCode[code];
-    return `<div class="line"><span>${cart[code]} × ${esc(p.n)}</span><span>${money(cart[code] * p.p)}</span></div>`;
+    return `<div class="line"><span>${cart[code]} × ${esc(p.n)}</span>${withPrices() ? `<span>${money(cart[code] * p.p)}</span>` : ''}</div>`;
   }).join('');
   $('totalVal').textContent = money(totals().sum);
+  document.querySelector('.total').style.display = withPrices() ? 'flex' : 'none';
   $('err').textContent = '';
   $('sheet').style.display = 'flex';
 };
@@ -235,8 +238,8 @@ $('sendBtn').onclick = () => {
   const name = $('cName').value.trim(), addr = $('cAddr').value.trim(), note = $('cNote').value.trim();
   if (!name || !addr) { $('err').textContent = t.needName; return; }
   store.set('customer', { name, addr });
-  const lines = Object.keys(cart).map(code => `• ${cart[code]} × ${byCode[code].n} = ${money(cart[code] * byCode[code].p)}`);
-  const text = [t.msgHead(shop.name), '', ...lines, '', `${t.msgTotal}: ${money(totals().sum)}`,
+  const lines = Object.keys(cart).map(code => `• ${cart[code]} × ${byCode[code].n}` + (withPrices() ? ` = ${money(cart[code] * byCode[code].p)}` : ''));
+  const text = [t.msgHead(shop.name), '', ...lines, '', ...(withPrices() ? [`${t.msgTotal}: ${money(totals().sum)}`] : []),
     `${t.msgName}: ${name}`, `${t.msgAddr}: ${addr}`, ...(note ? [`${t.msgNote}: ${note}`] : [])].join('\n');
   location.href = `https://api.whatsapp.com/send?phone=${shop.phone}&text=${encodeURIComponent(text)}`;
   cart = {}; store.set(cartKey, cart);

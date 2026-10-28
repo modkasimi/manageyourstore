@@ -91,7 +91,7 @@ p, li {
 
 <div class="container">
 <h1>Privacy Policy</h1>
-<p class="updated">Last updated: October 13, 2026</p>
+<p class="updated">Last updated: October 28, 2026</p>
 
 <p>This policy covers the <strong>My Store</strong> app (listed on the Microsoft Store as
 "my sales") and the free <strong>productsCount</strong> companion app, both published by
@@ -126,9 +126,25 @@ we generate a device identifier and a readable label (e.g. your computer name or
 model) and send them to our license-management service. We do not use this identifier
 for advertising or tracking purposes.</p>
 
-<p><strong>Camera / barcode scanning (both apps).</strong> If you use a barcode-scanning
-feature, the camera is used on-device only to read a barcode's numbers. No photos or
-video are stored or transmitted to us. In productsCount, a scanned barcode number is sent
+<p><strong>Online shop, My Store only (optional).</strong> If you press Publish on My
+Store's Online Shop screen, we upload a catalog to our Firebase Cloud Storage so your
+customers can open it with your shop link: your shop name, the WhatsApp number orders go
+to, your currency, your logo (if you add one), and for each product you choose to show
+its code, name, description, picture, whether it is in stock and, unless you turn prices
+off, its selling price. This catalog is <strong>public</strong>: anyone with your shop
+link can see it. Your stock quantities, purchase prices, sales and other store data are
+not included.</p>
+
+<p><strong>Customers ordering from an online shop.</strong> When a customer orders from a
+shop page, the order, their name and their address are sent directly from their phone to
+the shop's WhatsApp - not to us. The shop page remembers the customer's name and address
+in their own browser only, so they don't have to type them again.</p>
+
+<p><strong>Camera (both apps).</strong> If you use a barcode-scanning feature, the camera
+is used on-device only to read a barcode's numbers. In My Store you can also take a
+photo of a product or pick one from your gallery; that picture is saved on your device
+and only leaves it if you publish that product in your online shop (see above). No other
+photos or video are stored or transmitted to us. In productsCount, a scanned barcode number is sent
 to the public <a href="https://world.openfoodfacts.org/" target="_blank"
 rel="noopener">Open Food Facts</a> database to look up and auto-fill product details -
 see their own privacy policy for how they handle that lookup.</p>
@@ -147,14 +163,20 @@ use Google Analytics and the Meta (Facebook) Pixel to understand site traffic an
 ad performance. These use cookies/identifiers in your browser; see Google's and Meta's own
 privacy policies for details on what they collect.</p>
 
-<p>We do <strong>not</strong> collect your address, state, province, city, or postal code
-- the app has no feature that asks for this.</p>
+<p>We do <strong>not</strong> collect your address, state, province, city, or postal code.
+(A shop's customers type their address when ordering, but it goes to that shop by
+WhatsApp, not to us.)</p>
+
+<p><strong>Calls and WhatsApp messages to your partners.</strong> The Call and WhatsApp
+buttons next to your customers and suppliers simply open your phone's dialer or WhatsApp
+with that number. Nothing is sent to us.</p>
 
 <h2>How We Use Information</h2>
 <ul>
 <li>To provide the app's core functionality and keep your account signed in</li>
 <li>To verify your subscription/trial status and enforce device-activation limits</li>
 <li>To back up and restore your store data when you enable that feature</li>
+<li>To show your online shop catalog to your customers when you publish it</li>
 <li>To respond to support requests and arrange manual payments when requested</li>
 <li>To understand website traffic and measure the effectiveness of our ads</li>
 </ul>
@@ -163,7 +185,9 @@ privacy policies for details on what they collect.</p>
 <p>We share data with the following providers only as needed to deliver the service:</p>
 <ul>
 <li><strong>Google Firebase / Google Cloud</strong> - authentication, cloud storage for
-backups, and server-side functions</li>
+backups and online shop catalogs, and server-side functions</li>
+<li><strong>WhatsApp</strong> - online shop orders are sent by WhatsApp between the
+customer and the shop; WhatsApp's own privacy policy applies</li>
 <li><strong>Lemon Squeezy</strong> - our subscription billing and license-management
 provider; processes your email and subscription/payment information as the merchant of
 record</li>
@@ -176,6 +200,8 @@ measurement on manageyourstore.site</li>
 <h2>Data Retention</h2>
 <p>Your store data stays on your device unless you enable cloud backup, in which case the
 latest backup is kept until it's overwritten by a newer one or you ask us to delete it.
+A published online shop catalog stays online until you publish again (which replaces it)
+or you ask us to remove it.
 Manual payment request records are kept for our bookkeeping. Uninstalling the app removes
 your local data from that device only.</p>
 
@@ -185,6 +211,8 @@ your local data from that device only.</p>
 <li>You can ask us to delete your cloud backup and any manual-payment request records by
 emailing us (below).</li>
 <li>You can deactivate a device from the "Manage Devices" screen in the app.</li>
+<li>You choose which products appear in your online shop, can hide prices, and can ask us
+to take your whole shop offline by emailing us.</li>
 </ul>
 
 <h2>Children's Privacy</h2>

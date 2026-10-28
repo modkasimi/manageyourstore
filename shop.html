@@ -17,6 +17,7 @@ body { font-family:'Cairo','Segoe UI',Tahoma,sans-serif; background:var(--bg); c
 header { background:var(--green); color:#fff; padding:14px 16px 12px; position:sticky; top:0; z-index:5; }
 .top { display:flex; align-items:center; gap:10px; }
 .top h1 { font-size:22px; font-weight:800; flex:1; line-height:1.25; }
+#logo { width:44px; height:44px; border-radius:50%; object-fit:cover; background:#fff; display:none; flex:none; }
 #install { background:var(--gold); color:#1d1d1d; border:0; border-radius:999px; font:inherit; font-weight:800; font-size:14px; padding:6px 14px; cursor:pointer; display:none; }
 #search { width:100%; margin-top:10px; border:0; border-radius:10px; padding:10px 14px; font:inherit; font-size:16px; }
 #tip { display:none; background:#fff8e6; color:#5a4100; font-size:14px; padding:10px 16px; border-bottom:1px solid #f0dfb3; }
@@ -62,7 +63,7 @@ footer a { color:var(--muted); }
 </head>
 <body>
 <header>
-  <div class="top"><h1 id="shopName">…</h1><button id="install"></button></div>
+  <div class="top"><img id="logo" alt=""><h1 id="shopName">…</h1><button id="install"></button></div>
   <input id="search" type="search" autocomplete="off">
 </header>
 <div id="tip"><span id="tipText"></span><button id="tipClose">✕</button></div>
@@ -143,13 +144,17 @@ $('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target
 const me = store.get('customer', {});
 $('cName').value = me.name || ''; $('cAddr').value = me.addr || '';
 
-function setManifest(name) {
+// The shop's own logo (512x512 jpg) becomes the installed app's icon;
+// shops without one get the default icons.
+function setManifest(name, logo) {
   const base = location.origin + location.pathname.replace(/[^/]*$/, '');
+  const icons = logo
+    ? [{ src: logo, sizes: '512x512', type: 'image/jpeg', purpose: 'any' }]
+    : [{ src: base + 'assets/shop/icon-192.png', sizes: '192x192', type: 'image/png' },
+       { src: base + 'assets/shop/icon-512.png', sizes: '512x512', type: 'image/png' }];
   const m = { name, short_name: name.slice(0, 24), lang: document.documentElement.lang, dir: t.dir,
     start_url: base + 'shop.html?s=' + encodeURIComponent(shopId), scope: base, display: 'standalone',
-    background_color: '#0a4640', theme_color: '#0a4640',
-    icons: [{ src: base + 'assets/shop/icon-192.png', sizes: '192x192', type: 'image/png' },
-            { src: base + 'assets/shop/icon-512.png', sizes: '512x512', type: 'image/png' }] };
+    background_color: '#0a4640', theme_color: '#0a4640', icons };
   $('manifest').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' }));
 }
 
@@ -175,7 +180,13 @@ function show(c) {
   for (const code in cart) if (!byCode[code] || !byCode[code].s) delete cart[code];
   document.title = c.name || 'My Store';
   $('shopName').textContent = c.name || 'My Store';
-  setManifest(c.name || 'My Store');
+  const logo = c.logo ? fileUrl(c.logo) : '';
+  $('logo').style.display = logo ? 'block' : 'none';
+  if (logo) {
+    $('logo').src = logo;
+    document.querySelectorAll('link[rel=icon], link[rel=apple-touch-icon]').forEach(l => l.href = logo);
+  }
+  setManifest(c.name || 'My Store', logo);
   render();
 }
 

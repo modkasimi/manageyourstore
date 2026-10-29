@@ -108,21 +108,21 @@ const L = {
         noShop:'لم يتم العثور على هذا المتجر. تأكد من الرابط.', install:'ثبّت التطبيق',
         ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', by:'متجر مُدار بتطبيق',
         msgHead:s=>`🛒 طلب جديد — ${s}`, msgTotal:'المجموع', msgName:'الاسم', msgAddr:'العنوان', msgNote:'ملاحظة',
-        other:'أخرى', all:'الكل', count:n=>`${n} سلعة` },
+        other:'أخرى', all:'الكل', delivery:'🚚 التوصيل', count:n=>`${n} سلعة` },
   fr: { dir:'ltr', search:'Rechercher un produit…', add:'Ajouter', out:'Épuisé pour le moment', items:n=>`${n} article(s) dans le panier`, order:'Commander sur WhatsApp',
         sheet:'Votre commande', total:'Total', name:'Nom', addr:'Adresse (livraison)', note:'Note (facultatif)', cancel:'Retour', send:'Envoyer la commande',
         needName:'Indiquez votre nom et votre adresse, s\'il vous plaît.', empty:'Aucun produit trouvé.', loading:'Chargement…',
         noShop:'Boutique introuvable. Vérifiez le lien.', install:'Installer l\'appli',
         ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', by:'Boutique gérée avec',
         msgHead:s=>`🛒 Nouvelle commande — ${s}`, msgTotal:'Total', msgName:'Nom', msgAddr:'Adresse', msgNote:'Note',
-        other:'Autres', all:'Toutes', count:n=>`${n} produit(s)` },
+        other:'Autres', all:'Toutes', delivery:'🚚 Livraison', count:n=>`${n} produit(s)` },
   en: { dir:'ltr', search:'Search products…', add:'Add', out:'Out of stock', items:n=>`${n} item(s) in the cart`, order:'Order on WhatsApp',
         sheet:'Your order', total:'Total', name:'Name', addr:'Address (delivery)', note:'Note (optional)', cancel:'Back', send:'Send order',
         needName:'Please enter your name and address.', empty:'No matching products.', loading:'Loading…',
         noShop:'Shop not found. Check the link.', install:'Install app',
         ios:'To install: tap Share ⬆️ then "Add to Home Screen".', by:'Shop run with',
         msgHead:s=>`🛒 New order — ${s}`, msgTotal:'Total', msgName:'Name', msgAddr:'Address', msgNote:'Note',
-        other:'Other', all:'All', count:n=>`${n} product(s)` },
+        other:'Other', all:'All', delivery:'🚚 Delivery', count:n=>`${n} product(s)` },
 };
 const lang = (navigator.language || 'ar').slice(0,2);
 const t = L[lang] || L.ar;
@@ -148,6 +148,8 @@ const fileUrl = path => `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o
 const money = v => (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (shop && shop.coin ? ' ' + shop.coin : '');
 // The owner can publish without prices: then no price, line amount or total shows anywhere.
 const withPrices = () => !shop || shop.showPrices !== false;
+// What the shop charges to deliver an order (0: it doesn't say).
+const delivery = () => (shop && shop.delivery > 0) ? shop.delivery : 0;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
 
 $('search').placeholder = t.search;
@@ -338,8 +340,8 @@ $('orderBtn').onclick = () => {
   $('lines').innerHTML = Object.keys(cart).map(code => {
     const p = byCode[code];
     return `<div class="line"><span>${cart[code]} × ${esc(p.n)}</span>${withPrices() ? `<span>${money(cart[code] * p.p)}</span>` : ''}</div>`;
-  }).join('');
-  $('totalVal').textContent = money(totals().sum);
+  }).join('') + (delivery() ? `<div class="line"><span>${t.delivery}</span><span>${money(delivery())}</span></div>` : '');
+  $('totalVal').textContent = money(totals().sum + delivery());
   document.querySelector('.total').style.display = withPrices() ? 'flex' : 'none';
   $('err').textContent = '';
   $('sheet').style.display = 'flex';
@@ -353,7 +355,8 @@ $('sendBtn').onclick = () => {
   if (!name || !addr) { $('err').textContent = t.needName; return; }
   store.set('customer', { name, addr });
   const lines = Object.keys(cart).map(code => `• ${cart[code]} × ${byCode[code].n}` + (withPrices() ? ` = ${money(cart[code] * byCode[code].p)}` : ''));
-  const text = [t.msgHead(shop.name), '', ...lines, '', ...(withPrices() ? [`${t.msgTotal}: ${money(totals().sum)}`] : []),
+  if (delivery()) lines.push(`${t.delivery}: ${money(delivery())}`);
+  const text = [t.msgHead(shop.name), '', ...lines, '', ...(withPrices() ? [`${t.msgTotal}: ${money(totals().sum + delivery())}`] : []),
     `${t.msgName}: ${name}`, `${t.msgAddr}: ${addr}`, ...(note ? [`${t.msgNote}: ${note}`] : [])].join('\n');
   location.href = `https://api.whatsapp.com/send?phone=${shop.phone}&text=${encodeURIComponent(text)}`;
   cart = {}; store.set(cartKey, cart);

@@ -322,6 +322,10 @@ function gtag_report_conversion(url) {
      data-fr="&lt;strong&gt;Remarque :&lt;/strong&gt; vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres de la tablette."
      data-ar="&lt;strong&gt;ملاحظة:&lt;/strong&gt; قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الجهاز اللوحي.">
      <strong>Note:</strong> you may need to allow "Install from unknown apps" in the tablet's settings.</p>
+  <div class="pb-video android-video" hidden>
+    <p class="pb-vtitle" data-centered="1" data-en="▶ See how to download and install" data-fr="▶ Voyez comment télécharger et installer" data-ar="▶ شاهد طريقة التنزيل والتثبيت">▶ See how to download and install</p>
+    <video controls preload="none" playsinline poster="assets/video/android_download_ar.jpg" src="assets/video/android_download_ar.mp4"></video>
+  </div>
   <div class="dp-email-slot"></div>
 </div>
 
@@ -351,6 +355,10 @@ function gtag_report_conversion(url) {
      data-fr="À l'ouverture de l'application, choisissez &lt;b&gt;Utiliser le téléphone en magasin&lt;/b&gt;. Vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres du téléphone."
      data-ar="عند فتح التطبيق، اختر &lt;b&gt;استخدام الهاتف في المتجر&lt;/b&gt;. قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الهاتف.">
      When the app opens, choose <b>Use phone in shop</b>. You may need to allow "Install from unknown apps" in the phone's settings.</p>
+  <div class="pb-video android-video" hidden>
+    <p class="pb-vtitle" data-centered="1" data-en="▶ See how to download and install" data-fr="▶ Voyez comment télécharger et installer" data-ar="▶ شاهد طريقة التنزيل والتثبيت">▶ See how to download and install</p>
+    <video controls preload="none" playsinline poster="assets/video/android_download_ar.jpg" src="assets/video/android_download_ar.mp4"></video>
+  </div>
   <div class="dp-email-slot"></div>
 </div>
 
@@ -532,6 +540,13 @@ function gtag_report_conversion(url) {
       hint.hidden = false;
     });
     input.addEventListener('input', function () { err.hidden = true; });
+
+    // Tablet and phone panels: the Android download video, in Arabic only for now
+    // (it only shows once one of those devices is chosen, since it sits in their panels).
+    var pageLang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('selectedLanguage') || 'en';
+    if (pageLang === 'ar') {
+      document.querySelectorAll('.android-video').forEach(function (v) { v.hidden = false; });
+    }
 
     // Phone visitors: WhatsApp help (pre-filled message) and, in Arabic, the 1-minute tutorial.
     if (document.documentElement.classList.contains('is-phone')) {

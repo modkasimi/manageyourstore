@@ -102,21 +102,21 @@ const L = {
         sheet:'طلبك', total:'المجموع', name:'الاسم', addr:'العنوان (للتوصيل)', note:'ملاحظة (اختياري)', cancel:'رجوع', send:'إرسال الطلب',
         needName:'اكتب اسمك وعنوانك من فضلك.', empty:'لا توجد سلع مطابقة.', loading:'جارٍ التحميل…',
         noShop:'لم يتم العثور على هذا المتجر. تأكد من الرابط.', install:'ثبّت التطبيق',
-        ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', by:'متجر مُدار بتطبيق',
+        ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', manual:'لتثبيته: اضغط ⋮ في أعلى المتصفح ثم «إضافة إلى الشاشة الرئيسية». إن فتحت الرابط من واتساب، اختر أولًا «فتح في Chrome».', by:'متجر مُدار بتطبيق',
         msgHead:s=>`🛒 طلب جديد — ${s}`, msgTotal:'المجموع', msgName:'الاسم', msgAddr:'العنوان', msgNote:'ملاحظة',
         other:'أخرى', all:'الكل', delivery:'🚚 التوصيل', count:n=>`${n} سلعة` },
   fr: { dir:'ltr', search:'Rechercher un produit…', add:'Ajouter', out:'Épuisé pour le moment', items:n=>`${n} article(s) dans le panier`, order:'Commander sur WhatsApp',
         sheet:'Votre commande', total:'Total', name:'Nom', addr:'Adresse (livraison)', note:'Note (facultatif)', cancel:'Retour', send:'Envoyer la commande',
         needName:'Indiquez votre nom et votre adresse, s\'il vous plaît.', empty:'Aucun produit trouvé.', loading:'Chargement…',
         noShop:'Boutique introuvable. Vérifiez le lien.', install:'Installer l\'appli',
-        ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', by:'Boutique gérée avec',
+        ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', manual:'Pour l\'installer : touchez ⋮ en haut du navigateur puis « Ajouter à l\'écran d\'accueil ». Si le lien s\'est ouvert dans WhatsApp, choisissez d\'abord « Ouvrir dans Chrome ».', by:'Boutique gérée avec',
         msgHead:s=>`🛒 Nouvelle commande — ${s}`, msgTotal:'Total', msgName:'Nom', msgAddr:'Adresse', msgNote:'Note',
         other:'Autres', all:'Toutes', delivery:'🚚 Livraison', count:n=>`${n} produit(s)` },
   en: { dir:'ltr', search:'Search products…', add:'Add', out:'Out of stock', items:n=>`${n} item(s) in the cart`, order:'Order on WhatsApp',
         sheet:'Your order', total:'Total', name:'Name', addr:'Address (delivery)', note:'Note (optional)', cancel:'Back', send:'Send order',
         needName:'Please enter your name and address.', empty:'No matching products.', loading:'Loading…',
         noShop:'Shop not found. Check the link.', install:'Install app',
-        ios:'To install: tap Share ⬆️ then "Add to Home Screen".', by:'Shop run with',
+        ios:'To install: tap Share ⬆️ then "Add to Home Screen".', manual:'To install: tap ⋮ at the top of the browser, then "Add to Home screen". If the link opened inside WhatsApp, first choose "Open in Chrome".', by:'Shop run with',
         msgHead:s=>`🛒 New order — ${s}`, msgTotal:'Total', msgName:'Name', msgAddr:'Address', msgNote:'Note',
         other:'Other', all:'All', delivery:'🚚 Delivery', count:n=>`${n} product(s)` },
 };
@@ -348,13 +348,30 @@ $('sendBtn').onclick = () => {
   render();
 };
 
-// Install: Android offers it through beforeinstallprompt; iPhone needs the
-// Share menu, so it gets a one-time tip instead.
+// Install: the button shows whenever the shop is not already opened as an
+// installed app. When the browser offers the install (beforeinstallprompt,
+// Android Chrome) one tap installs; when it doesn't (already installed shop
+// from this site, link opened inside WhatsApp, install refused before, iPhone)
+// the button shows how to do it from the browser's menu instead.
 let installEvent = null;
 const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvent = e; $('install').style.display = 'block'; });
-$('install').onclick = async () => { if (!installEvent) return; installEvent.prompt(); await installEvent.userChoice; installEvent = null; $('install').style.display = 'none'; };
-if (!standalone && /iphone|ipad|ipod/i.test(navigator.userAgent) && !store.get('iosTipShown', false)) {
+const iphone = /iphone|ipad|ipod/i.test(navigator.userAgent);
+if (!standalone) $('install').style.display = 'block';
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvent = e; });
+addEventListener('appinstalled', () => { $('install').style.display = 'none'; $('tip').style.display = 'none'; });
+$('install').onclick = async () => {
+  if (installEvent) {
+    installEvent.prompt();
+    const r = await installEvent.userChoice;
+    installEvent = null;
+    if (r.outcome === 'accepted') $('install').style.display = 'none';
+    return;
+  }
+  $('tipText').textContent = iphone ? t.ios : t.manual;
+  $('tip').style.display = 'block';
+  scrollTo(0, 0);
+};
+if (!standalone && iphone && !store.get('iosTipShown', false)) {
   $('tipText').textContent = t.ios; $('tip').style.display = 'block';
 }
 $('tipClose').onclick = () => { $('tip').style.display = 'none'; store.set('iosTipShown', true); };

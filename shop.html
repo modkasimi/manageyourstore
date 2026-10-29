@@ -57,19 +57,14 @@ textarea { resize:vertical; min-height:60px; }
 .actions { display:flex; gap:10px; margin-top:12px; }
 .actions .wa { flex:1; justify-content:center; }
 .cancel { border:1px solid var(--line); background:#fff; border-radius:12px; font:inherit; font-weight:700; padding:11px 16px; cursor:pointer; }
-/* Categories: tiles on the home view, a back bar + brand buttons inside one. */
-main.tiles { grid-template-columns:repeat(auto-fill, minmax(104px, 1fr)); gap:8px; }
-.tile { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; text-align:center; }
-.tile .pic { aspect-ratio:1/1; }
-.tile b { font-size:14px; padding:6px 4px 0; line-height:1.25; }
-.tile small { color:var(--muted); font-size:12px; padding-bottom:8px; }
-#nav { display:none; max-width:960px; margin:0 auto; padding:10px 12px 0; }
-#nav .head { display:flex; align-items:center; gap:8px; }
-#nav .head h2 { font-size:20px; font-weight:800; color:var(--green); }
-#back { border:0; background:#e3e9e7; color:var(--green); width:38px; height:38px; border-radius:50%; font-size:20px; font-weight:800; cursor:pointer; flex:none; }
-#brands { display:flex; gap:8px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; }
-#brands button { flex:none; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+/* Categories: a row of buttons that scrolls sideways under the search
+   (stays on screen with the header), brand buttons under it once a category is chosen. */
+.pills { display:none; gap:8px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; }
+.pills::-webkit-scrollbar { display:none; }
+.pills button { flex:none; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+#cats button.on { background:var(--gold); border-color:var(--gold); color:#1d1d1d; }
 #brands button.on { background:var(--green); border-color:var(--green); color:#fff; }
+#nav { max-width:960px; margin:0 auto; padding:0 12px; }
 footer { text-align:center; font-size:12px; color:var(--muted); padding:8px 0 16px; }
 footer a { color:var(--muted); }
 </style>
@@ -78,9 +73,10 @@ footer a { color:var(--muted); }
 <header>
   <div class="top"><img id="logo" alt=""><h1 id="shopName">…</h1><button id="install"></button></div>
   <input id="search" type="search" autocomplete="off">
+  <div id="cats" class="pills"></div>
 </header>
 <div id="tip"><span id="tipText"></span><button id="tipClose">✕</button></div>
-<div id="nav"><div class="head"><button id="back" aria-label="back"></button><h2 id="catTitle"></h2></div><div id="brands"></div></div>
+<div id="nav"><div id="brands" class="pills"></div></div>
 <main id="list"><div id="msg"></div></main>
 <footer id="foot"></footer>
 
@@ -141,7 +137,7 @@ if (shopId) store.set('lastShop', shopId);
 const cartKey = 'cart_' + shopId;
 let cart = store.get(cartKey, {});
 let shop = null, byCode = {};
-// Open category (null: the category tiles) and brand filter inside it.
+// Chosen category (null: all products) and brand filter inside it.
 let view = { cat: null, brand: null };
 
 const fileUrl = path => `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encodeURIComponent('shops/' + shopId + '/' + path.split('?')[0])}?alt=media${path.includes('?') ? '&' + path.split('?')[1] : ''}`;
@@ -161,7 +157,6 @@ $('sheetTitle').textContent = t.sheet;
 $('totalLabel').textContent = t.total;
 $('lName').textContent = t.name; $('lAddr').textContent = t.addr; $('lNote').textContent = t.note;
 $('install').textContent = t.install;
-$('back').textContent = t.dir === 'rtl' ? '→' : '←';
 $('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target="_blank" rel="noopener">My Store</a>`;
 const me = store.get('customer', {});
 $('cName').value = me.name || ''; $('cAddr').value = me.addr || '';
@@ -215,24 +210,19 @@ function show(c) {
 function render() {
   const q = $('search').value.trim().toLowerCase();
   const cats = categories();
+  if (!cats) view.cat = null;
+  catBar(cats);
   let list;
   if (q) {
-    // Search looks through every product, whatever category is open.
+    // Search looks through every product, whatever category is chosen.
     list = shop.products.filter(p => p.n.toLowerCase().includes(q) || (p.d || '').toLowerCase().includes(q)
       || (p.k || '').toLowerCase().includes(q) || p.c === q);
-  } else if (cats && view.cat === null) {
-    $('nav').style.display = 'none';
-    $('list').className = 'tiles';
-    $('list').innerHTML = cats.map(tile).join('');
-    bar();
-    return;
-  } else if (cats) {
+  } else if (view.cat !== null) {
     list = (cats.find(c => c.name === view.cat) || { items: [] }).items;
   } else {
     list = shop.products;
   }
-  $('list').className = '';
-  navBar(!q && cats && view.cat !== null ? list : null);
+  navBar(!q && view.cat !== null ? list : null);
   if (!q && view.brand) list = list.filter(p => brandOf(p) === view.brand);
   $('list').innerHTML = list.length ? list.map(card).join('') : `<div id="empty">${t.empty}</div>`;
   bar();
@@ -252,21 +242,21 @@ function categories() {
     .sort((a, b) => (a.name === t.other) - (b.name === t.other) || a.name.localeCompare(b.name));
 }
 
-function tile(c) {
-  const withPic = c.items.find(p => p.i);
-  const pic = withPic ? `<img loading="lazy" src="${fileUrl(withPic.i)}" alt="">` : `<span>${esc(c.name.charAt(0))}</span>`;
-  return `<div class="tile" data-k="${esc(c.name)}"><div class="pic">${pic}</div><b dir="auto">${esc(c.name)}</b><small>${t.count(c.items.length)}</small></div>`;
+// "All" and one button per category, the chosen one in gold.
+function catBar(cats) {
+  $('cats').style.display = cats ? 'flex' : 'none';
+  if (!cats) return;
+  $('cats').innerHTML = `<button data-i="-1" class="${view.cat === null ? 'on' : ''}">${t.all}</button>`
+    + cats.map((c, i) => `<button data-i="${i}" class="${view.cat === c.name ? 'on' : ''}" dir="auto">${esc(c.name)}</button>`).join('');
 }
 
 const brandOf = p => p.n.trim().toLowerCase();
 
-// Back arrow, category name and brand buttons above a category's products.
+// Brand buttons above a category's products.
 // Brand buttons only help when brands repeat: an owner who typed product
 // names into the brand field would otherwise get one button per product.
 function navBar(items) {
-  $('nav').style.display = items ? 'block' : 'none';
-  if (!items) return;
-  $('catTitle').textContent = view.cat;
+  if (!items) { $('brands').style.display = 'none'; return; }
   const counts = new Map();
   for (const p of items) {
     const b = brandOf(p);
@@ -279,13 +269,6 @@ function navBar(items) {
   if (!useful) { view.brand = null; return; }
   $('brands').innerHTML = `<button data-b="" class="${view.brand ? '' : 'on'}">${t.all}</button>`
     + brands.map(([key, v]) => `<button data-b="${esc(key)}" class="${view.brand === key ? 'on' : ''}" dir="auto">${esc(v.label)}</button>`).join('');
-}
-
-function openCategory(name) {
-  view = { cat: name, brand: null };
-  history.pushState({ cat: name }, '');
-  render();
-  scrollTo(0, 0);
 }
 
 function card(p) {
@@ -312,8 +295,6 @@ function bar() {
 }
 
 $('list').addEventListener('click', e => {
-  const tileEl = e.target.closest('.tile[data-k]');
-  if (tileEl) { openCategory(tileEl.dataset.k); return; }
   const b = e.target.closest('button[data-c]');
   if (!b) return;
   const code = b.dataset.c;
@@ -329,11 +310,14 @@ $('brands').addEventListener('click', e => {
   view.brand = b.dataset.b === view.brand ? null : (b.dataset.b || null);
   render();
 });
-// The phone's back button (and the arrow) go from a category back to the tiles.
-$('back').onclick = () => history.back();
-addEventListener('popstate', e => {
-  view = { cat: (e.state && e.state.cat) || null, brand: null };
+$('cats').addEventListener('click', e => {
+  const b = e.target.closest('button[data-i]');
+  if (!b) return;
+  const cats = categories();
+  const i = Number(b.dataset.i);
+  view = { cat: i < 0 || !cats ? null : cats[i].name, brand: null };
   render();
+  scrollTo(0, 0);
 });
 
 $('orderBtn').onclick = () => {

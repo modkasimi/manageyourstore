@@ -57,6 +57,19 @@ textarea { resize:vertical; min-height:60px; }
 .actions { display:flex; gap:10px; margin-top:12px; }
 .actions .wa { flex:1; justify-content:center; }
 .cancel { border:1px solid var(--line); background:#fff; border-radius:12px; font:inherit; font-weight:700; padding:11px 16px; cursor:pointer; }
+/* Categories: tiles on the home view, a back bar + brand buttons inside one. */
+main.tiles { grid-template-columns:repeat(auto-fill, minmax(104px, 1fr)); gap:8px; }
+.tile { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column; text-align:center; }
+.tile .pic { aspect-ratio:1/1; }
+.tile b { font-size:14px; padding:6px 4px 0; line-height:1.25; }
+.tile small { color:var(--muted); font-size:12px; padding-bottom:8px; }
+#nav { display:none; max-width:960px; margin:0 auto; padding:10px 12px 0; }
+#nav .head { display:flex; align-items:center; gap:8px; }
+#nav .head h2 { font-size:20px; font-weight:800; color:var(--green); }
+#back { border:0; background:#e3e9e7; color:var(--green); width:38px; height:38px; border-radius:50%; font-size:20px; font-weight:800; cursor:pointer; flex:none; }
+#brands { display:flex; gap:8px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; }
+#brands button { flex:none; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+#brands button.on { background:var(--green); border-color:var(--green); color:#fff; }
 footer { text-align:center; font-size:12px; color:var(--muted); padding:8px 0 16px; }
 footer a { color:var(--muted); }
 </style>
@@ -67,6 +80,7 @@ footer a { color:var(--muted); }
   <input id="search" type="search" autocomplete="off">
 </header>
 <div id="tip"><span id="tipText"></span><button id="tipClose">✕</button></div>
+<div id="nav"><div class="head"><button id="back" aria-label="back"></button><h2 id="catTitle"></h2></div><div id="brands"></div></div>
 <main id="list"><div id="msg"></div></main>
 <footer id="foot"></footer>
 
@@ -93,19 +107,22 @@ const L = {
         needName:'اكتب اسمك وعنوانك من فضلك.', empty:'لا توجد سلع مطابقة.', loading:'جارٍ التحميل…',
         noShop:'لم يتم العثور على هذا المتجر. تأكد من الرابط.', install:'ثبّت التطبيق',
         ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', by:'متجر مُدار بتطبيق',
-        msgHead:s=>`🛒 طلب جديد — ${s}`, msgTotal:'المجموع', msgName:'الاسم', msgAddr:'العنوان', msgNote:'ملاحظة' },
+        msgHead:s=>`🛒 طلب جديد — ${s}`, msgTotal:'المجموع', msgName:'الاسم', msgAddr:'العنوان', msgNote:'ملاحظة',
+        other:'أخرى', all:'الكل', count:n=>`${n} سلعة` },
   fr: { dir:'ltr', search:'Rechercher un produit…', add:'Ajouter', out:'Épuisé pour le moment', items:n=>`${n} article(s) dans le panier`, order:'Commander sur WhatsApp',
         sheet:'Votre commande', total:'Total', name:'Nom', addr:'Adresse (livraison)', note:'Note (facultatif)', cancel:'Retour', send:'Envoyer la commande',
         needName:'Indiquez votre nom et votre adresse, s\'il vous plaît.', empty:'Aucun produit trouvé.', loading:'Chargement…',
         noShop:'Boutique introuvable. Vérifiez le lien.', install:'Installer l\'appli',
         ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', by:'Boutique gérée avec',
-        msgHead:s=>`🛒 Nouvelle commande — ${s}`, msgTotal:'Total', msgName:'Nom', msgAddr:'Adresse', msgNote:'Note' },
+        msgHead:s=>`🛒 Nouvelle commande — ${s}`, msgTotal:'Total', msgName:'Nom', msgAddr:'Adresse', msgNote:'Note',
+        other:'Autres', all:'Toutes', count:n=>`${n} produit(s)` },
   en: { dir:'ltr', search:'Search products…', add:'Add', out:'Out of stock', items:n=>`${n} item(s) in the cart`, order:'Order on WhatsApp',
         sheet:'Your order', total:'Total', name:'Name', addr:'Address (delivery)', note:'Note (optional)', cancel:'Back', send:'Send order',
         needName:'Please enter your name and address.', empty:'No matching products.', loading:'Loading…',
         noShop:'Shop not found. Check the link.', install:'Install app',
         ios:'To install: tap Share ⬆️ then "Add to Home Screen".', by:'Shop run with',
-        msgHead:s=>`🛒 New order — ${s}`, msgTotal:'Total', msgName:'Name', msgAddr:'Address', msgNote:'Note' },
+        msgHead:s=>`🛒 New order — ${s}`, msgTotal:'Total', msgName:'Name', msgAddr:'Address', msgNote:'Note',
+        other:'Other', all:'All', count:n=>`${n} product(s)` },
 };
 const lang = (navigator.language || 'ar').slice(0,2);
 const t = L[lang] || L.ar;
@@ -124,6 +141,8 @@ if (shopId) store.set('lastShop', shopId);
 const cartKey = 'cart_' + shopId;
 let cart = store.get(cartKey, {});
 let shop = null, byCode = {};
+// Open category (null: the category tiles) and brand filter inside it.
+let view = { cat: null, brand: null };
 
 const fileUrl = path => `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encodeURIComponent('shops/' + shopId + '/' + path.split('?')[0])}?alt=media${path.includes('?') ? '&' + path.split('?')[1] : ''}`;
 const money = v => (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (shop && shop.coin ? ' ' + shop.coin : '');
@@ -140,6 +159,7 @@ $('sheetTitle').textContent = t.sheet;
 $('totalLabel').textContent = t.total;
 $('lName').textContent = t.name; $('lAddr').textContent = t.addr; $('lNote').textContent = t.note;
 $('install').textContent = t.install;
+$('back').textContent = t.dir === 'rtl' ? '→' : '←';
 $('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target="_blank" rel="noopener">My Store</a>`;
 const me = store.get('customer', {});
 $('cName').value = me.name || ''; $('cAddr').value = me.addr || '';
@@ -192,9 +212,78 @@ function show(c) {
 
 function render() {
   const q = $('search').value.trim().toLowerCase();
-  const list = shop.products.filter(p => !q || p.n.toLowerCase().includes(q) || (p.d || '').toLowerCase().includes(q) || p.c === q);
+  const cats = categories();
+  let list;
+  if (q) {
+    // Search looks through every product, whatever category is open.
+    list = shop.products.filter(p => p.n.toLowerCase().includes(q) || (p.d || '').toLowerCase().includes(q)
+      || (p.k || '').toLowerCase().includes(q) || p.c === q);
+  } else if (cats && view.cat === null) {
+    $('nav').style.display = 'none';
+    $('list').className = 'tiles';
+    $('list').innerHTML = cats.map(tile).join('');
+    bar();
+    return;
+  } else if (cats) {
+    list = (cats.find(c => c.name === view.cat) || { items: [] }).items;
+  } else {
+    list = shop.products;
+  }
+  $('list').className = '';
+  navBar(!q && cats && view.cat !== null ? list : null);
+  if (!q && view.brand) list = list.filter(p => brandOf(p) === view.brand);
   $('list').innerHTML = list.length ? list.map(card).join('') : `<div id="empty">${t.empty}</div>`;
   bar();
+}
+
+// [{name, items}] when the owner has given categories, else null (one plain list).
+// Products without a category go last, under "Other".
+function categories() {
+  if (!shop.products.some(p => p.k)) return null;
+  const map = new Map();
+  for (const p of shop.products) {
+    const name = p.k || t.other;
+    if (!map.has(name)) map.set(name, []);
+    map.get(name).push(p);
+  }
+  return [...map.entries()].map(([name, items]) => ({ name, items }))
+    .sort((a, b) => (a.name === t.other) - (b.name === t.other) || a.name.localeCompare(b.name));
+}
+
+function tile(c) {
+  const withPic = c.items.find(p => p.i);
+  const pic = withPic ? `<img loading="lazy" src="${fileUrl(withPic.i)}" alt="">` : `<span>${esc(c.name.charAt(0))}</span>`;
+  return `<div class="tile" data-k="${esc(c.name)}"><div class="pic">${pic}</div><b dir="auto">${esc(c.name)}</b><small>${t.count(c.items.length)}</small></div>`;
+}
+
+const brandOf = p => p.n.trim().toLowerCase();
+
+// Back arrow, category name and brand buttons above a category's products.
+// Brand buttons only help when brands repeat: an owner who typed product
+// names into the brand field would otherwise get one button per product.
+function navBar(items) {
+  $('nav').style.display = items ? 'block' : 'none';
+  if (!items) return;
+  $('catTitle').textContent = view.cat;
+  const counts = new Map();
+  for (const p of items) {
+    const b = brandOf(p);
+    if (!counts.has(b)) counts.set(b, { label: p.n.trim(), n: 0 });
+    counts.get(b).n++;
+  }
+  const brands = [...counts.entries()].sort((a, b) => b[1].n - a[1].n);
+  const useful = brands.length >= 2 && brands.length < items.length && brands.length <= 30;
+  $('brands').style.display = useful ? 'flex' : 'none';
+  if (!useful) { view.brand = null; return; }
+  $('brands').innerHTML = `<button data-b="" class="${view.brand ? '' : 'on'}">${t.all}</button>`
+    + brands.map(([key, v]) => `<button data-b="${esc(key)}" class="${view.brand === key ? 'on' : ''}" dir="auto">${esc(v.label)}</button>`).join('');
+}
+
+function openCategory(name) {
+  view = { cat: name, brand: null };
+  history.pushState({ cat: name }, '');
+  render();
+  scrollTo(0, 0);
 }
 
 function card(p) {
@@ -221,6 +310,8 @@ function bar() {
 }
 
 $('list').addEventListener('click', e => {
+  const tileEl = e.target.closest('.tile[data-k]');
+  if (tileEl) { openCategory(tileEl.dataset.k); return; }
   const b = e.target.closest('button[data-c]');
   if (!b) return;
   const code = b.dataset.c;
@@ -230,6 +321,18 @@ $('list').addEventListener('click', e => {
   render();
 });
 $('search').addEventListener('input', render);
+$('brands').addEventListener('click', e => {
+  const b = e.target.closest('button[data-b]');
+  if (!b) return;
+  view.brand = b.dataset.b === view.brand ? null : (b.dataset.b || null);
+  render();
+});
+// The phone's back button (and the arrow) go from a category back to the tiles.
+$('back').onclick = () => history.back();
+addEventListener('popstate', e => {
+  view = { cat: (e.state && e.state.cat) || null, brand: null };
+  render();
+});
 
 $('orderBtn').onclick = () => {
   $('lines').innerHTML = Object.keys(cart).map(code => {

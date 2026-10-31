@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a4640">
+<meta name="robots" content="noindex">
+<title>My Store</title>
+<link rel="manifest" id="manifest">
+<link rel="icon" href="assets/shop/icon-192.png">
+<link rel="apple-touch-icon" href="assets/shop/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --green:#0a4640; --gold:#e3b04b; --bg:#f3f6f5; --card:#fff; --text:#1d2524; --muted:#66706e; --line:#dde5e3; --ok:#25d366; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Cairo','Segoe UI',Tahoma,sans-serif; background:var(--bg); color:var(--text); padding-bottom:96px; }
+header { background:var(--green); color:#fff; padding:14px 16px 12px; position:sticky; top:0; z-index:5; }
+.top { display:flex; align-items:center; gap:10px; }
+.top h1 { font-size:22px; font-weight:800; flex:1; line-height:1.25; }
+#logo { width:44px; height:44px; border-radius:50%; object-fit:cover; background:#fff; display:none; flex:none; }
+#install { background:var(--gold); color:#1d1d1d; border:0; border-radius:999px; font:inherit; font-weight:800; font-size:14px; padding:6px 14px; cursor:pointer; display:none; }
+#search { width:100%; margin-top:10px; border:0; border-radius:10px; padding:10px 14px; font:inherit; font-size:16px; }
+#tip { display:none; background:#fff8e6; color:#5a4100; font-size:14px; padding:10px 16px; border-bottom:1px solid #f0dfb3; }
+#tip button { background:none; border:0; font:inherit; font-weight:800; color:#5a4100; margin-inline-start:8px; cursor:pointer; }
+main { max-width:960px; margin:0 auto; padding:12px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
+.pic { aspect-ratio:4/3; background:#e8efed; display:flex; align-items:center; justify-content:center; position:relative; }
+.off { position:absolute; top:6px; inset-inline-start:6px; background:var(--gold); color:#1d1d1d; border-radius:999px; font-size:13px; font-weight:800; padding:1px 9px; direction:ltr; }
+.pic img { width:100%; height:100%; object-fit:contain; background:#fff; }
+.pic span { font-size:44px; font-weight:800; color:var(--green); opacity:.35; }
+.info { padding:8px 10px 10px; display:flex; flex-direction:column; gap:2px; flex:1; }
+.name { font-weight:700; font-size:15px; line-height:1.3; }
+.desc { font-size:12px; color:var(--muted); }
+.price { font-weight:800; color:var(--green); font-size:16px; margin-top:auto; padding-top:4px; direction:ltr; text-align:end; }
+.old { font-weight:700; color:var(--muted); font-size:13px; text-decoration:line-through; margin-inline-end:6px; }
+.out { font-size:13px; color:#b3261e; font-weight:700; text-align:center; padding:6px 0 2px; }
+.qty { display:flex; align-items:center; justify-content:space-between; margin-top:6px; }
+.qty button { width:38px; height:38px; border-radius:50%; border:0; background:var(--green); color:#fff; font-size:22px; font-weight:800; cursor:pointer; line-height:1; }
+.qty button.minus { background:#e3e9e7; color:var(--green); }
+.qty b { font-size:18px; min-width:28px; text-align:center; }
+.add { margin-top:6px; border:0; border-radius:10px; background:var(--green); color:#fff; font:inherit; font-weight:700; padding:7px; cursor:pointer; }
+#empty, #msg { grid-column:1/-1; text-align:center; color:var(--muted); padding:40px 16px; font-size:17px; }
+#bar { position:fixed; inset-inline:0; bottom:0; background:#fff; border-top:1px solid var(--line); padding:12px 16px calc(12px + env(safe-area-inset-bottom)); display:none; align-items:center; gap:12px; z-index:6; box-shadow:0 -6px 20px rgba(0,0,0,.08); }
+#bar .sum { flex:1; font-size:15px; line-height:1.3; }
+#bar .sum b { font-size:20px; color:var(--green); direction:ltr; display:inline-block; }
+.wa { background:var(--ok); color:#fff; border:0; border-radius:12px; font:inherit; font-weight:800; font-size:17px; padding:11px 18px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+.wa svg { width:22px; height:22px; fill:#fff; }
+#sheet, #bsheet { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:flex-end; justify-content:center; z-index:9; }
+#sheet .box, #bsheet .box { background:#fff; width:100%; max-width:560px; border-radius:18px 18px 0 0; padding:18px 16px calc(18px + env(safe-area-inset-bottom)); max-height:92vh; overflow:auto; }
+#sheet h2, #bsheet h2 { font-size:20px; margin-bottom:8px; }
+.line { display:flex; justify-content:space-between; gap:10px; font-size:15px; padding:5px 0; border-bottom:1px dashed var(--line); }
+.line span:last-child { direction:ltr; white-space:nowrap; }
+.total { display:flex; justify-content:space-between; font-weight:800; font-size:18px; padding:10px 0 4px; }
+.total span:last-child { direction:ltr; }
+label { display:block; font-weight:700; font-size:14px; margin-top:10px; }
+input, textarea { width:100%; border:1px solid var(--line); border-radius:10px; padding:10px 12px; font:inherit; font-size:16px; margin-top:4px; }
+textarea { resize:vertical; min-height:60px; }
+.err { color:#b3261e; font-size:13px; min-height:18px; }
+.actions { display:flex; gap:10px; margin-top:12px; }
+.actions .wa { flex:1; justify-content:center; }
+.cancel { border:1px solid var(--line); background:#fff; border-radius:12px; font:inherit; font-weight:700; padding:11px 16px; cursor:pointer; }
+/* Categories: a row of buttons that scrolls sideways under the search
+   (stays on screen with the header), brand buttons under it once a category is chosen. */
+.pills { display:none; gap:8px; overflow-x:auto; padding:10px 0 2px; scrollbar-width:none; }
+.pills::-webkit-scrollbar { display:none; }
+.pills button { flex:none; border:1px solid var(--line); background:#fff; color:var(--text); border-radius:999px; padding:6px 14px; font:inherit; font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap; }
+#cats button.offers { border-color:var(--gold); color:#7a5600; }
+#cats button.on { background:var(--gold); border-color:var(--gold); color:#1d1d1d; }
+#brands button.on { background:var(--green); border-color:var(--green); color:#fff; }
+#nav { max-width:960px; margin:0 auto; padding:0 12px; }
+/* Bundles: sliding cards above the products; a card opens its details. */
+#bundles { display:none; gap:10px; overflow-x:auto; padding:12px 0 2px; scrollbar-width:none; }
+#bundles::-webkit-scrollbar { display:none; }
+.bcard { flex:none; width:172px; background:var(--card); border:2px solid var(--gold); border-radius:14px; overflow:hidden; cursor:pointer; font:inherit; color:inherit; padding:0; text-align:start; display:flex; flex-direction:column; }
+.bpics { display:flex; height:82px; background:#e8efed; width:100%; position:relative; }
+.bpics > img, .bpics > span { flex:1; min-width:0; height:100%; object-fit:contain; background:#fff; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; color:var(--green); opacity:.85; }
+.binfo { padding:6px 10px 8px; display:flex; flex-direction:column; gap:1px; }
+.bprice { font-weight:800; color:var(--green); font-size:16px; direction:ltr; text-align:end; }
+.bsave { font-size:12px; font-weight:800; color:#7a5600; }
+#bsheet .out { padding:10px 0 0; }
+#sent { position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:10; padding:16px; }
+#sent .box { background:#fff; border-radius:16px; padding:18px 16px; width:100%; max-width:380px; }
+#sent h2 { font-size:19px; text-align:center; }
+#sent .actions { flex-direction:column; }
+#sent .wa { justify-content:center; }
+#changeBar { display:none; max-width:960px; margin:10px auto 0; padding:0 12px; }
+#changeBar button { width:100%; background:#fff8e6; color:#5a4100; border:1px solid #f0dfb3; border-radius:10px; font:inherit; font-weight:700; padding:8px; cursor:pointer; }
+footer { text-align:center; font-size:12px; color:var(--muted); padding:8px 0 16px; }
+footer a { color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><img id="logo" alt=""><h1 id="shopName">…</h1><button id="install"></button></div>
+  <input id="search" type="search" autocomplete="off">
+  <div id="cats" class="pills"></div>
+</header>
+<div id="tip"><span id="tipText"></span><button id="tipClose">✕</button></div>
+<div id="changeBar"><button id="changeBtn"></button></div>
+<div id="nav"><div id="bundles"></div><div id="brands" class="pills"></div></div>
+<main id="list"><div id="msg"></div></main>
+<footer id="foot"></footer>
+
+<div id="bar"><div class="sum"><span id="count"></span><br><b id="sum"></b></div>
+  <button class="wa" id="orderBtn"></button></div>
+
+<div id="sheet"><div class="box">
+  <h2 id="sheetTitle"></h2>
+  <div id="lines"></div>
+  <div class="total"><span id="totalLabel"></span><span id="totalVal"></span></div>
+  <label for="cName" id="lName"></label><input id="cName" autocomplete="name">
+  <label for="cAddr" id="lAddr"></label><textarea id="cAddr" autocomplete="street-address"></textarea>
+  <label for="cNote" id="lNote"></label><input id="cNote">
+  <div class="err" id="err"></div>
+  <div class="actions"><button class="cancel" id="cancelBtn"></button><button class="wa" id="sendBtn"></button></div>
+</div></div>
+
+<div id="bsheet"><div class="box" id="bbox"></div></div>
+
+<div id="sent"><div class="box">
+  <h2 id="sentQ"></h2>
+  <div class="actions"><button class="wa" id="sentYes"></button><button class="cancel" id="sentNo"></button></div>
+</div></div>
+
+<script>
+const BUCKET = 'store-678b8.firebasestorage.app';
+const WA_ICON = '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>';
+const L = {
+  ar: { dir:'rtl', search:'ابحث عن سلعة…', add:'أضف', out:'غير متوفر حاليًا', items:n=>`${n} سلعة في السلة`, order:'اطلب عبر واتساب',
+        sheet:'راجع طلبك', total:'المجموع', name:'الاسم', addr:'العنوان (للتوصيل)', note:'ملاحظة (اختياري)', cancel:'رجوع', send:'إرسال الطلب',
+        needName:'اكتب اسمك وعنوانك من فضلك.', empty:'لا توجد سلع مطابقة.', loading:'جارٍ التحميل…',
+        noShop:'لم يتم العثور على هذا المتجر. تأكد من الرابط.', install:'ثبّت التطبيق',
+        ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', manual:'لتثبيته: اضغط ⋮ في أعلى المتصفح ثم «إضافة إلى الشاشة الرئيسية». إن فتحت الرابط من واتساب، اختر أولًا «فتح في Chrome».', by:'متجر مُدار بتطبيق',
+        msgHead:(n,s)=>`🛒 طلب ${n} — ${s}`, replaces:n=>`🔁 يعوض الطلب ${n}`, sentQ:'هل أرسلت طلبك؟', sentYes:'نعم، أرسلته', sentNo:'لا، أريد تعديله', change:n=>`تعديل الطلب ${n}`, msgTotal:'المجموع', msgName:'الزبون', msgAddr:'العنوان', msgNote:'ملاحظة',
+        other:'أخرى', all:'الكل', save:v=>`وفّر ${v}`, separately:'بالتفصيل', includes:'تحتوي على', offers:'عروض', offerTag:'عرض', delivery:'🚚 التوصيل', count:n=>`${n} سلعة` },
+  fr: { dir:'ltr', search:'Rechercher un produit…', add:'Ajouter', out:'Épuisé pour le moment', items:n=>`${n} article(s) dans le panier`, order:'Commander sur WhatsApp',
+        sheet:'Vérifiez votre commande', total:'Total', name:'Nom', addr:'Adresse (livraison)', note:'Note (facultatif)', cancel:'Retour', send:'Envoyer la commande',
+        needName:'Indiquez votre nom et votre adresse, s\'il vous plaît.', empty:'Aucun produit trouvé.', loading:'Chargement…',
+        noShop:'Boutique introuvable. Vérifiez le lien.', install:'Installer l\'appli',
+        ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', manual:'Pour l\'installer : touchez ⋮ en haut du navigateur puis « Ajouter à l\'écran d\'accueil ». Si le lien s\'est ouvert dans WhatsApp, choisissez d\'abord « Ouvrir dans Chrome ».', by:'Boutique gérée avec',
+        msgHead:(n,s)=>`🛒 Commande ${n} — ${s}`, replaces:n=>`🔁 Remplace la commande ${n}`, sentQ:'Commande envoyée ?', sentYes:'Oui, envoyée', sentNo:'Non, la modifier', change:n=>`Modifier la commande ${n}`, msgTotal:'Total', msgName:'Client', msgAddr:'Adresse', msgNote:'Note',
+        other:'Autres', all:'Toutes', save:v=>`Économisez ${v}`, separately:'Prix séparé', includes:'Contient', offers:'Offres', offerTag:'offre', delivery:'🚚 Livraison', count:n=>`${n} produit(s)` },
+  en: { dir:'ltr', search:'Search products…', add:'Add', out:'Out of stock', items:n=>`${n} item(s) in the cart`, order:'Order on WhatsApp',
+        sheet:'Check your order', total:'Total', name:'Name', addr:'Address (delivery)', note:'Note (optional)', cancel:'Back', send:'Send order',
+        needName:'Please enter your name and address.', empty:'No matching products.', loading:'Loading…',
+        noShop:'Shop not found. Check the link.', install:'Install app',
+        ios:'To install: tap Share ⬆️ then "Add to Home Screen".', manual:'To install: tap ⋮ at the top of the browser, then "Add to Home screen". If the link opened inside WhatsApp, first choose "Open in Chrome".', by:'Shop run with',
+        msgHead:(n,s)=>`🛒 Order ${n} — ${s}`, replaces:n=>`🔁 Replaces order ${n}`, sentQ:'Order sent?', sentYes:'Yes, sent', sentNo:'No, change it', change:n=>`Change order ${n}`, msgTotal:'Total', msgName:'Customer', msgAddr:'Address', msgNote:'Note',
+        other:'Other', all:'All', save:v=>`Save ${v}`, separately:'Bought separately', includes:'Includes', offers:'Offers', offerTag:'offer', delivery:'🚚 Delivery', count:n=>`${n} product(s)` },
+};
+const lang = (navigator.language || 'ar').slice(0,2);
+const t = L[lang] || L.ar;
+document.documentElement.lang = L[lang] ? lang : 'ar';
+document.documentElement.dir = t.dir;
+
+const $ = id => document.getElementById(id);
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+                set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+
+// The shop id comes from the link; an installed copy opens without it, so
+// remember the last shop opened.
+const params = new URLSearchParams(location.search);
+const shopId = params.get('s') || store.get('lastShop', '');
+if (shopId) store.set('lastShop', shopId);
+const cartKey = 'cart_' + shopId;
+const pendingKey = 'pending_' + shopId, replacesKey = 'replaces_' + shopId, lastKey = 'last_' + shopId;
+// Random id of this browser: the shop's app groups a customer's orders by it,
+// whatever spelling of the name they type.
+let customerId = store.get('customerId', '');
+if (!customerId) { customerId = Math.random().toString(36).slice(2, 8); store.set('customerId', customerId); }
+let cart = store.get(cartKey, {});
+let shop = null, byCode = {};
+// Chosen category (null: all products) and brand filter inside it.
+let view = { cat: null, brand: null };
+
+const fileUrl = path => `https://firebasestorage.googleapis.com/v0/b/${BUCKET}/o/${encodeURIComponent('shops/' + shopId + '/' + path.split('?')[0])}?alt=media${path.includes('?') ? '&' + path.split('?')[1] : ''}`;
+const money = v => (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + (shop && shop.coin ? ' ' + shop.coin : '');
+// The owner can publish without prices: then no price, line amount or total shows anywhere.
+const withPrices = () => !shop || shop.showPrices !== false;
+// What the shop charges to deliver an order (0: it doesn't say).
+const delivery = () => (shop && shop.delivery > 0) ? shop.delivery : 0;
+// A product's offer applies through its end date (u), which needs no new
+// publish: when it passes, the normal price is back.
+const offerOn = p => p.o > 0 && (!p.u || new Date(p.u + 'T23:59:59') >= new Date());
+const priceOf = p => offerOn(p) ? p.o : (p.p || 0);
+// view.cat value for the Offers button (a category can't be named this).
+const OFFERS = '\u0000offers';
+// A bundle lasts through its end date too, and goes in the cart as 'b:<id>'.
+const bundleOn = b => !b.u || new Date(b.u + 'T23:59:59') >= new Date();
+const bundles = () => withPrices() ? (shop.bundles || []).filter(bundleOn) : [];
+const contents = p => p.x ? ` (${p.x.map(i => (i.q > 1 ? i.q + ' × ' : '') + i.n).join(', ')})` : '';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+
+$('search').placeholder = t.search;
+$('msg').textContent = t.loading;
+$('orderBtn').innerHTML = WA_ICON + t.order;
+$('sendBtn').innerHTML = WA_ICON + t.send;
+$('cancelBtn').textContent = t.cancel;
+$('sheetTitle').textContent = t.sheet;
+$('totalLabel').textContent = t.total;
+$('lName').textContent = t.name; $('lAddr').textContent = t.addr; $('lNote').textContent = t.note;
+$('install').textContent = t.install;
+$('sentQ').textContent = t.sentQ; $('sentYes').textContent = t.sentYes; $('sentNo').textContent = t.sentNo;
+$('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target="_blank" rel="noopener">My Store</a>`;
+const me = store.get('customer', {});
+$('cName').value = me.name || ''; $('cAddr').value = me.addr || '';
+
+// The shop's own logo (512x512 jpg) becomes the installed app's icon;
+// shops without one get the default icons.
+function setManifest(name, logo) {
+  const base = location.origin + location.pathname.replace(/[^/]*$/, '');
+  const icons = logo
+    ? [{ src: logo, sizes: '512x512', type: 'image/jpeg', purpose: 'any' }]
+    : [{ src: base + 'assets/shop/icon-192.png', sizes: '192x192', type: 'image/png' },
+       { src: base + 'assets/shop/icon-512.png', sizes: '512x512', type: 'image/png' }];
+  const m = { name, short_name: name.slice(0, 24), lang: document.documentElement.lang, dir: t.dir,
+    start_url: base + 'shop-test.html?s=' + encodeURIComponent(shopId), scope: base, display: 'standalone',
+    background_color: '#0a4640', theme_color: '#0a4640', icons };
+  $('manifest').href = URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' }));
+}
+
+async function load() {
+  if (!shopId) { $('msg').textContent = t.noShop; return; }
+  const cached = store.get('catalog_' + shopId, null);
+  if (cached) show(cached);
+  try {
+    const r = await fetch(fileUrl('catalog.json'), { cache: 'no-cache' });
+    if (!r.ok) throw new Error(r.status);
+    const c = await r.json();
+    store.set('catalog_' + shopId, c);
+    show(c);
+  } catch (e) {
+    if (!cached) $('msg').textContent = t.noShop;
+  }
+}
+
+function show(c) {
+  shop = c;
+  byCode = {};
+  c.products.forEach(p => byCode[p.c] = p);
+  (c.bundles || []).filter(bundleOn).forEach(b => byCode['b:' + b.id] = { ...b, c: 'b:' + b.id });
+  for (const code in cart) if (!byCode[code] || !byCode[code].s) delete cart[code];
+  document.title = c.name || 'My Store';
+  $('shopName').textContent = c.name || 'My Store';
+  const logo = c.logo ? fileUrl(c.logo) : '';
+  $('logo').style.display = logo ? 'block' : 'none';
+  if (logo) {
+    $('logo').src = logo;
+    document.querySelectorAll('link[rel=icon], link[rel=apple-touch-icon]').forEach(l => l.href = logo);
+  }
+  setManifest(c.name || 'My Store', logo);
+  render();
+  askSent();
+}
+
+// WhatsApp can't report back, so the cart stays until the customer says the
+// order went. Coming back from WhatsApp asks.
+function askSent() {
+  const pending = store.get(pendingKey, null);
+  if (pending && Date.now() - pending.at > 1500) $('sent').style.display = 'flex';
+}
+addEventListener('pageshow', askSent);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') askSent(); });
+$('sentYes').onclick = () => {
+  const pending = store.get(pendingKey, null);
+  if (pending) store.set(lastKey, { no: pending.no, cart: pending.cart, at: Date.now() });
+  store.set(pendingKey, null); store.set(replacesKey, null);
+  cart = {}; store.set(cartKey, cart);
+  $('cNote').value = '';
+  $('sent').style.display = 'none';
+  render();
+};
+$('sentNo').onclick = () => {
+  const pending = store.get(pendingKey, null);
+  if (pending) store.set(replacesKey, pending.no);
+  store.set(pendingKey, null);
+  $('sent').style.display = 'none';
+  render();
+};
+$('changeBtn').onclick = () => {
+  const last = store.get(lastKey, null);
+  if (!last) return;
+  cart = {};
+  for (const code in last.cart) if (byCode[code] && byCode[code].s) cart[code] = last.cart[code];
+  store.set(cartKey, cart); store.set(replacesKey, last.no); store.set(lastKey, null);
+  render();
+  $('orderBtn').click();
+};
+
+// "Change order N" for a day after sending, while the cart is empty.
+function changeBar() {
+  const last = store.get(lastKey, null);
+  const on = last && !Object.keys(cart).length && Date.now() - last.at < 864e5;
+  $('changeBar').style.display = on ? 'block' : 'none';
+  if (on) $('changeBtn').textContent = t.change(last.no);
+}
+
+// The message's last line, read by the shop's Paste order button:
+// #MS:1|order|customer id|order it replaces|total|quantity per line|items
+// Items are code/quantity/normal price/discount with each code URL-encoded,
+// bundles as their real products and an offer as a discount, one entry per
+// product. No * _ ~ in it: WhatsApp would treat them as formatting.
+function orderCode(no, replaces, total) {
+  const items = new Map();
+  const put = (code, q, price, off) => {
+    const i = items.get(code) || { q: 0, p: price, d: 0 };
+    i.q += q; i.d += off;
+    items.set(code, i);
+  };
+  const codes = Object.keys(cart);
+  for (const code of codes) {
+    const n = cart[code], p = byCode[code];
+    if (!p.x) { put(code, n, p.p || 0, n * ((p.p || 0) - priceOf(p))); continue; }
+    const saving = n * (p.w - p.p);
+    let left = saving;
+    p.x.forEach((x, k) => {
+      const off = k === p.x.length - 1 ? left : Math.round(saving * x.q * x.p / p.w * 100) / 100;
+      left -= off;
+      put(x.c, n * x.q, x.p, off);
+    });
+  }
+  const list = [...items].map(([c, i]) => `${encodeURIComponent(c)}/${i.q}/${i.p}/${Math.round(i.d * 100) / 100}`);
+  return `#MS:1|${no}|${customerId}|${replaces || ''}|${total}|${codes.map(c => cart[c]).join(',')}|${list.join(',')}`;
+}
+
+function render() {
+  const q = $('search').value.trim().toLowerCase();
+  const cats = categories();
+  const offers = shop.products.filter(offerOn);
+  if (view.cat === OFFERS ? !offers.length : !cats) view.cat = null;
+  catBar(cats, offers.length > 0);
+  bundleBar(!q && view.cat === null ? bundles() : []);
+  let list;
+  if (q) {
+    // Search looks through every product, whatever category is chosen.
+    list = shop.products.filter(p => p.n.toLowerCase().includes(q) || (p.d || '').toLowerCase().includes(q)
+      || (p.k || '').toLowerCase().includes(q) || p.c === q);
+  } else if (view.cat === OFFERS) {
+    list = offers;
+  } else if (view.cat !== null) {
+    list = (cats.find(c => c.name === view.cat) || { items: [] }).items;
+  } else {
+    list = shop.products;
+  }
+  navBar(!q && view.cat !== null && view.cat !== OFFERS ? list : null);
+  if (!q && view.brand) list = list.filter(p => brandOf(p) === view.brand);
+  $('list').innerHTML = list.length ? list.map(card).join('') : `<div id="empty">${t.empty}</div>`;
+  bar();
+  changeBar();
+}
+
+// [{name, items}] when the owner has given categories, else null (one plain list).
+// Products without a category go last, under "Other".
+function categories() {
+  if (!shop.products.some(p => p.k)) return null;
+  const map = new Map();
+  for (const p of shop.products) {
+    const name = p.k || t.other;
+    if (!map.has(name)) map.set(name, []);
+    map.get(name).push(p);
+  }
+  return [...map.entries()].map(([name, items]) => ({ name, items }))
+    .sort((a, b) => (a.name === t.other) - (b.name === t.other) || a.name.localeCompare(b.name));
+}
+
+// "Offers" when there are any, "All" and one button per category, the chosen
+// one in gold.
+function catBar(cats, hasOffers) {
+  $('cats').style.display = cats || hasOffers ? 'flex' : 'none';
+  $('cats').innerHTML = (hasOffers ? `<button data-i="-2" class="offers ${view.cat === OFFERS ? 'on' : ''}">🏷️ ${t.offers}</button>` : '')
+    + `<button data-i="-1" class="${view.cat === null ? 'on' : ''}">${t.all}</button>`
+    + (cats || []).map((c, i) => `<button data-i="${i}" class="${view.cat === c.name ? 'on' : ''}" dir="auto">${esc(c.name)}</button>`).join('');
+}
+
+const brandOf = p => p.n.trim().toLowerCase();
+
+// Brand buttons above a category's products.
+// Brand buttons only help when brands repeat: an owner who typed product
+// names into the brand field would otherwise get one button per product.
+function navBar(items) {
+  if (!items) { $('brands').style.display = 'none'; return; }
+  const counts = new Map();
+  for (const p of items) {
+    const b = brandOf(p);
+    if (!counts.has(b)) counts.set(b, { label: p.n.trim(), n: 0 });
+    counts.get(b).n++;
+  }
+  const brands = [...counts.entries()].sort((a, b) => b[1].n - a[1].n);
+  const useful = brands.length >= 2 && brands.length < items.length && brands.length <= 30;
+  $('brands').style.display = useful ? 'flex' : 'none';
+  if (!useful) { view.brand = null; return; }
+  $('brands').innerHTML = `<button data-b="" class="${view.brand ? '' : 'on'}">${t.all}</button>`
+    + brands.map(([key, v]) => `<button data-b="${esc(key)}" class="${view.brand === key ? 'on' : ''}" dir="auto">${esc(v.label)}</button>`).join('');
+}
+
+function bundlePics(b) {
+  return `<div class="bpics">${b.x.slice(0, 3).map(i => i.i ? `<img loading="lazy" src="${fileUrl(i.i)}" alt="">` : `<span>${esc(i.n.trim().charAt(0))}</span>`).join('')}</div>`;
+}
+
+function bundleBar(list) {
+  $('bundles').style.display = list.length ? 'flex' : 'none';
+  $('bundles').innerHTML = list.map(b => `<button class="bcard" data-b="${esc(b.id)}">${bundlePics(b)}<div class="binfo"><div class="name" dir="auto">${esc(b.n)}</div>`
+    + `<div class="bsave">${t.save(money(b.w - b.p))}</div><div class="bprice">${money(b.p)}</div></div></button>`).join('');
+}
+
+// The bundle's details: what's inside, the saving, and its place in the cart.
+function bundleSheet(id) {
+  const b = byCode['b:' + id];
+  const n = cart[b.c] || 0;
+  const ctl = !b.s ? `<div class="out">${t.out}</div>`
+    : n ? `<div class="qty"><button class="minus" data-c="${esc(b.c)}" data-d="-1">−</button><b>${n}</b><button data-c="${esc(b.c)}" data-d="1">+</button></div>`
+        : `<button class="add" style="width:100%" data-c="${esc(b.c)}" data-d="1">${t.add}</button>`;
+  $('bbox').dataset.b = id;
+  $('bbox').innerHTML = `${bundlePics(b)}<h2 dir="auto" style="margin-top:10px">${esc(b.n)}</h2><label>${t.includes}</label>`
+    + b.x.map(i => `<div class="line"><span dir="auto">${i.q} × ${esc(i.n)}</span><span>${money(i.q * i.p)}</span></div>`).join('')
+    + `<div class="line"><span>${t.separately}</span><span class="old">${money(b.w)}</span></div>`
+    + `<div class="total"><span>${t.save(money(b.w - b.p))}</span><span>${money(b.p)}</span></div>`
+    + ctl + `<div class="actions"><button class="cancel" id="bBack" style="flex:1">${t.cancel}</button></div>`;
+  $('bsheet').style.display = 'flex';
+}
+
+function card(p) {
+  const n = cart[p.c] || 0;
+  const pic = p.i ? `<img loading="lazy" src="${fileUrl(p.i)}" alt="">` : `<span>${esc(p.n.trim().charAt(0))}</span>`;
+  const ctl = !p.s ? `<div class="out">${t.out}</div>`
+    : n ? `<div class="qty"><button class="minus" data-c="${esc(p.c)}" data-d="-1">−</button><b>${n}</b><button data-c="${esc(p.c)}" data-d="1">+</button></div>`
+        : `<button class="add" data-c="${esc(p.c)}" data-d="1">${t.add}</button>`;
+  const off = withPrices() && offerOn(p);
+  const badge = off ? `<div class="off">-${Math.round((1 - p.o / p.p) * 100)}%</div>` : '';
+  const price = !withPrices() ? '' : `<div class="price">${off ? `<span class="old">${money(p.p)}</span>` : ''}${money(priceOf(p))}</div>`;
+  return `<div class="card"><div class="pic">${pic}${badge}</div><div class="info"><div class="name" dir="auto">${esc(p.n)}</div>`
+    + (p.d ? `<div class="desc" dir="auto">${esc(p.d)}</div>` : '') + price + `${ctl}</div></div>`;
+}
+
+function totals() {
+  let count = 0, sum = 0;
+  for (const code in cart) { count += cart[code]; sum += cart[code] * priceOf(byCode[code]); }
+  return { count, sum };
+}
+
+function bar() {
+  const { count, sum } = totals();
+  $('bar').style.display = count ? 'flex' : 'none';
+  $('count').textContent = t.items(count);
+  $('sum').textContent = withPrices() ? money(sum) : '';
+}
+
+function step(b) {
+  const code = b.dataset.c;
+  cart[code] = Math.max(0, (cart[code] || 0) + Number(b.dataset.d));
+  if (!cart[code]) delete cart[code];
+  store.set(cartKey, cart);
+  render();
+}
+$('list').addEventListener('click', e => {
+  const b = e.target.closest('button[data-c]');
+  if (b) step(b);
+});
+$('bundles').addEventListener('click', e => {
+  const b = e.target.closest('button[data-b]');
+  if (b) bundleSheet(b.dataset.b);
+});
+$('bsheet').addEventListener('click', e => {
+  const b = e.target.closest('button[data-c]');
+  if (b) { step(b); bundleSheet($('bbox').dataset.b); }
+  else if (e.target.id === 'bsheet' || e.target.id === 'bBack') $('bsheet').style.display = 'none';
+});
+$('search').addEventListener('input', render);
+$('brands').addEventListener('click', e => {
+  const b = e.target.closest('button[data-b]');
+  if (!b) return;
+  view.brand = b.dataset.b === view.brand ? null : (b.dataset.b || null);
+  render();
+});
+$('cats').addEventListener('click', e => {
+  const b = e.target.closest('button[data-i]');
+  if (!b) return;
+  const cats = categories();
+  const i = Number(b.dataset.i);
+  view = { cat: i === -2 ? OFFERS : i < 0 || !cats ? null : cats[i].name, brand: null };
+  render();
+  scrollTo(0, 0);
+});
+
+$('orderBtn').onclick = () => {
+  $('lines').innerHTML = Object.keys(cart).map(code => {
+    const p = byCode[code];
+    return `<div class="line"><span>${cart[code]} × ${esc(p.n + contents(p))}</span>${withPrices() ? `<span>${money(cart[code] * priceOf(p))}</span>` : ''}</div>`;
+  }).join('') + (delivery() ? `<div class="line"><span>${t.delivery}</span><span>${money(delivery())}</span></div>` : '');
+  $('totalVal').textContent = money(totals().sum + delivery());
+  document.querySelector('.total').style.display = withPrices() ? 'flex' : 'none';
+  $('err').textContent = '';
+  $('sheet').style.display = 'flex';
+};
+['cName', 'cAddr'].forEach(id => $(id).addEventListener('input', () => $('err').textContent = ''));
+$('cancelBtn').onclick = () => $('sheet').style.display = 'none';
+$('sheet').onclick = e => { if (e.target.id === 'sheet') $('sheet').style.display = 'none'; };
+
+$('sendBtn').onclick = () => {
+  const name = $('cName').value.trim(), addr = $('cAddr').value.trim(), note = $('cNote').value.trim();
+  if (!name || !addr) { $('err').textContent = t.needName; return; }
+  store.set('customer', { name, addr });
+  const lines = Object.keys(cart).map((code, i) => `${i + 1}. ${cart[code]} × ${byCode[code].n}${contents(byCode[code])}`
+    + (withPrices() ? ` = ${money(cart[code] * priceOf(byCode[code]))}${offerOn(byCode[code]) ? ` (${t.offerTag})` : ''}` : ''));
+  if (delivery()) lines.push(`${t.delivery}: ${money(delivery())}`);
+  const no = Math.floor(Date.now() / 1000) % 10000000;
+  const replaces = store.get(replacesKey, null);
+  const total = totals().sum + delivery();
+  const text = [...(replaces ? [t.replaces(replaces)] : []), t.msgHead(no, shop.name), '',
+    `${t.msgName}: ${name}`, `${t.msgAddr}: ${addr}`, ...(note ? [`${t.msgNote}: ${note}`] : []), '',
+    ...lines, ...(withPrices() ? ['', `${t.msgTotal}: ${money(total)}`] : []), '', orderCode(no, replaces, total)].join('\n');
+  store.set(pendingKey, { no, cart, at: Date.now() });
+  $('sheet').style.display = 'none';
+  location.href = `https://api.whatsapp.com/send?phone=${shop.phone}&text=${encodeURIComponent(text)}`;
+};
+
+// Install: the button shows whenever the shop is not already opened as an
+// installed app. When the browser offers the install (beforeinstallprompt,
+// Android Chrome) one tap installs; when it doesn't (already installed shop
+// from this site, link opened inside WhatsApp, install refused before, iPhone)
+// the button shows how to do it from the browser's menu instead.
+let installEvent = null;
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+const iphone = /iphone|ipad|ipod/i.test(navigator.userAgent);
+if (!standalone) $('install').style.display = 'block';
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvent = e; });
+addEventListener('appinstalled', () => { $('install').style.display = 'none'; $('tip').style.display = 'none'; });
+$('install').onclick = async () => {
+  if (installEvent) {
+    installEvent.prompt();
+    const r = await installEvent.userChoice;
+    installEvent = null;
+    if (r.outcome === 'accepted') $('install').style.display = 'none';
+    return;
+  }
+  $('tipText').textContent = iphone ? t.ios : t.manual;
+  $('tip').style.display = 'block';
+  scrollTo(0, 0);
+};
+if (!standalone && iphone && !store.get('iosTipShown', false)) {
+  $('tipText').textContent = t.ios; $('tip').style.display = 'block';
+}
+$('tipClose').onclick = () => { $('tip').style.display = 'none'; store.set('iosTipShown', true); };
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('shop-sw.js', { scope: './shop' }).catch(() => {});
+
+load();
+</script>
+</body>
+</html>

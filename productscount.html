@@ -88,6 +88,9 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         .pc-steps h3 { font-size: 16px; margin: 0 0 6px; unicode-bidi: plaintext; }
         .pc-steps p { font-size: 14px; line-height: 1.5; margin: 0; unicode-bidi: plaintext; }
 
+        .pc-video { text-align: center; }
+        .pc-video > h2 { font-size: 22px; }
+        .pc-video video { width: 100%; max-width: 320px; border-radius: 16px; background: #000; display: block; margin: 0 auto; box-shadow: 0 10px 30px rgba(10,59,54,.18); }
         .pc-pic { text-align: center; }
         .pc-pic img { width: 100%; max-width: 520px; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(10,59,54,.18); cursor: zoom-in; }
         .pc-wrap p.pc-tip { text-align: center; font-size: 13px; color: var(--muted) !important; margin: 8px 0 0; unicode-bidi: plaintext; }
@@ -182,6 +185,12 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 </section>
 
 <main class="pc-wrap">
+
+    <!-- 1-minute demo video (Arabic only for now - shown by the script below when the page is in Arabic) -->
+    <section class="pc-section pc-video" id="pc-video" hidden>
+        <h2 data-centered="1" data-en="▶ See it in 1 minute" data-fr="▶ Voyez-le en 1 minute" data-ar="▶ شاهد التطبيق في دقيقة">▶ See it in 1 minute</h2>
+        <video controls preload="none" playsinline poster="assets/video/productscount_demo_ar.jpg" src="assets/video/productscount_demo_ar.mp4"></video>
+    </section>
 
     <!-- The problem it solves -->
     <section class="pc-section">
@@ -442,7 +451,12 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         if (['en', 'fr', 'ar'].indexOf(lang) < 0) lang = 'en';
 
         var img = document.getElementById('pc-img');
-        function setPic(l) { img.src = 'assets/productscount/productscount_' + (['en', 'fr', 'ar'].indexOf(l) < 0 ? 'en' : l) + '.jpg'; }
+        var vid = document.getElementById('pc-video');
+        function setPic(l) {
+            img.src = 'assets/productscount/productscount_' + (['en', 'fr', 'ar'].indexOf(l) < 0 ? 'en' : l) + '.jpg';
+            vid.hidden = l !== 'ar';   // only the Arabic demo video exists so far
+            if (vid.hidden) vid.querySelector('video').pause();
+        }
         setPic(lang);
         // The top-bar language menu translates the text in place without a reload, so swap the picture too.
         if (typeof window.changeLanguage === 'function') {

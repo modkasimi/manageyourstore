@@ -158,10 +158,10 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
        data-fr="📱 Application Android gratuite · compagnon de My Store"
        data-ar="📱 تطبيق أندرويد مجاني · رفيق تطبيق متجري">📱 Free Android app · companion to My Store</p>
     <h1 data-centered="1"
-        data-en="Thousands of products to enter? &lt;span class=&quot;pc-accent&quot;&gt;Don't type them, scan them.&lt;/span&gt;"
-        data-fr="Des milliers de produits à saisir ? &lt;span class=&quot;pc-accent&quot;&gt;Ne les tapez pas, scannez-les.&lt;/span&gt;"
-        data-ar="آلاف المنتجات لإدخالها؟ &lt;span class=&quot;pc-accent&quot;&gt;لا تكتبها، امسحها.&lt;/span&gt;">
-        Thousands of products to enter? <span class="pc-accent">Don't type them, scan them.</span>
+        data-en="Hundreds of products to enter? &lt;span class=&quot;pc-accent&quot;&gt;Don't type them, scan them.&lt;/span&gt;"
+        data-fr="Des centaines de produits à saisir ? &lt;span class=&quot;pc-accent&quot;&gt;Ne les tapez pas, scannez-les.&lt;/span&gt;"
+        data-ar="مئات المنتجات لإدخالها؟ &lt;span class=&quot;pc-accent&quot;&gt;لا تكتبها، امسحها.&lt;/span&gt;">
+        Hundreds of products to enter? <span class="pc-accent">Don't type them, scan them.</span>
     </h1>
     <p class="pc-lead" data-centered="1"
        data-en="productsCount turns your Android phone into a barcode scanner. Walk your shelves, scan each product, count your stock and set your prices. Using My Store? Send the whole list into it in one go."
@@ -186,9 +186,9 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 
 <main class="pc-wrap">
 
-    <!-- 3-minute demo video with the owner's own voice (Arabic only for now - shown by the script below when the page is in Arabic) -->
-    <section class="pc-section pc-video" id="pc-video" hidden>
-        <h2 data-centered="1" data-en="▶ See how it works" data-fr="▶ Voyez comment ça marche" data-ar="▶ شاهد كيف يعمل التطبيق">▶ See how it works</h2>
+    <!-- 3-minute demo video with the owner's own voice (Arabic voice, shown in every language) -->
+    <section class="pc-section pc-video" id="pc-video">
+        <h2 data-centered="1" data-en="▶ See how it works (video in Arabic)" data-fr="▶ Voyez comment ça marche (vidéo en arabe)" data-ar="▶ شاهد كيف يعمل التطبيق">▶ See how it works (video in Arabic)</h2>
         <video controls preload="none" playsinline poster="assets/video/productscount_demo_ar.jpg" src="assets/video/productscount_demo_ar.mp4"></video>
     </section>
 
@@ -451,11 +451,8 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         if (['en', 'fr', 'ar'].indexOf(lang) < 0) lang = 'en';
 
         var img = document.getElementById('pc-img');
-        var vid = document.getElementById('pc-video');
         function setPic(l) {
             img.src = 'assets/productscount/productscount_' + (['en', 'fr', 'ar'].indexOf(l) < 0 ? 'en' : l) + '.jpg';
-            vid.hidden = l !== 'ar';   // only the Arabic demo video exists so far
-            if (vid.hidden) vid.querySelector('video').pause();
         }
         setPic(lang);
         // The top-bar language menu translates the text in place without a reload, so swap the picture too.

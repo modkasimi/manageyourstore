@@ -1,9 +1,21 @@
 // Links like download.html?lang=fr (ads, WhatsApp messages) open the page in that language.
+// A first-time visitor with no ?lang and no saved choice gets the language of their phone or
+// computer (Arabic, French, otherwise English); the menu choice is saved and always wins after that.
 (function () {
     var q = new URLSearchParams(location.search).get('lang');
-    if (q === 'en' || q === 'fr' || q === 'ar') {
-        try { localStorage.setItem('selectedLanguage', q); } catch (e) {}
-    }
+    try {
+        if (q === 'en' || q === 'fr' || q === 'ar') {
+            localStorage.setItem('selectedLanguage', q);
+        } else if (!localStorage.getItem('selectedLanguage')) {
+            var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+            var found = 'en';
+            for (var i = 0; i < prefs.length; i++) {
+                var code = String(prefs[i]).toLowerCase().slice(0, 2);
+                if (code === 'ar' || code === 'fr' || code === 'en') { found = code; break; }
+            }
+            localStorage.setItem('selectedLanguage', found);
+        }
+    } catch (e) {}
 })();
 
 

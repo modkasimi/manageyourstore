@@ -10,6 +10,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-46L0L6JK7R');
+  gtag('config', 'AW-859245208');  // Google Ads (Search campaign download-click conversion)
 </script>
 <!-- Meta Pixel Code -->
 <script>
@@ -442,12 +443,13 @@ function gtag_report_conversion(url) {
   // One Lead per visit: a visitor who clicks several download buttons
   // still counts as a single lead for the ad campaign.
   function msLead(name) {
-    if (typeof fbq !== 'function') return;
     try {
       if (sessionStorage.getItem('ms_lead_sent')) return;
       sessionStorage.setItem('ms_lead_sent', '1');
     } catch (e) { /* storage unavailable: still send the event */ }
-    fbq('track', 'Lead', {content_name: name});
+    if (typeof fbq === 'function') fbq('track', 'Lead', {content_name: name});
+    // Google Ads conversion "Download button click (site)", same one-per-visit rule
+    if (typeof gtag === 'function') gtag('event', 'conversion', {send_to: 'AW-859245208/9Tb4CLfjk7kdEJiV3JkD', transport_type: 'beacon'});
   }
 </script>
 <script>

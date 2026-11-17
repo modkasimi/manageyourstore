@@ -75,6 +75,15 @@ input[type="text"], input[type="email"], textarea, select { border: 1px solid va
 .site-bar-lang { display: flex; align-items: center; gap: 6px; color: var(--on-primary); font-size: 17px; }
 .site-bar-lang select { font: inherit; font-size: 14px; font-weight: 600; padding: 5px 8px; border-radius: 8px !important;
   border: 0 !important; background: #fff; color: var(--ink); cursor: pointer; }
+/* prices + legal links in the middle of the bar; on phones they drop to a second row */
+.site-bar { flex-wrap: wrap; }
+.site-bar-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; }
+.site-bar-links a { color: var(--on-primary) !important; text-decoration: none; font-size: 14px; font-weight: 600; opacity: .9; }
+.site-bar-links a:hover, .site-bar-links a[aria-current="page"] { opacity: 1; text-decoration: underline; }
+@media (max-width: 600px) {
+  .site-bar-links { order: 3; flex-basis: 100%; gap: 4px 12px; }
+  .site-bar-links a { font-size: 13px; }
+}
 /* the old per-page home icons and the home page's old selector are replaced by the bar */
 .home-icon, [class^="home-icon"], .language-selector { display: none !important; }
 

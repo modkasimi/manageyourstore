@@ -130,21 +130,21 @@ const L = {
         sheet:'راجع طلبك', total:'المجموع', name:'الاسم', addr:'العنوان (للتوصيل)', note:'ملاحظة (اختياري)', cancel:'رجوع', send:'إرسال الطلب',
         needName:'اكتب اسمك وعنوانك من فضلك.', empty:'لا توجد سلع مطابقة.', loading:'جارٍ التحميل…',
         noShop:'لم يتم العثور على هذا المتجر. تأكد من الرابط.', install:'ثبّت التطبيق',
-        ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', manual:'لتثبيته: اضغط ⋮ في أعلى المتصفح ثم «إضافة إلى الشاشة الرئيسية». إن فتحت الرابط من واتساب، اختر أولًا «فتح في Chrome».', by:'متجر مُدار بتطبيق',
+        ios:'لتثبيته: اضغط زر المشاركة ⬆️ ثم «إضافة إلى الشاشة الرئيسية».', manual:'لتثبيته: اضغط ⋮ في أعلى المتصفح ثم «إضافة إلى الشاشة الرئيسية». إن فتحت الرابط من واتساب، اختر أولًا «فتح في Chrome».', by:'متجر مُدار بتطبيق', nopay:'تُرسَل الطلبات إلى المحل عبر واتساب، ولا يتم أي دفع في هذه الصفحة.',
         msgHead:(n,s)=>`🛒 طلب ${n} — ${s}`, replaces:n=>`🔁 يعوض الطلب ${n}`, sentQ:'هل أرسلت طلبك؟', sentYes:'نعم، أرسلته', sentNo:'لا، أريد تعديله', change:n=>`تعديل الطلب ${n}`, msgTotal:'المجموع', msgName:'الزبون', msgAddr:'العنوان', msgNote:'ملاحظة',
         other:'أخرى', all:'الكل', save:v=>`وفّر ${v}`, separately:'بالتفصيل', includes:'تحتوي على', offers:'عروض', offerTag:'عرض', delivery:'🚚 التوصيل', count:n=>`${n} سلعة` },
   fr: { dir:'ltr', search:'Rechercher un produit…', add:'Ajouter', out:'Épuisé pour le moment', items:n=>`${n} article(s) dans le panier`, order:'Commander sur WhatsApp',
         sheet:'Vérifiez votre commande', total:'Total', name:'Nom', addr:'Adresse (livraison)', note:'Note (facultatif)', cancel:'Retour', send:'Envoyer la commande',
         needName:'Indiquez votre nom et votre adresse, s\'il vous plaît.', empty:'Aucun produit trouvé.', loading:'Chargement…',
         noShop:'Boutique introuvable. Vérifiez le lien.', install:'Installer l\'appli',
-        ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', manual:'Pour l\'installer : touchez ⋮ en haut du navigateur puis « Ajouter à l\'écran d\'accueil ». Si le lien s\'est ouvert dans WhatsApp, choisissez d\'abord « Ouvrir dans Chrome ».', by:'Boutique gérée avec',
+        ios:'Pour l\'installer : touchez Partager ⬆️ puis « Sur l\'écran d\'accueil ».', manual:'Pour l\'installer : touchez ⋮ en haut du navigateur puis « Ajouter à l\'écran d\'accueil ». Si le lien s\'est ouvert dans WhatsApp, choisissez d\'abord « Ouvrir dans Chrome ».', by:'Boutique gérée avec', nopay:'Les commandes sont envoyées à la boutique par WhatsApp. Aucun paiement n’est effectué sur cette page.',
         msgHead:(n,s)=>`🛒 Commande ${n} — ${s}`, replaces:n=>`🔁 Remplace la commande ${n}`, sentQ:'Commande envoyée ?', sentYes:'Oui, envoyée', sentNo:'Non, la modifier', change:n=>`Modifier la commande ${n}`, msgTotal:'Total', msgName:'Client', msgAddr:'Adresse', msgNote:'Note',
         other:'Autres', all:'Toutes', save:v=>`Économisez ${v}`, separately:'Prix séparé', includes:'Contient', offers:'Offres', offerTag:'offre', delivery:'🚚 Livraison', count:n=>`${n} produit(s)` },
   en: { dir:'ltr', search:'Search products…', add:'Add', out:'Out of stock', items:n=>`${n} item(s) in the cart`, order:'Order on WhatsApp',
         sheet:'Check your order', total:'Total', name:'Name', addr:'Address (delivery)', note:'Note (optional)', cancel:'Back', send:'Send order',
         needName:'Please enter your name and address.', empty:'No matching products.', loading:'Loading…',
         noShop:'Shop not found. Check the link.', install:'Install app',
-        ios:'To install: tap Share ⬆️ then "Add to Home Screen".', manual:'To install: tap ⋮ at the top of the browser, then "Add to Home screen". If the link opened inside WhatsApp, first choose "Open in Chrome".', by:'Shop run with',
+        ios:'To install: tap Share ⬆️ then "Add to Home Screen".', manual:'To install: tap ⋮ at the top of the browser, then "Add to Home screen". If the link opened inside WhatsApp, first choose "Open in Chrome".', by:'Shop run with', nopay:'Orders are sent to the shop by WhatsApp. No payment is taken on this page.',
         msgHead:(n,s)=>`🛒 Order ${n} — ${s}`, replaces:n=>`🔁 Replaces order ${n}`, sentQ:'Order sent?', sentYes:'Yes, sent', sentNo:'No, change it', change:n=>`Change order ${n}`, msgTotal:'Total', msgName:'Customer', msgAddr:'Address', msgNote:'Note',
         other:'Other', all:'All', save:v=>`Save ${v}`, separately:'Bought separately', includes:'Includes', offers:'Offers', offerTag:'offer', delivery:'🚚 Delivery', count:n=>`${n} product(s)` },
 };
@@ -201,7 +201,7 @@ $('totalLabel').textContent = t.total;
 $('lName').textContent = t.name; $('lAddr').textContent = t.addr; $('lNote').textContent = t.note;
 $('install').textContent = t.install;
 $('sentQ').textContent = t.sentQ; $('sentYes').textContent = t.sentYes; $('sentNo').textContent = t.sentNo;
-$('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target="_blank" rel="noopener">My Store</a>`;
+$('foot').innerHTML = `${t.by} <a href="https://www.manageyourstore.site" target="_blank" rel="noopener">My Store</a><br>${t.nopay}`;
 const me = store.get('customer', {});
 $('cName').value = me.name || ''; $('cAddr').value = me.addr || '';
 

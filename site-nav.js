@@ -45,7 +45,28 @@
         }
     });
 
+    // Prices and the legal pages on every page, so they are always one
+    // click away (payment providers check this during their website review).
+    var links = document.createElement('div');
+    links.className = 'site-bar-links';
+    [['prices.html', 'Prices', 'Tarifs', 'الأسعار'],
+     ['terms.html', 'Terms', 'Conditions', 'الشروط'],
+     ['refund-policy.html', 'Refunds', 'Remboursement', 'الاسترداد'],
+     ['privacy-policy.html', 'Privacy', 'Confidentialité', 'الخصوصية']
+    ].forEach(function (l) {
+        var a = document.createElement('a');
+        a.href = l[0];
+        a.setAttribute('data-en', l[1]);
+        a.setAttribute('data-fr', l[2]);
+        a.setAttribute('data-ar', l[3]);
+        a.setAttribute('data-centered', '1');
+        a.textContent = l[1];
+        if (page === l[0]) a.setAttribute('aria-current', 'page');
+        links.appendChild(a);
+    });
+
     bar.appendChild(home);
+    bar.appendChild(links);
     bar.appendChild(label);
     document.body.insertBefore(bar, document.body.firstChild);
 })();

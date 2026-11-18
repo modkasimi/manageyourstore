@@ -178,6 +178,12 @@ nav ul li a:hover {
 
 
         /* full app tour video */
+        .first-section .hero-why { font-size: 1.9em; line-height: 1.35; max-width: 760px; margin: 18px auto 10px; text-align: center; }
+        .first-section .hero-why-sub { font-size: 1.1em; line-height: 1.6; max-width: 720px; margin: 0 auto 6px; text-align: center; opacity: .95; }
+        .first-section .hero-why-link { margin: 0 0 14px; text-align: center; }
+        .first-section .hero-why-link a { color: var(--accent) !important; font-weight: 700; text-decoration: none; }
+        @media (max-width: 600px) { .first-section .hero-why { font-size: 1.45em; } .first-section .hero-why-sub { font-size: 1em; padding: 0 6px; } }
+        html[lang=ar] .hero-why, html[lang=ar] .hero-why-sub, html[lang=ar] .hero-why-link, html[lang=ar] .why-section h2, html[lang=ar] .why-sign { direction: rtl !important; }
         /* WHY section (founder's feeling) */
         .why-section { max-width: 820px; margin: 0 auto; padding: 44px 20px 40px; text-align: center; box-sizing: border-box; }
         .why-section h2 { color: var(--ink) !important; font-size: 1.9em; margin: 0 0 18px; }
@@ -223,16 +229,16 @@ nav ul li a:hover {
 
 	
         <h2 data-en="My Store" data-fr="My Store" data-ar="متجـــــري" data-centered="true">My Store </h2>
-        <img src="assets/pictures/posup.jpg" alt="Your Image" style="width: 100%; max-width: 400px;">
         
-        <h2 data-en="Embrace Digital Solutions" data-fr="Adoptez les solutions numériques" data-ar="حان الوقت لاعتماد الحلول الرقمية" data-centered="true">Embrace Digital Solutions</h2>
-        <p data-en="Simple & Secure Store Management Software For Windows Systems" 
-   data-fr="Logiciel de gestion de magasin simple et sécurisé pour systèmes Windows" 
-   data-ar="برنامج بسيط وآمن  لإدارة المتاجر لأنظمة الويندوز " data-centered="true">
-   Simple & Secure Store Management Software For Windows Systems
-</p>
+        <h2 class="hero-why" data-en="You work hard every day. You deserve to see your real profit."
+            data-fr="Vous travaillez dur chaque jour. Vous m&eacute;ritez de voir votre vrai b&eacute;n&eacute;fice."
+            data-ar="تعمل بجهد كل يوم، وتستحق أن ترى ربحك الحقيقي." data-centered="true">You work hard every day. You deserve to see your real profit.</h2>
+        <p class="hero-why-sub" data-en="No more notebooks and mental arithmetic: sales, stock, profit and debts, clear at a glance. On your PC, tablet or phone, with or without internet."
+           data-fr="Fini les cahiers et les calculs de t&ecirc;te : ventes, stock, b&eacute;n&eacute;fices et dettes, clairs d&rsquo;un coup d&rsquo;&oelig;il. Sur PC, tablette ou t&eacute;l&eacute;phone, avec ou sans internet."
+           data-ar="وداعًا للدفاتر والحساب في الرأس: المبيعات والمخزون والأرباح والديون واضحة أمامك في لحظة. على الحاسوب أو اللوحة أو الهاتف، مع الإنترنت أو بدونه." data-centered="true">No more notebooks and mental arithmetic: sales, stock, profit and debts, clear at a glance. On your PC, tablet or phone, with or without internet.</p>
+        <p class="hero-why-link"><a href="#why" data-en="Why I made My Store &darr;" data-fr="Pourquoi j&rsquo;ai cr&eacute;&eacute; My Store &darr;" data-ar="لماذا صنعتُ متجري؟ &darr;" data-centered="true">Why I made My Store &darr;</a></p>
 
-	<div style="display: flex; gap: 10px;">
+	<div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
     <button onclick="window.location.href='https://manageyourstore.site/mystoreapp'" 
         data-en="My Store App" 
         data-fr="My Store App" 
@@ -246,6 +252,7 @@ nav ul li a:hover {
        DOWNLOAD
        </button>
 </div>
+        <img class="hero-img" src="assets/pictures/posup.jpg" alt="My Store" style="width: 100%; max-width: 400px; margin-top: 18px;">
 
 <!-- Full app tour (Arabic voice, 5 min) - plays are counted as TourVideoPlay -->
 <div class="tour-video" id="tour">

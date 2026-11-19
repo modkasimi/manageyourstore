@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Where the checkout sends a buyer after paying (successUrl in
+     pay.html). The app picks up the payment the next time it starts, so
+     the page only says to reopen it. -->
+<script src="language.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Payment Received - My Store</title>
+<link rel="stylesheet" href="theme.css">
+<script src="site-nav.js" defer></script>
+<style>
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+  .card { max-width: 620px; margin: 32px auto 40px; padding: 28px; background: var(--surface);
+          border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 20px rgba(10, 70, 64, .08); text-align: center; }
+  .tick { font-size: 56px; line-height: 1; color: var(--primary); margin-bottom: 8px; }
+  h1 { color: var(--ink); font-size: 1.6em; margin: 0 0 14px; }
+  p { line-height: 1.8; font-size: 1.05em; margin: 0 0 12px; }
+  .steps { text-align: start; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 18px 0; }
+  .steps p { margin: 0 0 6px; }
+  a { color: var(--link); font-weight: 600; }
+  html[lang="ar"] .card { direction: rtl; }
+  @media (max-width: 600px) { .card { margin: 12px 16px 28px; padding: 20px 16px; } h1 { font-size: 1.3em; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="tick" aria-hidden="true">&#10004;</div>
+  <h1 data-en="Thank you, your payment was received"
+      data-fr="Merci, votre paiement a bien été reçu"
+      data-ar="شكرًا، تم استلام دفعتك">Thank you, your payment was received</h1>
+  <p data-en="A receipt was sent to your email."
+     data-fr="Un reçu a été envoyé à votre adresse e-mail."
+     data-ar="تم إرسال إيصال إلى بريدك الإلكتروني.">A receipt was sent to your email.</p>
+  <div class="steps">
+    <p data-en="<strong>1.</strong> Close My Store completely."
+       data-fr="<strong>1.</strong> Fermez complètement My Store."
+       data-ar="<strong>1.</strong> أغلق «متجري» تمامًا."><strong>1.</strong> Close My Store completely.</p>
+    <p data-en="<strong>2.</strong> Open it again, signed in with the same account: your license is activated automatically."
+       data-fr="<strong>2.</strong> Rouvrez-le avec le même compte : votre licence est activée automatiquement."
+       data-ar="<strong>2.</strong> افتحه من جديد بنفس الحساب: يتم تفعيل ترخيصك تلقائيًا."><strong>2.</strong> Open it again, signed in with the same account: your license is activated automatically.</p>
+  </div>
+  <p data-en="A problem? Write to us at <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
+     data-fr="Un problème ? Écrivez-nous à <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
+     data-ar="هل واجهت مشكلة؟ راسلنا على <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>.">A problem? Write to us at <a href="mailto:kasimiapps@manageyourstore.site">kasimiapps@manageyourstore.site</a>.</p>
+</main>
+</body>
+</html>

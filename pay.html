@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Paddle's "default payment link": the app's BUY button opens
+     pay.html?_ptxn=<transaction> (functions/paddle.js) and Paddle.js opens
+     the checkout for that transaction here. ?env=sandbox = test account. -->
+<script src="language.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Secure Payment - My Store</title>
+<link rel="stylesheet" href="theme.css">
+<script src="site-nav.js" defer></script>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<style>
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+  .card { max-width: 620px; margin: 32px auto 40px; padding: 28px; background: var(--surface);
+          border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 20px rgba(10, 70, 64, .08); text-align: center; }
+  .wait { width: 42px; height: 42px; margin: 6px auto 14px; border-radius: 50%; border: 4px solid var(--line); border-top-color: var(--primary); animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .wait { animation: none; } }
+  .tick { font-size: 56px; line-height: 1; color: var(--primary); margin-bottom: 8px; }
+  h1 { color: var(--ink); font-size: 1.6em; margin: 0 0 14px; }
+  p { line-height: 1.8; font-size: 1.05em; margin: 0 0 12px; }
+  .steps { text-align: start; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin: 18px 0; }
+  .steps p { margin: 0 0 6px; }
+  a { color: var(--link); font-weight: 600; }
+  html[lang="ar"] .card { direction: rtl; }
+  @media (max-width: 600px) { .card { margin: 12px 16px 28px; padding: 20px 16px; } h1 { font-size: 1.3em; } }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="wait" id="wait" aria-hidden="true"></div>
+  <h1 id="title" data-en="Opening the secure payment window…"
+      data-fr="Ouverture de la fenêtre de paiement sécurisé…"
+      data-ar="جارٍ فتح نافذة الدفع الآمن…">Opening the secure payment window…</h1>
+  <p id="info" data-en="Payment is handled by Paddle, our reseller and merchant of record. Your card details never reach My Store."
+     data-fr="Le paiement est géré par Paddle, notre revendeur officiel (merchant of record). Vos données de carte n’arrivent jamais à My Store."
+     data-ar="يتم الدفع عبر Paddle، الموزّع الرسمي لتطبيقنا. بيانات بطاقتك لا تصل أبدًا إلى «متجري».">Payment is handled by Paddle, our reseller and merchant of record. Your card details never reach My Store.</p>
+  <p id="nopay" hidden data-en="This page opens the payment window from the My Store app. Open My Store and press <strong>BUY NOW</strong> or choose a plan."
+     data-fr="Cette page ouvre la fenêtre de paiement depuis l’application My Store. Ouvrez My Store et appuyez sur <strong>ACHETER</strong> ou choisissez une offre."
+     data-ar="هذه الصفحة تفتح نافذة الدفع من تطبيق «متجري». افتح التطبيق واضغط <strong>اشترِ الآن</strong> أو اختر خطة.">This page opens the payment window from the My Store app. Open My Store and press <strong>BUY NOW</strong> or choose a plan.</p>
+  <p id="closed" hidden data-en="The payment window was closed. To try again, go back to My Store and choose your plan once more."
+     data-fr="La fenêtre de paiement a été fermée. Pour réessayer, retournez dans My Store et choisissez à nouveau votre offre."
+     data-ar="تم إغلاق نافذة الدفع. للمحاولة من جديد، ارجع إلى «متجري» واختر خطتك مرة أخرى.">The payment window was closed. To try again, go back to My Store and choose your plan once more.</p>
+  <p data-en="A problem? Write to us at <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
+     data-fr="Un problème ? Écrivez-nous à <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
+     data-ar="هل واجهت مشكلة؟ راسلنا على <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>.">A problem? Write to us at <a href="mailto:kasimiapps@manageyourstore.site">kasimiapps@manageyourstore.site</a>.</p>
+</main>
+<script>
+(function () {
+  // Paddle client-side tokens are public by design (they only open checkouts).
+  var TOKENS = {
+    sandbox: "test_3746bddf596efcb539fc4172d9b",
+    live: ""
+  };
+  var params = new URLSearchParams(location.search);
+  var env = params.get("env") === "sandbox" ? "sandbox" : "live";
+  var hasTx = !!params.get("_ptxn");
+  function show(id, on) { document.getElementById(id).hidden = !on; }
+  function stopWaiting() { document.getElementById("wait").style.display = "none"; }
+  if (!hasTx || !TOKENS[env] || !window.Paddle) {
+    stopWaiting(); show("info", false); show("nopay", true);
+    document.getElementById("title").style.display = "none";
+    return;
+  }
+  var lang = (document.documentElement.lang || "en").slice(0, 2);
+  if (env === "sandbox") Paddle.Environment.set("sandbox");
+  Paddle.Initialize({
+    token: TOKENS[env],
+    checkout: { settings: {
+      displayMode: "overlay",
+      locale: ["en", "fr", "ar"].indexOf(lang) >= 0 ? lang : "en",
+      successUrl: "https://www.manageyourstore.site/payment-done.html"
+    } },
+    eventCallback: function (e) {
+      if (e.name === "checkout.loaded") stopWaiting();
+      if (e.name === "checkout.closed") {
+        stopWaiting(); show("closed", true);
+        document.getElementById("title").style.display = "none";
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>

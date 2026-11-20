@@ -46,10 +46,6 @@ function gtag_report_conversion(url) {
 }
 </script>
 
-<script>
-  window.lemonSqueezyAffiliateConfig = { store: 'mysales' }
-</script>
-<script src="https://lmsqueezy.com/affiliate.js" defer></script>
 
 
 
@@ -112,6 +108,7 @@ function gtag_report_conversion(url) {
         }
     </style>
 <script src="site-nav.js" defer></script>
+<script src="download.js" defer></script>
 <link rel="stylesheet" href="theme.css">
 <style>
   /* Step 1: "which device will you use in your shop?" - three picture cards. */
@@ -310,14 +307,13 @@ function gtag_report_conversion(url) {
      data-fr="La caisse complète sur une tablette de 7 pouces ou plus - à la verticale ou à l'horizontale. Téléchargez l'application sur la tablette elle-même."
      data-ar="الكاشير الكامل على جهاز لوحي 7 بوصات أو أكبر - عموديًا أو أفقيًا. نزّل التطبيق على الجهاز اللوحي نفسه.">
      The full till on a 7" or larger tablet - upright or sideways. Download the app on the tablet itself.</p>
-  <a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639"
-     class="download-btn dp-download" onclick="msLead('download_android_tablet')"
+  <a href="#" class="download-btn dp-download" onclick="msDownload('mystore', 'download_android_tablet', 'tablet'); return false;"
      data-en="Download for Android tablets" data-fr="Télécharger pour tablettes Android" data-ar="تنزيل للأجهزة اللوحية أندرويد">Download for Android tablets</a>
   <p class="trust-line" data-centered="1"
-     data-en="✅ Free download: enter your email and the download button appears right away · secured by Lemon Squeezy"
-     data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le bouton de téléchargement apparaît tout de suite · sécurisé par Lemon Squeezy"
-     data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويظهر زر التحميل مباشرة · مؤمّن عبر Lemon Squeezy">
-     ✅ Free download: enter your email and the download button appears right away · secured by Lemon Squeezy</p>
+     data-en="✅ Free download: enter your email and the download starts right away, from our own server"
+     data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le téléchargement commence tout de suite, depuis notre propre serveur"
+     data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويبدأ التنزيل مباشرة من خادمنا">
+     ✅ Free download: enter your email and the download starts right away, from our own server</p>
   <p class="dp-note" data-centered="1"
      data-en="&lt;strong&gt;Note:&lt;/strong&gt; you may need to allow &quot;Install from unknown apps&quot; in the tablet's settings."
      data-fr="&lt;strong&gt;Remarque :&lt;/strong&gt; vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres de la tablette."
@@ -343,14 +339,13 @@ function gtag_report_conversion(url) {
         data-fr="✨ Nom et contenance du produit remplis à partir du code-barres"
         data-ar="✨ اسم المنتج وحجمه يُملآن تلقائيًا من الباركود">✨ Product name and size filled in from the barcode</li>
   </ul>
-  <a href="https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639"
-     class="download-btn dp-download" onclick="msLead('download_android_phone')"
+  <a href="#" class="download-btn dp-download" onclick="msDownload('mystore', 'download_android_phone', 'phone'); return false;"
      data-en="Download for Android phones" data-fr="Télécharger pour téléphones Android" data-ar="تنزيل لهواتف أندرويد">Download for Android phones</a>
   <p class="trust-line" data-centered="1"
-     data-en="✅ Free download: enter your email and the download button appears right away · secured by Lemon Squeezy"
-     data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le bouton de téléchargement apparaît tout de suite · sécurisé par Lemon Squeezy"
-     data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويظهر زر التحميل مباشرة · مؤمّن عبر Lemon Squeezy">
-     ✅ Free download: enter your email and the download button appears right away · secured by Lemon Squeezy</p>
+     data-en="✅ Free download: enter your email and the download starts right away, from our own server"
+     data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le téléchargement commence tout de suite, depuis notre propre serveur"
+     data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويبدأ التنزيل مباشرة من خادمنا">
+     ✅ Free download: enter your email and the download starts right away, from our own server</p>
   <p class="dp-note" data-centered="1"
      data-en="When the app opens, choose &lt;b&gt;Use phone in shop&lt;/b&gt;. You may need to allow &quot;Install from unknown apps&quot; in the phone's settings."
      data-fr="À l'ouverture de l'application, choisissez &lt;b&gt;Utiliser le téléphone en magasin&lt;/b&gt;. Vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres du téléphone."
@@ -411,7 +406,7 @@ function gtag_report_conversion(url) {
    productsCount is a separate, free helper app - not My Store itself - for your stock count: scan barcodes (or enter them by hand) to register your products, with product details auto-filled for you, then send everything straight into My Store App with the export version (paid, free to try for 15 days in the app). Great for getting your stock into the system fast, even before you've set up a full store.
 </p>
 
-<a href="https://mysales.lemonsqueezy.com/checkout/buy/40dc3daf-f3ba-4ad6-8e8a-4527e196eac7"
+<a href="#" onclick="msDownload('productscount', 'download_productscount', 'phone'); return false;"
    class="download-btn"
    data-en="Download productsCount" data-fr="Télécharger productsCount" data-ar="تنزيل productsCount">
   Download productsCount
@@ -421,10 +416,10 @@ function gtag_report_conversion(url) {
   How productsCount works
 </a>
 
-<p style="font-size:12px; color:#666;" data-en="✅ Free - just enter your email to get the APK"
-   data-fr="✅ Gratuit - il suffit d'indiquer votre email pour recevoir l'APK"
-   data-ar="✅ مجاني - فقط أدخل بريدك الإلكتروني للحصول على ملف APK">
-    ✅ Free - just enter your email to get the APK
+<p style="font-size:12px; color:#666;" data-en="✅ Free - just enter your email and the download starts"
+   data-fr="✅ Gratuit - indiquez votre e-mail et le téléchargement commence"
+   data-ar="✅ مجاني - أدخل بريدك الإلكتروني ويبدأ التنزيل">
+    ✅ Free - just enter your email and the download starts
 </p>
 
 <p style="font-size: 0.9em; color: #6c757d; margin-top: 10px;" data-en="&lt;strong&gt;Note:&lt;/strong&gt; You may need to enable &quot;Install from unknown apps&quot; in your phone's settings to complete the installation."
@@ -470,8 +465,8 @@ function gtag_report_conversion(url) {
   (function () {
     var LINKS = {
       pc: 'https://apps.microsoft.com/detail/9P07X9GQ43WZ',
-      tablet: 'https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639',
-      phone: 'https://mysales.lemonsqueezy.com/checkout/custom/498e9e42-7b5e-4b85-9a0e-0e3df8753c54?signature=21bfbf6d874f0d756018df873e1e66be784afc04700036417d60a3777a2e2639'
+      tablet: 'https://www.manageyourstore.site/download.html#tablet',
+      phone: 'https://www.manageyourstore.site/download.html#phone'
     };
     var cards = document.querySelectorAll('.device-card');
     var box = document.getElementById('email-link-box');
@@ -501,7 +496,10 @@ function gtag_report_conversion(url) {
       });
     });
     // Coming back to the page (e.g. from the download) re-opens the device chosen before.
-    try { var prev = sessionStorage.getItem('ms_device_choice'); if (prev && LINKS[prev]) choose(prev, false); } catch (e) {}
+    // A link from the "email me the link" box (download.html#phone) opens that device's panel.
+    var fromLink = location.hash.slice(1);
+    if (LINKS[fromLink]) { choose(fromLink, false); }
+    else { try { var prev = sessionStorage.getItem('ms_device_choice'); if (prev && LINKS[prev]) choose(prev, false); } catch (e) {} }
 
     // "Email me the link": a mailto addressed to the visitor themselves, in the page's language,
     // with the chosen device's link.

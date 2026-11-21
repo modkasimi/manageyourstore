@@ -34,7 +34,7 @@
   <p data-en="A receipt was sent to your email."
      data-fr="Un reçu a été envoyé à votre adresse e-mail."
      data-ar="تم إرسال إيصال إلى بريدك الإلكتروني.">A receipt was sent to your email.</p>
-  <div class="steps">
+  <div class="steps" id="steps-mystore">
     <p data-en="<strong>1.</strong> Close My Store completely."
        data-fr="<strong>1.</strong> Fermez complètement My Store."
        data-ar="<strong>1.</strong> أغلق «متجري» تمامًا."><strong>1.</strong> Close My Store completely.</p>
@@ -42,6 +42,20 @@
        data-fr="<strong>2.</strong> Rouvrez-le avec le même compte : votre licence est activée automatiquement."
        data-ar="<strong>2.</strong> افتحه من جديد بنفس الحساب: يتم تفعيل ترخيصك تلقائيًا."><strong>2.</strong> Open it again, signed in with the same account: your license is activated automatically.</p>
   </div>
+  <div class="steps" id="steps-productscount" hidden>
+    <p data-en="<strong>1.</strong> Go back to productsCount, to the export unlock page."
+       data-fr="<strong>1.</strong> Retournez dans productsCount, sur la page de déblocage de l’export."
+       data-ar="<strong>1.</strong> ارجع إلى productsCount، إلى صفحة فتح التصدير."><strong>1.</strong> Go back to productsCount, to the export unlock page.</p>
+    <p data-en="<strong>2.</strong> With the same email in the box, press <strong>CHECK PURCHASE</strong>: the export is unlocked."
+       data-fr="<strong>2.</strong> Avec le même e-mail dans la case, appuyez sur <strong>VÉRIFIER L’ACHAT</strong> : l’export est débloqué."
+       data-ar="<strong>2.</strong> بنفس البريد الإلكتروني في الخانة، اضغط <strong>تحقق من الشراء</strong>: يُفتح التصدير."><strong>2.</strong> With the same email in the box, press <strong>CHECK PURCHASE</strong>: the export is unlocked.</p>
+  </div>
+<script>
+  if (new URLSearchParams(location.search).get("app") === "productscount") {
+    document.getElementById("steps-mystore").hidden = true;
+    document.getElementById("steps-productscount").hidden = false;
+  }
+</script>
   <p data-en="A problem? Write to us at <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
      data-fr="Un problème ? Écrivez-nous à <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>."
      data-ar="هل واجهت مشكلة؟ راسلنا على <a href='mailto:kasimiapps@manageyourstore.site'>kasimiapps@manageyourstore.site</a>.">A problem? Write to us at <a href="mailto:kasimiapps@manageyourstore.site">kasimiapps@manageyourstore.site</a>.</p>

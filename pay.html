@@ -76,7 +76,8 @@
     checkout: { settings: {
       displayMode: "overlay",
       locale: ["en", "fr", "ar"].indexOf(lang) >= 0 ? lang : "en",
-      successUrl: "https://www.manageyourstore.site/payment-done.html"
+      successUrl: "https://www.manageyourstore.site/payment-done.html" +
+        (params.get("app") === "productscount" ? "?app=productscount" : "")
     } },
     eventCallback: function (e) {
       if (e.name === "checkout.loaded") stopWaiting();

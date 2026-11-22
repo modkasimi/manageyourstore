@@ -150,6 +150,7 @@ function gtag_report_conversion(url) {
   @keyframes dp-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   .container .device-panel p.dp-title { font-size: 19px; font-weight: 800; color: var(--ink) !important; margin: 0 0 6px; unicode-bidi: plaintext; }
   .container .device-panel p.dp-text { font-size: 15.5px; line-height: 1.55; margin: 0 0 12px; unicode-bidi: plaintext; }
+  .container .device-panel p.dp-after { font-size: 14px; line-height: 1.6; margin: 12px 6px 0; padding: 10px 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); unicode-bidi: plaintext; }
   .container .device-panel p.dp-note { font-size: 13px; color: var(--muted) !important; margin: 8px 6px 0; unicode-bidi: plaintext; }
   .device-panel ul.dp-points { list-style: none; padding: 0; margin: 0 auto 12px; max-width: 440px; text-align: start; }
   .device-panel ul.dp-points li { font-size: 15px; line-height: 1.45; padding: 4px 0; color: var(--text); unicode-bidi: plaintext; }
@@ -314,15 +315,16 @@ function gtag_report_conversion(url) {
      data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le téléchargement commence tout de suite, depuis notre propre serveur"
      data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويبدأ التنزيل مباشرة من خادمنا">
      ✅ Free download: enter your email and the download starts right away, from our own server</p>
+  <p class="dp-after" data-centered="1"
+     data-en="&lt;strong&gt;After installing:&lt;/strong&gt; open the app, tap &lt;b&gt;Create a free account&lt;/b&gt;, enter your email and a password, and your 15-day free trial starts right away."
+     data-fr="&lt;strong&gt;Après l'installation :&lt;/strong&gt; ouvrez l'application, appuyez sur &lt;b&gt;Créer un compte gratuit&lt;/b&gt;, entrez votre e-mail et un mot de passe, et votre essai gratuit de 15 jours commence aussitôt."
+     data-ar="&lt;strong&gt;بعد التثبيت:&lt;/strong&gt; افتح التطبيق واضغط «&lt;b&gt;إنشاء حساب مجاني&lt;/b&gt;»، ثم أدخل بريدك الإلكتروني وكلمة سر، وتبدأ تجربتك المجانية 15 يومًا مباشرة.">
+     <strong>After installing:</strong> open the app, tap <b>Create a free account</b>, enter your email and a password, and your 15-day free trial starts right away.</p>
   <p class="dp-note" data-centered="1"
      data-en="&lt;strong&gt;Note:&lt;/strong&gt; you may need to allow &quot;Install from unknown apps&quot; in the tablet's settings."
      data-fr="&lt;strong&gt;Remarque :&lt;/strong&gt; vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres de la tablette."
      data-ar="&lt;strong&gt;ملاحظة:&lt;/strong&gt; قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الجهاز اللوحي.">
      <strong>Note:</strong> you may need to allow "Install from unknown apps" in the tablet's settings.</p>
-  <div class="pb-video android-video" hidden>
-    <p class="pb-vtitle" data-centered="1" data-en="▶ See how to download and install" data-fr="▶ Voyez comment télécharger et installer" data-ar="▶ شاهد طريقة التنزيل والتثبيت">▶ See how to download and install</p>
-    <video controls preload="none" playsinline poster="assets/video/android_download_ar.jpg" src="assets/video/android_download_ar.mp4"></video>
-  </div>
   <div class="dp-email-slot"></div>
 </div>
 
@@ -346,15 +348,16 @@ function gtag_report_conversion(url) {
      data-fr="✅ Téléchargement gratuit : entrez votre e-mail et le téléchargement commence tout de suite, depuis notre propre serveur"
      data-ar="✅ تنزيل مجاني: أدخل بريدك الإلكتروني ويبدأ التنزيل مباشرة من خادمنا">
      ✅ Free download: enter your email and the download starts right away, from our own server</p>
+  <p class="dp-after" data-centered="1"
+     data-en="&lt;strong&gt;After installing:&lt;/strong&gt; open the app, tap &lt;b&gt;Create a free account&lt;/b&gt;, enter your email and a password, and your 15-day free trial starts right away."
+     data-fr="&lt;strong&gt;Après l'installation :&lt;/strong&gt; ouvrez l'application, appuyez sur &lt;b&gt;Créer un compte gratuit&lt;/b&gt;, entrez votre e-mail et un mot de passe, et votre essai gratuit de 15 jours commence aussitôt."
+     data-ar="&lt;strong&gt;بعد التثبيت:&lt;/strong&gt; افتح التطبيق واضغط «&lt;b&gt;إنشاء حساب مجاني&lt;/b&gt;»، ثم أدخل بريدك الإلكتروني وكلمة سر، وتبدأ تجربتك المجانية 15 يومًا مباشرة.">
+     <strong>After installing:</strong> open the app, tap <b>Create a free account</b>, enter your email and a password, and your 15-day free trial starts right away.</p>
   <p class="dp-note" data-centered="1"
      data-en="When the app opens, choose &lt;b&gt;Use phone in shop&lt;/b&gt;. You may need to allow &quot;Install from unknown apps&quot; in the phone's settings."
      data-fr="À l'ouverture de l'application, choisissez &lt;b&gt;Utiliser le téléphone en magasin&lt;/b&gt;. Vous devrez peut-être autoriser « Installer des applications inconnues » dans les paramètres du téléphone."
      data-ar="عند فتح التطبيق، اختر &lt;b&gt;استخدام الهاتف في المتجر&lt;/b&gt;. قد تحتاج إلى تفعيل «تثبيت التطبيقات من مصادر غير معروفة» في إعدادات الهاتف.">
      When the app opens, choose <b>Use phone in shop</b>. You may need to allow "Install from unknown apps" in the phone's settings.</p>
-  <div class="pb-video android-video" hidden>
-    <p class="pb-vtitle" data-centered="1" data-en="▶ See how to download and install" data-fr="▶ Voyez comment télécharger et installer" data-ar="▶ شاهد طريقة التنزيل والتثبيت">▶ See how to download and install</p>
-    <video controls preload="none" playsinline poster="assets/video/android_download_ar.jpg" src="assets/video/android_download_ar.mp4"></video>
-  </div>
   <div class="dp-email-slot"></div>
 </div>
 
@@ -541,13 +544,6 @@ function gtag_report_conversion(url) {
       hint.hidden = false;
     });
     input.addEventListener('input', function () { err.hidden = true; });
-
-    // Tablet and phone panels: the Android download video, in Arabic only for now
-    // (it only shows once one of those devices is chosen, since it sits in their panels).
-    var pageLang = new URLSearchParams(location.search).get('lang') || localStorage.getItem('selectedLanguage') || 'en';
-    if (pageLang === 'ar') {
-      document.querySelectorAll('.android-video').forEach(function (v) { v.hidden = false; });
-    }
 
     // Phone visitors: WhatsApp help (pre-filled message) and, in Arabic, the 1-minute tutorial.
     if (document.documentElement.classList.contains('is-phone')) {

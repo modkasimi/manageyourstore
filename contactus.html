@@ -129,11 +129,23 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
         })();
     </script>
     <script type="text/javascript">
+        // Spam bots fill in every field they find and submit at once. People
+        // never see the hidden "website" field and take more than a few
+        // seconds to write. A message that fails either check is dropped
+        // quietly: the bot is told it worked, so it doesn't try another way.
+        var pageOpenedAt = Date.now();
         window.onload = function() {
             document.getElementById('contact-form').addEventListener('submit', function(event) {
                 event.preventDefault();
+                var form = this;
+                var trap = form.querySelector('input[name="website"]');
+                if ((trap && trap.value) || Date.now() - pageOpenedAt < 4000) {
+                    alert("Your message has been sent successfully!");
+                    form.reset();
+                    return;
+                }
                 // these IDs from the previous steps
-                emailjs.sendForm('service_8vonmex', 'template_ysqt2st', this)
+                emailjs.sendForm('service_8vonmex', 'template_ysqt2st', form)
                     .then(() => {
                         alert("Your message has been sent successfully!");
                         form.reset();
@@ -161,9 +173,14 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 
         <label for="message" data-fr="Message:" data-ar="نص الرسالة" data-en="Message">Message:</label>
         <textarea name="message"  data-fr="Votre message" data-ar="رسالتك" required rows="6" cols="40"></textarea>
-        
 
-        <button type="submit" 
+        <!-- Bot trap: hidden from people and screen readers, filled in by bots. -->
+        <div style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit">
             <span data-en="Send Message" data-ar="إرســـــال" data-fr="Envoyer">Send Message</span>
         </button>
     </form>

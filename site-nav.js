@@ -45,12 +45,12 @@
         }
     });
 
-    // Prices and the legal pages on every page, so they are always one
-    // click away (payment providers check this during their website review).
+    // The legal pages on every page, so they are always one click away
+    // (payment providers check this during their website review). Prices
+    // are in the home page's own menu.
     var links = document.createElement('div');
     links.className = 'site-bar-links';
-    [['prices.html', 'Prices', 'Tarifs', 'الأسعار'],
-     ['terms.html', 'Terms', 'Conditions', 'الشروط'],
+    [['terms.html', 'Terms', 'Conditions', 'الشروط'],
      ['refund-policy.html', 'Refunds', 'Remboursement', 'الاسترداد'],
      ['privacy-policy.html', 'Privacy', 'Confidentialité', 'الخصوصية']
     ].forEach(function (l) {

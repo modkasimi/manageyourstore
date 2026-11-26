@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-46L0L6JK7R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-46L0L6JK7R');
+</script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1079131717015007');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+
+    <script src="language.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Store: an easy point of sale for small shops on the Windows PC, Android tablet or phone you already have. Your real profit, who owes you, what's running out, and a free WhatsApp online shop. 15 days free.">
+    <title>My Store - Point of Sale for Small Shops</title>
+    <!-- Same layout as productscount.html (pc-* classes), so the two product pages match. -->
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+        .pc-wrap { max-width: 920px; margin: 0 auto; padding: 0 16px 30px; box-sizing: border-box; }
+        .pc-wrap *, .pc-hero * { box-sizing: border-box; }
+
+        .pc-hero { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: var(--on-primary); text-align: center; padding: 44px 16px 52px; }
+        .pc-hero-in { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 28px; }
+        .pc-hero-txt { flex: 1 1 0; min-width: 0; }
+        .pc-hero-pic { flex: 0 0 300px; position: relative; }
+        .pc-hero-pic::before { content: ""; position: absolute; inset: 2%; border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(255,255,255,.9), rgba(255,255,255,.45) 70%, rgba(255,255,255,0)); }
+        .pc-hero-pic img { position: relative; width: 62%; height: auto; display: block; margin: 19% auto; border-radius: 22%;
+            box-shadow: 0 14px 34px rgba(0,0,0,.25); }
+        .pc-hero .pc-badge { display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); color: var(--on-primary) !important;
+            border-radius: 999px; padding: 5px 14px; font-size: 13px; font-weight: 600; margin: 0 0 14px; unicode-bidi: plaintext; }
+        .pc-hero h1 { color: var(--on-primary) !important; font-size: 34px; line-height: 1.2; margin: 0 auto 14px; max-width: 760px; unicode-bidi: plaintext; }
+        .pc-hero h1 .pc-accent { color: var(--accent); }
+        .pc-hero p.pc-lead { color: var(--on-primary) !important; opacity: .92; font-size: 18px; line-height: 1.55; max-width: 680px; margin: 0 auto 22px; unicode-bidi: plaintext; }
+        .pc-hero .pc-ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        a.download-btn.pc-dl { padding: 14px 26px !important; font-size: 16px !important; font-weight: 700; }
+        .pc-hero a.pc-ghost { display: inline-block; color: var(--on-primary) !important; border: 1px solid rgba(255,255,255,.5); border-radius: 10px;
+            padding: 13px 22px; text-decoration: none; font-weight: 600; margin: 6px 4px; }
+        .pc-hero a.pc-ghost:hover { background: rgba(255,255,255,.1); }
+        .pc-hero p.pc-small { color: var(--on-primary) !important; opacity: .8; font-size: 13px; margin: 12px 0 0; unicode-bidi: plaintext; }
+
+        .pc-section { margin: 40px 0 0; }
+        .pc-section > h2 { font-size: 26px; text-align: center; margin: 0 0 8px; unicode-bidi: plaintext; }
+        .pc-section > p.pc-sub { text-align: center; color: var(--muted) !important; font-size: 16px; max-width: 640px; margin: 0 auto 22px; unicode-bidi: plaintext; }
+
+        .pc-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .pc-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+        .pc-card .pc-ico { font-size: 28px; line-height: 1; margin-bottom: 10px; }
+        .pc-card h3 { font-size: 17px; margin: 0 0 6px; unicode-bidi: plaintext; }
+        .pc-card p { font-size: 15px; line-height: 1.5; margin: 0; color: var(--text) !important; unicode-bidi: plaintext; }
+
+        .pc-pain { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 14px; padding: 20px 22px; }
+        html[lang="ar"] .pc-pain { border-left: 1px solid var(--line); border-right: 5px solid var(--accent); }
+        .pc-pain h3 { margin: 0 0 8px; font-size: 20px; unicode-bidi: plaintext; }
+        .pc-pain p { margin: 0 0 8px; font-size: 16px; line-height: 1.55; unicode-bidi: plaintext; }
+        .pc-pain p:last-child { margin-bottom: 0; }
+
+        .pc-steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: st; }
+        .pc-steps li { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 16px; position: relative; counter-increment: st; }
+        .pc-steps li::before { content: counter(st); display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%;
+            background: var(--primary); color: var(--on-primary); font-weight: 700; margin-bottom: 10px; }
+        .pc-steps h3 { font-size: 16px; margin: 0 0 6px; unicode-bidi: plaintext; }
+        .pc-steps p { font-size: 14px; line-height: 1.5; margin: 0; unicode-bidi: plaintext; }
+        .pc-steps p a { color: var(--link); font-weight: 600; }
+
+        .pc-video { text-align: center; }
+        .pc-video > h2 { font-size: 22px; }
+        .pc-video video { width: 100%; max-width: 320px; border-radius: 16px; background: #000; display: block; margin: 0 auto; box-shadow: 0 10px 30px rgba(10,59,54,.18); }
+        .pc-pics { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .pc-pics img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(10,59,54,.18); cursor: zoom-in; display: block; }
+        .pc-wrap p.pc-tip { text-align: center; font-size: 13px; color: var(--muted) !important; margin: 8px 0 0; unicode-bidi: plaintext; }
+
+        .pc-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .pc-plan { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+        .pc-plan.pc-paid { border: 2px solid var(--accent); }
+        .pc-plan h3 { margin: 0 0 4px; font-size: 20px; unicode-bidi: plaintext; }
+        .pc-plan p.pc-plan-tag { margin: 0 0 12px; font-size: 14px; color: var(--muted) !important; unicode-bidi: plaintext; }
+        .pc-plan ul { margin: 0; padding: 0; list-style: none; }
+        .pc-plan li { font-size: 15px; line-height: 1.5; padding: 5px 0; border-top: 1px solid var(--line); unicode-bidi: plaintext; }
+        .pc-plan li:first-child { border-top: 0; }
+        .pc-plan li a { color: var(--link); font-weight: 600; }
+        .pc-wrap p.pc-note { text-align: center; font-size: 15px; margin: 14px auto 0; max-width: 680px; unicode-bidi: plaintext; }
+        .pc-wrap p.pc-note a { color: var(--link); font-weight: 600; }
+
+        .pc-faq details { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 0 16px; margin: 0 0 10px; }
+        .pc-faq summary { cursor: pointer; font-weight: 600; color: var(--ink); padding: 14px 0; font-size: 16px; unicode-bidi: plaintext; }
+        .pc-faq details p { margin: 0 0 14px; font-size: 15px; line-height: 1.55; unicode-bidi: plaintext; }
+        .pc-faq details p a { color: var(--link); font-weight: 600; }
+
+        .pc-final { margin: 44px 0 0; background: var(--primary); border-radius: 18px; padding: 30px 20px; text-align: center; }
+        .pc-final h2 { color: var(--on-primary) !important; margin: 0 0 8px; font-size: 24px; unicode-bidi: plaintext; }
+        .pc-final p { color: var(--on-primary) !important; opacity: .9; margin: 0 0 16px; unicode-bidi: plaintext; }
+        .pc-final p.pc-small { font-size: 13px; opacity: .8; margin: 10px 0 0; }
+        .pc-final a.pc-link { color: var(--accent) !important; font-weight: 600; }
+
+        .pc-zoom { position: fixed; inset: 0; background: rgba(5,25,22,.92); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px; }
+        .pc-zoom[hidden] { display: none; }
+        .pc-zoom img { max-width: 100%; max-height: 100%; border-radius: 12px; }
+
+        footer { text-align: center; padding: 18px; margin-top: 40px; }
+
+        @media (max-width: 760px) {
+            .pc-cards, .pc-plans, .pc-pics { grid-template-columns: 1fr; }
+            .pc-steps { grid-template-columns: 1fr 1fr; }
+            .pc-hero h1 { font-size: 27px; }
+            .pc-hero-in { flex-direction: column; gap: 6px; }
+            .pc-hero-pic { order: -1; flex: 0 0 auto; width: 200px; max-width: 60%; }
+            .pc-hero { padding-top: 22px; }
+            .pc-hero p.pc-lead { font-size: 16px; }
+        }
+        @media (max-width: 440px) {
+            .pc-steps { grid-template-columns: 1fr; }
+        }
+    </style>
+<script src="site-nav.js" defer></script>
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<section class="pc-hero">
+<div class="pc-hero-in">
+<div class="pc-hero-txt">
+    <p class="pc-badge" data-centered="1"
+       data-en="💻 Windows PC · Android tablet · Android phone"
+       data-fr="💻 PC Windows · tablette Android · téléphone Android"
+       data-ar="💻 حاسوب ويندوز · لوحة أندرويد · هاتف أندرويد">💻 Windows PC · Android tablet · Android phone</p>
+    <h1 data-centered="1"
+        data-en="Your shop, clear at a glance. &lt;span class=&quot;pc-accent&quot;&gt;No more notebooks.&lt;/span&gt;"
+        data-fr="Votre magasin, clair d'un coup d'œil. &lt;span class=&quot;pc-accent&quot;&gt;Fini les cahiers.&lt;/span&gt;"
+        data-ar="متجرك واضح أمامك في لحظة. &lt;span class=&quot;pc-accent&quot;&gt;وداعًا للدفاتر.&lt;/span&gt;">
+        Your shop, clear at a glance. <span class="pc-accent">No more notebooks.</span>
+    </h1>
+    <p class="pc-lead" data-centered="1"
+       data-en="My Store is an easy point of sale for small shops, on the PC, tablet or phone you already have. See your real profit, who owes you money, and what is running out, even when you are away from the shop."
+       data-fr="My Store est une caisse simple pour les petits magasins, sur le PC, la tablette ou le téléphone que vous avez déjà. Voyez votre vrai bénéfice, qui vous doit de l'argent et ce qui va manquer, même loin du magasin."
+       data-ar="«متجري» نظام كاشير سهل للمحلات الصغيرة، على الحاسوب أو اللوحة أو الهاتف الذي تملكه. اعرف ربحك الحقيقي، ومن عليه دين لك، وما الذي سينفد من المخزون، حتى وأنت بعيد عن المحل.">
+        My Store is an easy point of sale for small shops, on the PC, tablet or phone you already have. See your real profit, who owes you money, and what is running out, even when you are away from the shop.
+    </p>
+    <div class="pc-ctas">
+        <a class="download-btn pc-dl" href="download.html" data-src="ms_hero"
+           data-en="Try My Store free" data-fr="Essayer My Store gratuitement" data-ar="جرّب تطبيق متجري مجانًا">Try My Store free</a>
+        <a class="pc-ghost" href="#how"
+           data-en="See how it works" data-fr="Voir comment ça marche" data-ar="شاهد كيف يعمل">See how it works</a>
+    </div>
+    <p class="pc-small" data-centered="1"
+       data-en="✅ 15 days free · no bank card needed · Arabic, French and English"
+       data-fr="✅ 15 jours gratuits · sans carte bancaire · arabe, français et anglais"
+       data-ar="✅ 15 يومًا مجانًا · بدون بطاقة بنكية · بالعربية والفرنسية والإنجليزية">✅ 15 days free · no bank card needed · Arabic, French and English</p>
+</div>
+<div class="pc-hero-pic"><img src="assets/pictures/mystore_logo.png" width="512" height="512" alt="My Store"></div>
+</div>
+</section>
+
+<main class="pc-wrap">
+
+    <!-- 5-minute tour of the app (Arabic voice, shown in every language) -->
+    <section class="pc-section pc-video" id="ms-video">
+        <h2 data-centered="1" data-en="▶ A tour of the app (video in Arabic)" data-fr="▶ Visite de l'application (vidéo en arabe)" data-ar="▶ جولة في التطبيق">▶ A tour of the app (video in Arabic)</h2>
+        <video controls preload="none" playsinline poster="assets/video/app_tour_ar.jpg" src="assets/video/app_tour_ar.mp4"></video>
+    </section>
+
+    <!-- The problem it solves -->
+    <section class="pc-section">
+        <div class="pc-pain">
+            <h3 data-en="You work hard every day. You deserve to see your real profit."
+                data-fr="Vous travaillez dur chaque jour. Vous méritez de voir votre vrai bénéfice."
+                data-ar="تعمل بجد كل يوم. ومن حقك أن ترى ربحك الحقيقي.">
+                You work hard every day. You deserve to see your real profit.
+            </h3>
+            <p data-en="Many shop owners still run everything from a notebook and mental arithmetic. The cash in the drawer is not the profit, customer debts get forgotten, and a product runs out just when a customer asks for it. Decisions are made in the dark."
+               data-fr="Beaucoup de commerçants gèrent encore tout avec un cahier et du calcul mental. L'argent dans le tiroir n'est pas le bénéfice, les dettes des clients s'oublient, et un produit manque juste quand un client le demande. On décide à l'aveugle."
+               data-ar="كثير من أصحاب المحلات ما زالوا يسيّرون كل شيء بالدفتر والحساب في الرأس. المال في الدرج ليس هو الربح، وديون الزبائن تُنسى، ومنتج ما ينفد بالضبط حين يطلبه زبون. فتُتخذ القرارات في الظلام.">
+                Many shop owners still run everything from a notebook and mental arithmetic. The cash in the drawer is not the profit, customer debts get forgotten, and a product runs out just when a customer asks for it. Decisions are made in the dark.
+            </p>
+            <p data-en="&lt;strong&gt;And going digital does not mean buying an expensive POS system.&lt;/strong&gt; My Store runs on the device already in your hand, and you can start today."
+               data-fr="&lt;strong&gt;Et passer au numérique ne veut pas dire acheter une caisse coûteuse.&lt;/strong&gt; My Store fonctionne sur l'appareil que vous avez déjà en main, et vous pouvez commencer aujourd'hui."
+               data-ar="&lt;strong&gt;والانتقال إلى الرقمي لا يعني شراء نظام كاشير باهظ الثمن.&lt;/strong&gt; «متجري» يعمل على الجهاز الذي بين يديك، ويمكنك البدء اليوم.">
+                <strong>And going digital does not mean buying an expensive POS system.</strong> My Store runs on the device already in your hand, and you can start today.
+            </p>
+        </div>
+    </section>
+
+    <!-- What it does: the basics in one line, then what really helps -->
+    <section class="pc-section">
+        <h2 data-centered="1" data-en="What My Store does" data-fr="Ce que fait My Store" data-ar="ماذا يفعل تطبيق متجري">What My Store does</h2>
+        <p class="pc-sub" data-centered="1"
+           data-en="Everything a shop needs day to day (sales, purchases, stock and receipts), plus what really helps:"
+           data-fr="Tout ce dont un magasin a besoin au quotidien (ventes, achats, stock et tickets), plus ce qui aide vraiment :"
+           data-ar="كل ما يحتاجه المحل يوميًا (المبيعات والمشتريات والمخزون والفواتير)، وفوق ذلك ما يساعدك حقًا:">
+            Everything a shop needs day to day (sales, purchases, stock and receipts), plus what really helps:
+        </p>
+        <div class="pc-cards">
+            <div class="pc-card">
+                <div class="pc-ico">📈</div>
+                <h3 data-en="Your real profit" data-fr="Votre vrai bénéfice" data-ar="ربحك الحقيقي">Your real profit</h3>
+                <p data-en="Profit by day, month and product, not just the cash in the drawer. Stop selling at a loss without knowing."
+                   data-fr="Le bénéfice par jour, par mois et par produit, pas seulement l'argent du tiroir. Arrêtez de vendre à perte sans le savoir."
+                   data-ar="الربح حسب اليوم والشهر والمنتج، وليس فقط المال في الدرج. توقّف عن البيع بخسارة دون أن تدري.">
+                    Profit by day, month and product, not just the cash in the drawer. Stop selling at a loss without knowing.
+                </p>
+            </div>
+            <div class="pc-card">
+                <div class="pc-ico">📒</div>
+                <h3 data-en="Who owes you" data-fr="Qui vous doit" data-ar="من عليه دين لك">Who owes you</h3>
+                <p data-en="Each customer's credit with name, amount and date, and what you owe your suppliers. No more arguments over a notebook."
+                   data-fr="Le crédit de chaque client avec nom, montant et date, et ce que vous devez à vos fournisseurs. Fini les disputes autour d'un cahier."
+                   data-ar="دين كل زبون بالاسم والمبلغ والتاريخ، وما عليك لمورّديك. لا مزيد من الخلافات حول الدفتر.">
+                    Each customer's credit with name, amount and date, and what you owe your suppliers. No more arguments over a notebook.
+                </p>
+            </div>
+            <div class="pc-card">
+                <div class="pc-ico">📦</div>
+                <h3 data-en="What is running out" data-fr="Ce qui va manquer" data-ar="ما الذي سينفد">What is running out</h3>
+                <p data-en="A shortage report shows the products to reorder before the shelf is empty."
+                   data-fr="Un rapport de manques montre les produits à racheter avant que le rayon soit vide."
+                   data-ar="تقرير النواقص يبيّن لك المنتجات التي يجب إعادة شرائها قبل أن يفرغ الرف.">
+                    A shortage report shows the products to reorder before the shelf is empty.
+                </p>
+            </div>
+            <div class="pc-card">
+                <div class="pc-ico">📱</div>
+                <h3 data-en="Your shop on your phone" data-fr="Votre magasin sur votre téléphone" data-ar="محلك في هاتفك">Your shop on your phone</h3>
+                <p data-en="While an employee runs the shop, follow every sale and the shift's cash from your phone, wherever you are."
+                   data-fr="Pendant qu'un employé tient le magasin, suivez chaque vente et la caisse du service depuis votre téléphone, où que vous soyez."
+                   data-ar="بينما يسيّر أحد العاملين المحل، تابع كل عملية بيع ومال الوردية من هاتفك أينما كنت.">
+                    While an employee runs the shop, follow every sale and the shift's cash from your phone, wherever you are.
+                </p>
+            </div>
+            <div class="pc-card">
+                <div class="pc-ico">🛍️</div>
+                <h3 data-en="A free online shop" data-fr="Une boutique en ligne gratuite" data-ar="متجر إلكتروني مجاني">A free online shop</h3>
+                <p data-en="Your customers browse your products on their phone and order on WhatsApp. Included in every plan, at no extra cost."
+                   data-fr="Vos clients parcourent vos produits sur leur téléphone et commandent sur WhatsApp. Inclus dans chaque formule, sans frais en plus."
+                   data-ar="يتصفح زبائنك منتجاتك على هواتفهم ويطلبون عبر واتساب. مشمول في كل الاشتراكات بدون أي تكلفة إضافية.">
+                    Your customers browse your products on their phone and order on WhatsApp. Included in every plan, at no extra cost.
+                </p>
+            </div>
+            <div class="pc-card">
+                <div class="pc-ico">🧾</div>
+                <h3 data-en="Scanner and receipts" data-fr="Lecteur et tickets" data-ar="قارئ الباركود والفواتير">Scanner and receipts</h3>
+                <p data-en="Sell with a barcode scanner or by tapping the product, and print receipts. Add a scanner and printer now or later."
+                   data-fr="Vendez avec un lecteur de codes-barres ou en touchant le produit, et imprimez les tickets. Ajoutez lecteur et imprimante maintenant ou plus tard."
+                   data-ar="بِع بقارئ الباركود أو بلمس المنتج، واطبع الفواتير. أضف القارئ والطابعة الآن أو لاحقًا.">
+                    Sell with a barcode scanner or by tapping the product, and print receipts. Add a scanner and printer now or later.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="pc-section" id="how">
+        <h2 data-centered="1" data-en="How it works" data-fr="Comment ça marche" data-ar="كيف يعمل">How it works</h2>
+        <p class="pc-sub" data-centered="1"
+           data-en="From download to your first sale in four steps."
+           data-fr="Du téléchargement à votre première vente en quatre étapes."
+           data-ar="من التحميل إلى أول عملية بيع في أربع خطوات.">
+            From download to your first sale in four steps.
+        </p>
+        <ol class="pc-steps">
+            <li>
+                <h3 data-en="Download" data-fr="Téléchargez" data-ar="حمّل التطبيق">Download</h3>
+                <p data-en="Windows from the Microsoft Store, Android from our website. Then create a free account in the app."
+                   data-fr="Windows depuis le Microsoft Store, Android depuis notre site. Puis créez un compte gratuit dans l'application."
+                   data-ar="ويندوز من متجر مايكروسوفت، وأندرويد من موقعنا. ثم أنشئ حسابًا مجانيًا داخل التطبيق.">Windows from the Microsoft Store, Android from our website. Then create a free account in the app.</p>
+            </li>
+            <li>
+                <h3 data-en="Add your products" data-fr="Ajoutez vos produits" data-ar="أضف منتجاتك">Add your products</h3>
+                <p data-en="Scan or type each product with its price and stock. Many products? Scan them faster with &lt;a href=&quot;productscount.html&quot;&gt;productsCount&lt;/a&gt;."
+                   data-fr="Scannez ou tapez chaque produit avec son prix et son stock. Beaucoup de produits ? Scannez-les plus vite avec &lt;a href=&quot;productscount.html&quot;&gt;productsCount&lt;/a&gt;."
+                   data-ar="امسح أو اكتب كل منتج مع سعره ومخزونه. منتجات كثيرة؟ امسحها أسرع مع &lt;a href=&quot;productscount.html&quot;&gt;productsCount&lt;/a&gt;.">Scan or type each product with its price and stock. Many products? Scan them faster with <a href="productscount.html">productsCount</a>.</p>
+            </li>
+            <li>
+                <h3 data-en="Sell" data-fr="Vendez" data-ar="بِع">Sell</h3>
+                <p data-en="Scan or tap the products, take the payment, print the receipt. Stock updates by itself."
+                   data-fr="Scannez ou touchez les produits, encaissez, imprimez le ticket. Le stock se met à jour tout seul."
+                   data-ar="امسح المنتجات أو المسها، استلم المبلغ، واطبع الفاتورة. يتحدّث المخزون تلقائيًا.">Scan or tap the products, take the payment, print the receipt. Stock updates by itself.</p>
+            </li>
+            <li>
+                <h3 data-en="See your profit" data-fr="Voyez votre bénéfice" data-ar="اطّلع على ربحك">See your profit</h3>
+                <p data-en="Open the reports: sales, profit, best sellers, debts and shortages. On the shop's device or on your phone."
+                   data-fr="Ouvrez les rapports : ventes, bénéfice, meilleures ventes, dettes et manques. Sur l'appareil du magasin ou sur votre téléphone."
+                   data-ar="افتح التقارير: المبيعات والأرباح والأكثر مبيعًا والديون والنواقص. على جهاز المحل أو على هاتفك.">Open the reports: sales, profit, best sellers, debts and shortages. On the shop's device or on your phone.</p>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Pictures (in the visitor's language) -->
+    <section class="pc-section">
+        <div class="pc-pics">
+            <img class="ms-pic" data-name="app_explainer_pos" width="900" height="1125" loading="lazy" alt="My Store: what the app does">
+            <img class="ms-pic" data-name="devices" width="900" height="1125" loading="lazy" alt="My Store runs on the device you already own">
+        </div>
+        <p class="pc-tip" data-centered="1"
+           data-en="Tap a picture to zoom" data-fr="Touchez une image pour l'agrandir" data-ar="المس الصورة لتكبيرها">Tap a picture to zoom</p>
+    </section>
+
+    <!-- Trial and plans -->
+    <section class="pc-section">
+        <h2 data-centered="1" data-en="Free trial, then the plan that suits you" data-fr="Essai gratuit, puis la formule qui vous convient" data-ar="تجربة مجانية، ثم الاشتراك الذي يناسبك">Free trial, then the plan that suits you</h2>
+        <p class="pc-sub" data-centered="1"
+           data-en="Every feature is in every plan. Prices depend on your country."
+           data-fr="Toutes les fonctions sont dans chaque formule. Les prix dépendent de votre pays."
+           data-ar="كل الخصائص موجودة في كل الاشتراكات. الأسعار حسب بلدك.">
+            Every feature is in every plan. Prices depend on your country.
+        </p>
+        <div class="pc-plans">
+            <div class="pc-plan">
+                <h3 data-en="15 days free" data-fr="15 jours gratuits" data-ar="15 يومًا مجانًا">15 days free</h3>
+                <p class="pc-plan-tag" data-en="To try everything in your own shop" data-fr="Pour tout essayer dans votre magasin" data-ar="لتجربة كل شيء في محلك">To try everything in your own shop</p>
+                <ul>
+                    <li data-en="✅ All features open" data-fr="✅ Toutes les fonctions ouvertes" data-ar="✅ كل الخصائص مفتوحة">✅ All features open</li>
+                    <li data-en="✅ No bank card needed" data-fr="✅ Sans carte bancaire" data-ar="✅ بدون بطاقة بنكية">✅ No bank card needed</li>
+                    <li data-en="✅ Help on WhatsApp if you need it" data-fr="✅ De l'aide sur WhatsApp si besoin" data-ar="✅ مساعدة عبر واتساب عند الحاجة">✅ Help on WhatsApp if you need it</li>
+                </ul>
+            </div>
+            <div class="pc-plan pc-paid">
+                <h3 data-en="After the trial" data-fr="Après l'essai" data-ar="بعد التجربة">After the trial</h3>
+                <p class="pc-plan-tag" data-en="Prices for Morocco" data-fr="Prix pour le Maroc" data-ar="الأسعار في المغرب">Prices for Morocco</p>
+                <ul>
+                    <li data-en="📅 Monthly: $4.99" data-fr="📅 Mensuel : 4,99 $" data-ar="📅 شهري: 4.99 $">📅 Monthly: $4.99</li>
+                    <li data-en="🗓️ Yearly: $38.99" data-fr="🗓️ Annuel : 38,99 $" data-ar="🗓️ سنوي: 38.99 $">🗓️ Yearly: $38.99</li>
+                    <li data-en="♾️ Lifetime, pay once: $75.99" data-fr="♾️ À vie, payé une fois : 75,99 $" data-ar="♾️ مدى الحياة، دفعة واحدة: 75.99 $">♾️ Lifetime, pay once: $75.99</li>
+                    <li data-en="💳 Pay by card, or without a card" data-fr="💳 Paiement par carte, ou sans carte" data-ar="💳 الدفع بالبطاقة أو بدون بطاقة">💳 Pay by card, or without a card</li>
+                </ul>
+            </div>
+        </div>
+        <p class="pc-note" data-centered="1"
+           data-en="Outside Morocco? &lt;a href=&quot;prices.html&quot;&gt;See the prices for your country&lt;/a&gt;."
+           data-fr="Hors du Maroc ? &lt;a href=&quot;prices.html&quot;&gt;Voir les prix pour votre pays&lt;/a&gt;."
+           data-ar="خارج المغرب؟ &lt;a href=&quot;prices.html&quot;&gt;اطّلع على الأسعار في بلدك&lt;/a&gt;.">
+            Outside Morocco? <a href="prices.html">See the prices for your country</a>.
+        </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="pc-section pc-faq">
+        <h2 data-centered="1" data-en="Questions" data-fr="Questions fréquentes" data-ar="أسئلة شائعة">Questions</h2>
+        <details>
+            <summary data-en="Do I need to buy a POS terminal?" data-fr="Faut-il acheter une caisse ?" data-ar="هل يجب أن أشتري جهاز كاشير؟">Do I need to buy a POS terminal?</summary>
+            <p data-en="No. My Store runs on a Windows PC or laptop, or an Android tablet (7 inches or more) as a full cash register. A barcode scanner and a receipt printer work with it, but you can add them whenever you like."
+               data-fr="Non. My Store fonctionne comme une caisse complète sur un PC ou portable Windows, ou une tablette Android (7 pouces ou plus). Un lecteur de codes-barres et une imprimante de tickets fonctionnent avec, mais vous pouvez les ajouter quand vous voulez."
+               data-ar="لا. يعمل «متجري» كنظام كاشير كامل على حاسوب أو لابتوب بنظام ويندوز، أو على لوحة أندرويد (7 بوصات أو أكثر). قارئ الباركود وطابعة الفواتير يعملان معه، ويمكنك إضافتهما متى شئت.">
+                No. My Store runs on a Windows PC or laptop, or an Android tablet (7 inches or more) as a full cash register. A barcode scanner and a receipt printer work with it, but you can add them whenever you like.
+            </p>
+        </details>
+        <details>
+            <summary data-en="What does it do on a phone?" data-fr="Que fait-il sur un téléphone ?" data-ar="ماذا يفعل على الهاتف؟">What does it do on a phone?</summary>
+            <p data-en="On an Android phone you can sell, and you can also follow your shop from afar: the sales, profit, debts and the shift's cash recorded on the shop's PC or tablet."
+               data-fr="Sur un téléphone Android, vous pouvez vendre, et aussi suivre votre magasin à distance : les ventes, le bénéfice, les dettes et la caisse du service enregistrés sur le PC ou la tablette du magasin."
+               data-ar="على هاتف أندرويد يمكنك البيع، ويمكنك أيضًا متابعة محلك عن بُعد: المبيعات والأرباح والديون ومال الوردية المسجلة على حاسوب المحل أو لوحته.">
+                On an Android phone you can sell, and you can also follow your shop from afar: the sales, profit, debts and the shift's cash recorded on the shop's PC or tablet.
+            </p>
+        </details>
+        <details>
+            <summary data-en="Which languages?" data-fr="Quelles langues ?" data-ar="ما هي اللغات المتوفرة؟">Which languages?</summary>
+            <p data-en="Arabic, French and English. You can switch at any time in the app."
+               data-fr="Arabe, français et anglais. Vous pouvez changer à tout moment dans l'application."
+               data-ar="العربية والفرنسية والإنجليزية. يمكنك التغيير في أي وقت داخل التطبيق.">
+                Arabic, French and English. You can switch at any time in the app.
+            </p>
+        </details>
+        <details>
+            <summary data-en="Is my data safe if my PC breaks?" data-fr="Mes données sont-elles en sécurité si mon PC tombe en panne ?" data-ar="هل بياناتي في أمان إذا تعطل حاسوبي؟">Is my data safe if my PC breaks?</summary>
+            <p data-en="Your shop is backed up to the cloud in your account. On a new PC or tablet, sign in with the same account and your shop comes back, products and pictures included."
+               data-fr="Votre magasin est sauvegardé dans le cloud, dans votre compte. Sur un nouveau PC ou une nouvelle tablette, connectez-vous avec le même compte et votre magasin revient, produits et photos compris."
+               data-ar="يُحفظ محلك في السحابة ضمن حسابك. على حاسوب أو لوحة جديدة، سجّل الدخول بنفس الحساب فيعود محلك كما هو، بما في ذلك المنتجات وصورها.">
+                Your shop is backed up to the cloud in your account. On a new PC or tablet, sign in with the same account and your shop comes back, products and pictures included.
+            </p>
+        </details>
+        <details>
+            <summary data-en="How do I pay without a bank card?" data-fr="Comment payer sans carte bancaire ?" data-ar="كيف أدفع بدون بطاقة بنكية؟">How do I pay without a bank card?</summary>
+            <p data-en="When you choose a plan in the app, you can ask to pay without a card, for example by bank transfer or CashPlus. We send you the details and open your plan as soon as the payment arrives."
+               data-fr="Quand vous choisissez une formule dans l'application, vous pouvez demander à payer sans carte, par exemple par virement bancaire ou CashPlus. Nous vous envoyons les détails et ouvrons votre formule dès réception du paiement."
+               data-ar="عند اختيار الاشتراك داخل التطبيق، يمكنك طلب الدفع بدون بطاقة، مثلًا بتحويل بنكي أو عبر كاش بلوس. نرسل لك التفاصيل ونفعّل اشتراكك فور وصول المبلغ.">
+                When you choose a plan in the app, you can ask to pay without a card, for example by bank transfer or CashPlus. We send you the details and open your plan as soon as the payment arrives.
+            </p>
+        </details>
+        <details>
+            <summary data-en="I need help to start" data-fr="J'ai besoin d'aide pour commencer" data-ar="أحتاج مساعدة للبدء">I need help to start</summary>
+            <p data-en="Watch the &lt;a href=&quot;tutorial.html&quot;&gt;tutorials&lt;/a&gt;, or write to us on WhatsApp from the &lt;a href=&quot;contactus.html&quot;&gt;Contact page&lt;/a&gt;. You talk directly to the person who makes the app."
+               data-fr="Regardez les &lt;a href=&quot;tutorial.html&quot;&gt;tutoriels&lt;/a&gt;, ou écrivez-nous sur WhatsApp depuis la &lt;a href=&quot;contactus.html&quot;&gt;page Contact&lt;/a&gt;. Vous parlez directement avec la personne qui fait l'application."
+               data-ar="شاهد &lt;a href=&quot;tutorial.html&quot;&gt;الفيديوهات التوضيحية&lt;/a&gt;، أو راسلنا عبر واتساب من &lt;a href=&quot;contactus.html&quot;&gt;صفحة التواصل&lt;/a&gt;. ستتحدث مباشرة مع صاحب التطبيق.">
+                Watch the <a href="tutorial.html">tutorials</a>, or write to us on WhatsApp from the <a href="contactus.html">Contact page</a>. You talk directly to the person who makes the app.
+            </p>
+        </details>
+    </section>
+
+    <!-- Final call to action -->
+    <section class="pc-final">
+        <h2 data-centered="1" data-en="See your shop clearly, starting today" data-fr="Voyez clair dans votre magasin dès aujourd'hui" data-ar="شاهد محلك بوضوح ابتداءً من اليوم">See your shop clearly, starting today</h2>
+        <p data-centered="1" data-en="Try My Store free for 15 days on the device you already have."
+           data-fr="Essayez My Store gratuitement pendant 15 jours sur l'appareil que vous avez déjà."
+           data-ar="جرّب «متجري» مجانًا لمدة 15 يومًا على الجهاز الذي تملكه.">Try My Store free for 15 days on the device you already have.</p>
+        <a class="download-btn pc-dl" href="download.html" data-src="ms_final"
+           data-en="Try My Store free" data-fr="Essayer My Store gratuitement" data-ar="جرّب تطبيق متجري مجانًا">Try My Store free</a>
+        <p class="pc-small" data-centered="1"
+           data-en="✅ No bank card needed · &lt;a class=&quot;pc-link&quot; href=&quot;productscount.html&quot;&gt;Many products to enter? See productsCount&lt;/a&gt;"
+           data-fr="✅ Sans carte bancaire · &lt;a class=&quot;pc-link&quot; href=&quot;productscount.html&quot;&gt;Beaucoup de produits à saisir ? Voir productsCount&lt;/a&gt;"
+           data-ar="✅ بدون بطاقة بنكية · &lt;a class=&quot;pc-link&quot; href=&quot;productscount.html&quot;&gt;منتجات كثيرة لإدخالها؟ اكتشف productsCount&lt;/a&gt;">
+            ✅ No bank card needed · <a class="pc-link" href="productscount.html">Many products to enter? See productsCount</a>
+        </p>
+    </section>
+
+</main>
+
+<div class="pc-zoom" id="pc-zoom" hidden><img id="pc-zoom-img" alt=""></div>
+
+<footer>
+    <p>&copy; 2024 KasimiApps. All rights reserved.</p>
+        <p class="legal-links" style="font-size:13px;margin-top:6px"><a href="terms.html" data-en="Terms of Service" data-fr="Conditions d'utilisation" data-ar="شروط الاستخدام">Terms of Service</a> &middot; <a href="refund-policy.html" data-en="Refund Policy" data-fr="Politique de remboursement" data-ar="سياسة الاسترداد">Refund Policy</a> &middot; <a href="privacy-policy.html" data-en="Privacy Policy" data-fr="Politique de confidentialité" data-ar="سياسة الخصوصية">Privacy Policy</a></p>
+</footer>
+
+<script>
+    (function () {
+        // ?lang=fr / ?lang=ar links open the page in that language.
+        var q = new URLSearchParams(location.search).get('lang');
+        if (q === 'en' || q === 'fr' || q === 'ar') localStorage.setItem('selectedLanguage', q);
+        var lang = localStorage.getItem('selectedLanguage') || 'en';
+        if (['en', 'fr', 'ar'].indexOf(lang) < 0) lang = 'en';
+
+        var pics = document.querySelectorAll('.ms-pic');
+        function setPics(l) {
+            var code = ['en', 'fr', 'ar'].indexOf(l) < 0 ? 'en' : l;
+            pics.forEach(function (img) { img.src = 'assets/trial/' + img.getAttribute('data-name') + '_' + code + '.jpg'; });
+        }
+        setPics(lang);
+        // The top-bar language menu translates the text in place without a reload, so swap the pictures too.
+        if (typeof window.changeLanguage === 'function') {
+            var orig = window.changeLanguage;
+            window.changeLanguage = function (l) { orig(l); setPics(l); };
+        }
+        var zoom = document.getElementById('pc-zoom'), zimg = document.getElementById('pc-zoom-img');
+        pics.forEach(function (img) {
+            img.addEventListener('click', function () { zimg.src = img.src; zoom.hidden = false; document.body.style.overflow = 'hidden'; });
+        });
+        function close() { zoom.hidden = true; document.body.style.overflow = ''; }
+        zoom.addEventListener('click', close);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+        document.querySelectorAll('.pc-dl').forEach(function (a) {
+            a.addEventListener('click', function () {
+                if (typeof fbq === 'function') fbq('trackCustom', 'MyStorePageTry', { content_name: a.getAttribute('data-src') });
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>

@@ -41,12 +41,16 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
+            /* A column: the site bar (added by site-nav.js) across the top,
+               the form centred in the space below it. */
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
+        body > .site-bar { align-self: stretch; }
         .contact-container {
+            margin: 32px auto;
             width: 100%;
             max-width: 500px;
             background-color: #ffffff;
@@ -70,6 +74,7 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
             margin: 5px 0 15px;
             border: 1px solid #cccccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         button {
             width: 100%;
@@ -102,17 +107,33 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
     margin-right: 5px;
 }
 
+        /* WhatsApp's own green, so visitors recognise it at once. */
+        a.wa-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: #ffffff !important;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 24px;
+            font-size: 1em;
+        }
+        a.wa-button:hover { background: #1ebe5a; }
+        a.wa-button:focus-visible { outline: 3px solid #128C7E; outline-offset: 2px; }
+        a.wa-button i { font-size: 1.4em; }
+        .wa-number { display: inline-block; margin-top: 6px; font-size: 0.85em; color: #555555; }
+
         @media (max-width: 600px) {
             body {
-                height: auto;
-                min-height: 100vh;
-                align-items: flex-start;
-                padding: 20px 0;
+                padding: 0 0 20px;
                 box-sizing: border-box;
             }
             .contact-container {
-                margin: 0 15px;
+                margin: 20px 15px 0;
                 width: auto;
+                align-self: stretch;
                 padding: 15px;
             }
         }
@@ -193,7 +214,11 @@ src="https://www.facebook.com/tr?id=1079131717015007&ev=PageView&noscript=1"
 </p>
 <p data-en="Or message us on WhatsApp:" data-fr="Ou écrivez-nous sur WhatsApp :" data-ar="أو راسلنا على واتساب:">Or message us on WhatsApp:</p>
 <p style="text-align: center;">
-    <a href="https://wa.me/212649864854" target="_blank" rel="noopener" dir="ltr">+212 649 864 854</a>
+    <a href="https://wa.me/212649864854" target="_blank" rel="noopener" class="wa-button">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span data-en="Chat on WhatsApp" data-fr="Écrivez-nous sur WhatsApp" data-ar="راسلنا على واتساب">Chat on WhatsApp</span>
+    </a>
+    <br><span class="wa-number" dir="ltr">+212 649 864 854</span>
 </p>
 
 
